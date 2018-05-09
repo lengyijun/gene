@@ -62,7 +62,7 @@ class ProductCarousel extends React.Component {
     this.props.onSelectedProduct({
       index: this.props.products.indexOf(product),
       brand: product.brand,
-      model: product.model,
+      usetime: product.usetime,
       price: product.price
     });
   }

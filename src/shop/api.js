@@ -94,3 +94,20 @@ function splitFormulaPart(part, splitQualifier) {
     return null;
   }
 }
+
+export function compareGene(user, contractTypeUuid, additionalInfo) {
+  return fetch('/shop/api/comparegene', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify({ user, contractTypeUuid, additionalInfo })
+  }).then(async res => {
+    const response = await res.json();
+    if (response.success) {
+      return response.loginInfo;
+    } else {
+      throw new Error(response.error);
+    }
+  });
+}

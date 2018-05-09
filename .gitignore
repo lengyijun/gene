@@ -16,3 +16,4 @@
 /web/channel.tx
 /node_modules
 /.idea
+/static/js/*.bundle.js

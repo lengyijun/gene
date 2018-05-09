@@ -21,6 +21,9 @@ type SmartContract struct {
 }
 
 var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Response{
+//Gene Compare
+  "compare_type_1":           compare1,
+
 	// Insurance Peer
 	"contract_type_ls":         listContractTypes,
 	"contract_type_create":     createContractType,

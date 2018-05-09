@@ -11,7 +11,7 @@ import moment from 'moment';
 import Loading from '../../shared/Loading';
 import * as paymentActions from '../actions/paymentActions';
 import * as userMgmtActions from '../actions/userMgmtActions';
-import { enterContract } from '../api';
+import { compareGene } from '../api';
 
 class PaymentPage extends React.Component {
 
@@ -53,11 +53,11 @@ class PaymentPage extends React.Component {
     const { contractInfo, productInfo, userMgmtActions } = this.props;
     const { email, firstName, lastName } = contractInfo;
     const user = { username: email, firstName, lastName };
-    const loginInfo = await enterContract(user, contractInfo.uuid, {
+    const loginInfo = await compareGene(user, contractInfo.uuid, {
       item: {
         id: parseInt(productInfo.index),
         brand: productInfo.brand,
-        model: productInfo.model,
+        Use: productInfo.Use,
         price: productInfo.price,
         serialNo: productInfo.serialNo,
         description: productInfo.description
@@ -65,10 +65,10 @@ class PaymentPage extends React.Component {
       startDate: new Date(contractInfo.startDate),
       endDate: new Date(contractInfo.endDate)
     });
-    userMgmtActions.setUser({
-      firstName, lastName,
-      username: email, password: loginInfo.password
-    });
+    // userMgmtActions.setUser({
+    //   firstName, lastName,
+    //   username: email, password: loginInfo.password
+    // });
     this.inTransaction = false;
   }
 
@@ -126,7 +126,7 @@ class PaymentPage extends React.Component {
                     <td>
                       {productInfo.brand}
                       <br />
-                      {productInfo.model}
+                      {productInfo.Use}
                       <br />
                       <FormattedMessage id='Serial No.' />: {productInfo.serialNo}
                     </td>

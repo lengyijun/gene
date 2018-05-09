@@ -184,17 +184,6 @@ class ChooseInsurancePage extends React.Component {
                         })} />
                   </span>
                 </p>
-                <p className='ibm-form-elem-grp'>
-                  <label><FormattedMessage className='ibm-field-label'
-                    id='Theft Protection' />:</label>
-                  <span className='ibm-input-group'>
-                    <input type='checkbox' className='ibm-styled-checkbox'
-                      ref='theftInsuredField'
-                      checked={contractType.theftInsured} readOnly />
-                    <label className='ibm-field-label'
-                      htmlFor='theftInsuredField' />
-                  </span>
-                </p>
                 <p>
                   <label><FormattedMessage id='Contract Terms' />:</label>
                   <span>
@@ -223,22 +212,6 @@ class ChooseInsurancePage extends React.Component {
                   <span>
                     <input ref='emailField' value={contractInfo.email}
                       type='text' onChange={this.setContractInfo} />
-                  </span>
-                </p>
-                <p>
-                  <label><FormattedMessage id='Start Date' />:
-                  <span className='ibm-required'>*</span></label>
-                  <span>
-                    <DateInput value={contractInfo.startDate}
-                      onChange={this.setStartDate} />
-                  </span>
-                </p>
-                <p>
-                  <label><FormattedMessage id='End Date' />:
-                  <span className='ibm-required'>*</span></label>
-                  <span>
-                    <DateInput value={contractInfo.endDate}
-                      onChange={this.setEndDate} />
                   </span>
                 </p>
               </div>

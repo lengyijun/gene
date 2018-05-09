@@ -69,7 +69,7 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function getUserInfo(username) {
+export async function genecompare(username) {
   if (!isReady()) {
     return;
   }

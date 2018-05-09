@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node/bin/node',
+1 verbose cli   '/usr/bin/node/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'serve' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.3
+4 verbose run-script [ 'preserve', 'serve', 'postserve' ]
+5 info lifecycle blockchain-for-insurance@2.1.0~preserve: blockchain-for-insurance@2.1.0
+6 silly lifecycle blockchain-for-insurance@2.1.0~preserve: no script for preserve, continuing
+7 info lifecycle blockchain-for-insurance@2.1.0~serve: blockchain-for-insurance@2.1.0
+8 verbose lifecycle blockchain-for-insurance@2.1.0~serve: unsafe-perm in lifecycle true
+9 verbose lifecycle blockchain-for-insurance@2.1.0~serve: PATH: /usr/bin/node/lib/node_modules/npm/bin/node-gyp-bin:/home/sjtu-lyj/GeneWeb/node_modules/.bin:/usr/bin/node/bin:/home/sjtu-lyj/.npm-packages/bin:/home/sjtu-lyj/.local/share/umake/bin:/home/sjtu-lyj/.npm-packages/bin:/usr/lib/jvm/jdk1.8.0_162/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin/:/home/sjtu-lyj/.hyperledgerbin/bin:/usr/local/gitkraken/:/home/sjtu-lyj/go/bin:/usr/local/bin/you-get:/home/sjtu-lyj/go/src/github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local:/home/sjtu-lyj/.extractedExe/:/usr/bin/node/bin:/home/sjtu-lyj/.local/bin:/home/sjtu-lyj/bake:/home/sjtu-lyj/.local/VSCode-linux-x64/bin:/home/sjtu-lyj/.fzf/bin
+10 verbose lifecycle blockchain-for-insurance@2.1.0~serve: CWD: /home/sjtu-lyj/GeneWeb
+11 silly lifecycle blockchain-for-insurance@2.1.0~serve: Args: [ '-c', 'cross-env NODE_ENV=production node ./bin/server' ]
+12 silly lifecycle blockchain-for-insurance@2.1.0~serve: Returned: code: 1  signal: null
+13 info lifecycle blockchain-for-insurance@2.1.0~serve: Failed to exec serve script
+14 verbose stack Error: blockchain-for-insurance@2.1.0 serve: `cross-env NODE_ENV=production node ./bin/server`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/usr/bin/node/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/bin/node/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:920:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:230:5)
+15 verbose pkgid blockchain-for-insurance@2.1.0
+16 verbose cwd /home/sjtu-lyj/GeneWeb/src/shop
+17 error Linux 4.13.0-39-generic
+18 error argv "/usr/bin/node/bin/node" "/usr/bin/node/bin/npm" "run" "serve"
+19 error node v6.11.3
+20 error npm  v3.10.10
+21 error code ELIFECYCLE
+22 error blockchain-for-insurance@2.1.0 serve: `cross-env NODE_ENV=production node ./bin/server`
+22 error Exit status 1
+23 error Failed at the blockchain-for-insurance@2.1.0 serve script 'cross-env NODE_ENV=production node ./bin/server'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the blockchain-for-insurance package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     cross-env NODE_ENV=production node ./bin/server
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs blockchain-for-insurance
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls blockchain-for-insurance
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

@@ -97,7 +97,7 @@ class ContractsPage extends React.Component {
               <h4 className='ibm-bold ibm-h4'>{contract.description}</h4>
               <div style={{ wordWrap: 'break-word' }}>
                 <FormattedMessage id='Brand' />: {contract.item.brand}<br />
-                <FormattedMessage id='Model' />: {contract.item.model}<br />
+                <FormattedMessage id='Model' />: {contract.item.Use}<br />
                 <FormattedMessage id='Serial No.' />: {contract.item.serialNo}
                 <br />
                 {showExpirationInfo(contract)}

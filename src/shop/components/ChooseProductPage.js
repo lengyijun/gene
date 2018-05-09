@@ -76,6 +76,7 @@ class ChooseProductPage extends React.Component {
         <Redirect to='/insurance' />
       );
     }
+    console.log(productInfo)
 
     return (
       <div>
@@ -107,7 +108,7 @@ class ChooseProductPage extends React.Component {
                 <p>
                   <label><FormattedMessage id='Product Model' />:</label>
                   <span>
-                    <input type='text' readOnly value={productInfo.model} />
+                    <input type='text' readOnly value={productInfo.usetime} />
                   </span>
                 </p>
                 <p>

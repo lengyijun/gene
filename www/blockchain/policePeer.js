@@ -2,7 +2,7 @@
 
 import config from './config';
 import { wrapError } from './utils';
-import { policeClient as client, isReady } from './setup';
+import { calculatorClient as client, isReady } from './setup';
 
 export async function listTheftClaims() {
   if (!isReady()) {

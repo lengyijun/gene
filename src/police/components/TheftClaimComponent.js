@@ -75,7 +75,7 @@ class TheftClaimComponent extends React.Component {
               </p>
               <p>
                 <label><FormattedMessage id='Model' />:</label>
-                <span>{theftClaim.item.model}</span>
+                <span>{theftClaim.item.Use}</span>
               </p>
               <p>
                 <label><FormattedMessage id='Serial No.' />:</label>

@@ -41,7 +41,7 @@ class RepairOrderComponent extends React.Component {
                 <FormattedMessage id='Brand' />:
                   {repairOrder.item.brand} <br />
                 <FormattedMessage id='Model' />:
-                  {repairOrder.item.model} <br />
+                  {repairOrder.item.Use} <br />
                 <FormattedMessage id='Description' />:
                   {repairOrder.item.description} <br />
               </p>

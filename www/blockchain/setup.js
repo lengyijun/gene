@@ -30,7 +30,7 @@ const repairShopClient = new OrganizationClient(
   config.repairShopOrg.ca,
   config.repairShopOrg.admin
 );
-const policeClient = new OrganizationClient(
+const calculatorClient = new OrganizationClient(
   config.channelName,
   config.orderer0,
   config.policeOrg.peer,
@@ -67,7 +67,7 @@ function getAdminOrgs() {
     insuranceClient.getOrgAdmin(),
     shopClient.getOrgAdmin(),
     repairShopClient.getOrgAdmin(),
-    policeClient.getOrgAdmin()
+    calculatorClient.getOrgAdmin()
   ]);
 }
 
@@ -78,7 +78,7 @@ function getAdminOrgs() {
       insuranceClient.login(),
       shopClient.login(),
       repairShopClient.login(),
-      policeClient.login()
+      calculatorClient.login()
     ]);
   } catch (e) {
     console.log('Fatal error logging into blockchain organization clients!');
@@ -89,7 +89,7 @@ function getAdminOrgs() {
   insuranceClient.initEventHubs();
   shopClient.initEventHubs();
   repairShopClient.initEventHubs();
-  policeClient.initEventHubs();
+  calculatorClient.initEventHubs();
 
   // Bootstrap blockchain network
   try {
@@ -105,7 +105,7 @@ function getAdminOrgs() {
           insuranceClient.joinChannel(),
           shopClient.joinChannel(),
           repairShopClient.joinChannel(),
-          policeClient.joinChannel()
+          calculatorClient.joinChannel()
         ]);
         // Wait for 10s for the peers to join the newly created channel
         await new Promise(resolve => {
@@ -125,7 +125,7 @@ function getAdminOrgs() {
       insuranceClient.initialize(),
       shopClient.initialize(),
       repairShopClient.initialize(),
-      policeClient.initialize()
+      calculatorClient.initialize()
     ]);
   } catch (e) {
     console.log('Fatal error initializing blockchain organization clients!');
@@ -144,7 +144,7 @@ function getAdminOrgs() {
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
     installedOnRepairShopOrg = await repairShopClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
-    installedOnPoliceOrg = await policeClient.checkInstalled(
+    installedOnPoliceOrg = await calculatorClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
   } catch (e) {
     console.log('Fatal error getting installation status of the chaincode!');
@@ -209,7 +209,7 @@ function getAdminOrgs() {
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath),
       repairShopClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath),
-      policeClient.install(
+      calculatorClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath)
     ];
     try {
@@ -246,5 +246,5 @@ export {
   insuranceClient,
   shopClient,
   repairShopClient,
-  policeClient
+  calculatorClient
 };
