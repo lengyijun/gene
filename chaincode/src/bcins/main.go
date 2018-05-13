@@ -24,6 +24,10 @@ var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Resp
 //Gene Compare
   "compare_type_1":           compare1,
 
+//get all availGene data(origin gene data)
+  "gene_ls":          listGene,
+  "upload_gene":      uploadGene,
+
 	// Insurance Peer
 	"contract_type_ls":         listContractTypes,
 	"contract_type_create":     createContractType,
@@ -34,12 +38,15 @@ var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Resp
 	"claim_process":            processClaim,
 	"user_authenticate":        authUser,
 	"user_get_info":            getUser,
+
 	// Shop Peer
 	"contract_create": createContract,
 	"user_create":     createUser,
+
 	// Repair Shop Peer
 	"repair_order_ls":       listRepairOrders,
 	"repair_order_complete": completeRepairOrder,
+
 	// Police Peer
 	"theft_claim_ls":      listTheftClaims,
 	"theft_claim_process": processTheftClaim,
@@ -85,7 +92,7 @@ func (t *SmartContract) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	}
 	bcFunc := bcFunctions[function]
 	if bcFunc == nil {
-		return shim.Error("Invalid invoke function.")
+		return shim.Error("Invalid Invoke Function: "+function)
 	}
 	return bcFunc(stub, args)
 }
