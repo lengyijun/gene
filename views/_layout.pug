@@ -15,14 +15,14 @@ html(lang='en')
     include _favicon
     block header_exts
   body#ibm-com.ibm-type
-    #ibm-top.ibm-landing-page
-      #ibm-masthead(role='banner', aria-label='IBM')
-        #ibm-mast-options
-          ul(role='toolbar', aria-labelledby='ibm-masthead')
-        #ibm-universal-nav
-          #ibm-home
-            a(href='/') IBM&reg;
-          ul#ibm-menu-links(role='toolbar', aria-label='Site map')
+    //#ibm-top.ibm-landing-page
+    //  #ibm-masthead(role='banner', aria-label='IBM')
+    //    #ibm-mast-options
+    //      ul(role='toolbar', aria-labelledby='ibm-masthead')
+    //    #ibm-universal-nav
+    //      #ibm-home
+    //        a(href='/') Gene;
+    //      ul#ibm-menu-links(role='toolbar', aria-label='Site map')
     #ibm-content-wrapper
       header
         .ibm-sitenav-menu-container
@@ -41,19 +41,19 @@ html(lang='en')
                     a(role='menuitem', href='/shop/smart-phones') #{ __('Smart Phones') }
                   li(role='presentation', class=(skisActive ? 'ibm-highlight' : ''))
                     a(role='menuitem', href='/shop/skis') #{ __('Skis') }
-              li(role='presentation', class=(policeActive ? 'ibm-highlight' : ''))
-                a(role='menuitem', href='/police') #{ __('Police') }
+              //li(role='presentation', class=(policeActive ? 'ibm-highlight' : ''))
+              //  a(role='menuitem', href='/police') #{ __('Police') }
               li(role='presentation', class=(repairShopActive ? 'ibm-highlight' : ''))
                 a(role='menuitem', href='/repair-shop') #{ __('Repair Service') }
-              li.ibm-haschildlist(role='presentation', class=(insuranceActive ? 'ibm-highlight' : ''))
-                span(role='menuitem') #{ __('Insurance') }
-                ul(role='menu')
-                  li(role='presentation', class=(selfServiceActive ? 'ibm-highlight' : ''))
-                    a(role='menuitem', href='/insurance/self-service') #{ __('Claim Self-Service') }
-                  li(role='presentation', class=(claimProcessingActive ? 'ibm-highlight' : ''))
-                    a(role='menuitem', href='/insurance/claim-processing') #{ __('Claim Processing') }
-                  li(role='presentation', class=(contractManagementActive ? 'ibm-highlight' : ''))
-                    a(role='menuitem', href='/insurance/contract-management') #{ __('Contract Management') }
+              //li.ibm-haschildlist(role='presentation', class=(insuranceActive ? 'ibm-highlight' : ''))
+              //  span(role='menuitem') #{ __('Insurance') }
+              //  ul(role='menu')
+              //    li(role='presentation', class=(selfServiceActive ? 'ibm-highlight' : ''))
+              //      a(role='menuitem', href='/insurance/self-service') #{ __('Claim Self-Service') }
+              //    li(role='presentation', class=(claimProcessingActive ? 'ibm-highlight' : ''))
+              //      a(role='menuitem', href='/insurance/claim-processing') #{ __('Claim Processing') }
+              //    li(role='presentation', class=(contractManagementActive ? 'ibm-highlight' : ''))
+              //      a(role='menuitem', href='/insurance/contract-management') #{ __('Contract Management') }
       main(role='main', aria-labelledby='ibm-pagetitle-h1')
         #ibm-pcon
           #ibm-content

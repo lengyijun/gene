@@ -21,6 +21,7 @@ class SummaryPage extends React.Component {
 
   render() {
     // const { username, password } = this.props.user;
+    const { username } = this.props.user;
     return (
       <div>
         <div className='ibm-columns'>
@@ -35,9 +36,9 @@ class SummaryPage extends React.Component {
             <div>
               <FormattedMessage id='Transaction completed.' />
             </div>
-            {/*<div>*/}
-              {/*<FormattedMessage id='Username' />: {username}*/}
-            {/*</div>*/}
+            <div>
+              <FormattedMessage id='Username' />: {username}
+            </div>
             {/*<div>*/}
               {/*<FormattedMessage id='Password' />: {password}*/}
             {/*</div>*/}

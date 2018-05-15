@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import Loading from '../../shared/Loading';
 import * as repairShopActions from '../actions/repairShopActions';
 import RepairOrderComponent from './RepairOrderComponent';
+import {uploadGene} from '../api'
 
 class RepairOrdersPage extends React.Component {
 
@@ -26,6 +27,9 @@ class RepairOrdersPage extends React.Component {
     super(props);
 
     this.toRepairOrderComponent = this.toRepairOrderComponent.bind(this);
+    this.order = this.order.bind(this);
+    this.callback=this.callback.bind(this)
+    this.state = {redirectToNext: false };
   }
 
   toRepairOrderComponent(repairOrder, index) {
@@ -35,9 +39,35 @@ class RepairOrdersPage extends React.Component {
     );
   }
 
+  async callback(ll){
+    console.log(ll)
+    const uploadresult=await uploadGene(ll)
+    console.log(uploadresult)
+    this.setState({redirectToNext:true})
+  }
+
+  async order(e){
+    var file_toload=e.target.files[0]
+    var fileReader = new FileReader()
+    fileReader.onload = function(){
+      var textFromFileLoaded=fileReader.result
+      console.log(textFromFileLoaded)
+      var ll=textFromFileLoaded.split("\n\n\n")
+      this.callback(ll)
+    }.bind(this);
+
+    fileReader.readAsText(file_toload, "UTF-8");
+  }
+
   render() {
     const { repairOrders, loading, intl } = this.props;
 
+    let {redirectToNext } = this.state;
+    if (redirectToNext) {
+      return (
+        <Redirect to='/uploadsuccess' />
+      );
+    }
     const cards = Array.isArray(repairOrders) ?
       repairOrders.map(this.toRepairOrderComponent) : null;
     const orders = ((Array.isArray(cards) && cards.length > 0) ||
@@ -53,6 +83,13 @@ class RepairOrdersPage extends React.Component {
         <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh' }}
           data-widget='masonry' data-items='.ibm-col-5-1'>
           {orders}
+          <div className='ibm-columns'>
+            <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
+              <input type="file"   visibility="hidden"  onChange={this.order} />
+              <button type='submit' className='ibm-btn-pri ibm-btn-blue-50'
+                      ><FormattedMessage id='Order' /></button>
+            </div>
+          </div>
         </div>
       </Loading>
     );

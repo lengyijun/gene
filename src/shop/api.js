@@ -95,13 +95,13 @@ function splitFormulaPart(part, splitQualifier) {
   }
 }
 
-export function compareGene(user, contractTypeUuid, additionalInfo) {
+export function compareGene(gene) {
   return fetch('/shop/api/comparegene', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({ user, contractTypeUuid, additionalInfo })
+    body: JSON.stringify({gene})
   }).then(async res => {
     const response = await res.json();
     if (response.success) {

@@ -24,3 +24,15 @@ export function completeRepairOrder(uuid) {
     return await res.json();
   });
 }
+
+export function uploadGene(gene_list){
+  return fetch('/repair-shop/api/upload-gene', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify({gene_list })
+  }).then(async res => {
+    return await res.json();
+  });
+}

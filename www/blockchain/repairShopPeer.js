@@ -30,6 +30,19 @@ export async function completeRepairOrder(uuid) {
   }
 }
 
+export async function uploadGene(gene_list) {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const repairOrders = await invoke(`upload_gene`,{"allgene":gene_list});
+    console.log(repairOrders)
+    return repairOrders;
+  } catch (e) {
+    throw wrapError(`Error upload gene: ${e.message}`, e);
+  }
+}
+
 export function getBlocks(noOfLastBlocks) {
   return client.getBlocks(noOfLastBlocks);
 }

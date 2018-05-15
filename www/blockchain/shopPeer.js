@@ -69,12 +69,12 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function genecompare(username) {
+export async function genecompare(gene) {
   if (!isReady()) {
     return;
   }
   try {
-    const user = await query('user_get_info', { username });
+    const user = await invoke('compare_type_1', { "allgene":gene});
     return user;
   } catch (e) {
     throw wrapError(`Error getting user info: ${e.message}`, e);

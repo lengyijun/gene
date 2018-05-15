@@ -42,6 +42,23 @@ router.post('/api/blocks', async (req, res) => {
   }
 });
 
+router.post('/api/upload-gene', async (req, res) => {
+  const { gene_list } = req.body;
+  // if (Array.isArray(gene_list)) {
+  //   res.json({ error: 'Invalid request from upload-gene' });
+  // }
+  console.log(gene_list)
+  console.log(typeof gene_list) //object
+  try {
+    const blocks = await RepairShopPeer.uploadGene(gene_list);
+    console.log("blocks")
+    console.log(blocks)
+    res.json(blocks);
+  } catch (e) {
+    res.json({ error: 'Error accessing blockchain when upload-gene' });
+  }
+});
+
 router.get('*', (req, res) => {
   res.render('repair-shop', { repairShopActive: true });
 });

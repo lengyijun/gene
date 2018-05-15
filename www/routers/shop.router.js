@@ -108,22 +108,24 @@ router.post('/api/enter-contract', async (req, res) => {
 });
 
 router.post('/api/comparegene', async (req, res) => {
-  let { user, contractTypeUuid, additionalInfo } = req.body;
-  if (typeof user === 'object' &&
-    typeof contractTypeUuid === 'string' &&
-    typeof additionalInfo === 'object') {
+  let {gene} = req.body;
+  // if (typeof user === 'object' &&
+  //   typeof contractTypeUuid === 'string' &&
+  //   typeof additionalInfo === 'object') {
     try {
-      let loginInfo = await ShopPeer.genecompare({
-      });
+      let loginInfo = await ShopPeer.genecompare(gene );
+      console.log(loginInfo)
       res.json({ success: 'Contract signed.', loginInfo });
     } catch (e) {
       console.log(e);
       res.json({ error: 'Could not create new contract!' });
     }
-  } else {
-    res.json({ error: 'Invalid request!' });
   }
-});
+  // else {
+  //   res.json({ error: 'Invalid request!' });
+  // }
+// }
+);
 
 router.post('/api/blocks', async (req, res) => {
   const { noOfLastBlocks } = req.body;

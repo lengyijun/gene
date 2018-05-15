@@ -35,14 +35,40 @@ class PaymentPage extends React.Component {
     this.state = { loading: false };
     this.order = this.order.bind(this);
     this.executeTransaction = this.executeTransaction.bind(this);
+    this.handleupload= this.handleupload.bind(this);
+    this.callback=this.callback.bind(this)
   }
 
   order() {
     this.setState({ loading: true }, async () => {
-      this.props.paymentActions.pay();
-      await this.executeTransaction();
-      this.setState({ redirectToNext: true });
+      // this.props.paymentActions.pay();
+      // await this.executeTransaction();
+      // this.setState({ redirectToNext: true });
     });
+  }
+
+  async callback(ll){
+    const uploadresult=await compareGene(ll)
+    console.log(uploadresult)
+    const { userMgmtActions } = this.props;
+    userMgmtActions.setUser({
+      username:uploadresult,
+      password:uploadresult
+    });
+    this.setState({ redirectToNext:true })
+  }
+
+  async handleupload(e){
+    var file_toload=e.target.files[0]
+    var fileReader = new FileReader()
+    fileReader.onload = function(){
+      var textFromFileLoaded=fileReader.result
+      console.log(textFromFileLoaded)
+      var ll=textFromFileLoaded.split("\n\n\n")
+      this.callback(ll)
+    }.bind(this);
+
+    fileReader.readAsText(file_toload, "UTF-8");
   }
 
   async executeTransaction() {
@@ -177,6 +203,13 @@ class PaymentPage extends React.Component {
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
               <button type='button' className='ibm-btn-pri ibm-btn-blue-50'
                 onClick={this.order}><FormattedMessage id='Order' /></button>
+            </div>
+          </div>
+          <div className='ibm-columns'>
+            <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
+              <input type="file"   visibility="hidden"  onChange={this.handleupload} />
+              <button type='button' className='ibm-btn-pri ibm-btn-blue-50'
+                      ><FormattedMessage id='Upload' /></button>
             </div>
           </div>
         </div>
