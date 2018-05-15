@@ -16,4 +16,9 @@
 /web/channel.tx
 /node_modules
 /.idea
+chaincode/src/bcins/.idea
+
 /static/js/*.bundle.js
+/static/js/block-explorer.bundle.js
+/static/js/common.bundle.js
+
