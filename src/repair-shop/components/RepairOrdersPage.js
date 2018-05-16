@@ -85,9 +85,9 @@ class RepairOrdersPage extends React.Component {
           {orders}
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <input type="file"   visibility="hidden"  onChange={this.order} />
-              <button type='submit' className='ibm-btn-pri ibm-btn-blue-50'
-                      ><FormattedMessage id='Order' /></button>
+              <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order}>Choose file to upload
+              <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
+              </label>
             </div>
           </div>
         </div>
