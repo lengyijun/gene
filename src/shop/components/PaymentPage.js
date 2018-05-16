@@ -201,16 +201,15 @@ class PaymentPage extends React.Component {
           </div>
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <button type='button' className='ibm-btn-pri ibm-btn-blue-50'
-                onClick={this.order}><FormattedMessage id='Order' /></button>
+              <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.handleupload}>Choose file to upload
+                <input type="file" style={{display:"none"}}/>
+              </label>
             </div>
-          </div>
-          <div className='ibm-columns'>
-            <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <input type="file"   visibility="hidden"  onChange={this.handleupload} />
-              <button type='button' className='ibm-btn-pri ibm-btn-blue-50'
-                      ><FormattedMessage id='Upload' /></button>
-            </div>
+          {/*<div className='ibm-columns'>*/}
+            {/*<div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>*/}
+              {/*<button type='button' className='ibm-btn-pri ibm-btn-blue-50'*/}
+                {/*onClick={this.order}><FormattedMessage id='Order' /></button>*/}
+            {/*</div>*/}
           </div>
         </div>
       </Loading>
