@@ -157,7 +157,7 @@ class ChooseInsurancePage extends React.Component {
         <div>
           <div className='ibm-columns'>
             <div className='ibm-col-1-1'>
-              <h3 className='ibm-h3'>{messageAtTop}</h3>
+              {/*<h3 className='ibm-h3'>{messageAtTop}</h3>*/}
             </div>
           </div>
           <div className='ibm-columns'>

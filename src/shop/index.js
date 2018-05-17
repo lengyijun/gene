@@ -6,6 +6,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { IntlProvider, addLocaleData, defineMessages } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import deLocaleData from 'react-intl/locale-data/de';
+import zhLocaleData from 'react-intl/locale-data/zh';
 
 import getLocale from '../shared/getLocale';
 import { setShopType } from './actions/shopActions';
@@ -23,7 +24,7 @@ if (typeof shopType == 'string' && shopType.length > 0) {
 }
 
 const locale = getLocale();
-addLocaleData([...deLocaleData, ...enLocaleData]);
+addLocaleData([...deLocaleData, ...enLocaleData,...zhLocaleData]);
 
 window.digitalData.page.pageInfo.language = locale;
 

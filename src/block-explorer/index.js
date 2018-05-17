@@ -6,13 +6,14 @@ import { AppContainer } from 'react-hot-loader';
 import { IntlProvider, addLocaleData, defineMessages } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import deLocaleData from 'react-intl/locale-data/de';
+import zhLocaleData from 'react-intl/locale-data/zh';
 
 import getLocale from '../shared/getLocale';
 import translations from './translations';
 import Container from './components/Container.js';
 import './style.scss';
 
-addLocaleData([...enLocaleData, ...deLocaleData]);
+addLocaleData([...enLocaleData, ...deLocaleData,...zhLocaleData]);
 
 const locale = getLocale();
 const roolEl = document.getElementById('block-explorer');

@@ -12,6 +12,7 @@ html(lang='en')
     script(src='/socket.io/socket.io.js')
     link(rel='alternate', href='?applang=en', hreflang='en-us')
     link(rel='alternate', href='?applang=de', hreflang='de-de')
+    link(rel='alternate', href='?applang=zh', hreflang='zh')
     include _favicon
     block header_exts
   body#ibm-com.ibm-type
@@ -67,7 +68,7 @@ html(lang='en')
             select#region-selector(style='width: 100%;')
               option(value='', selected) &nbsp;
               option(value='en') English
-              option(value='de') Deutsch
+              option(value='zh') 中文
         #ibm-footer
 
     #block-explorer

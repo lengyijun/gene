@@ -7,10 +7,11 @@ export default function (app) {
   const isDev = app.get('env') === 'development';
 
   i18n.configure({
-    locales: ['en', 'de'],
+    locales: ['en', 'de','zh'],
     fallbacks: {
       'de_DE': ['de', 'en'],
-      'de': ['en']
+      'de': ['en'],
+      'zh' : ['zh']
     },
     cookie: 'applang',
     queryParameter: 'applang',
