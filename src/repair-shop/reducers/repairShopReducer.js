@@ -14,6 +14,10 @@ export default function repairShopReducer(state = initialState.repairShop, actio
             ...(state.repairOrders.filter(ro => ro.uuid !== action.uuid))
           ]
         });
+    case RepairShopActionType.CREATE_DISEASE_TYPES:
+      return Object.assign({}, state,
+        { products: [...action.products] });
+
     default:
       return state;
   }

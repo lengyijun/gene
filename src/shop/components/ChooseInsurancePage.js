@@ -142,8 +142,9 @@ class ChooseInsurancePage extends React.Component {
         break;
     }
 
+    const contractTypes=[{description:"Heart Disease"},{description:"Diabete"} ,{ description: "Hypertension"} ]
     let { contractType, contractInfo, dailyPrice, redirectToNext } = this.state;
-    let { intl, contractsLoaded, contractTypes } = this.props;
+    let { intl, contractsLoaded } = this.props;
 
     if (redirectToNext) {
       return (
@@ -164,15 +165,16 @@ class ChooseInsurancePage extends React.Component {
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
               <div className='ibm-column-form'>
                 {/*delete following code as Master require*/}
-                {/*<p>*/}
-                  {/*<label><FormattedMessage id='Contract' />:</label>*/}
-                  {/*<span>*/}
-                    {/*<SelectList options={contractTypes}*/}
-                      {/*getCaptionFunc={this.getContractCaption}*/}
-                      {/*onChange={this.setContractType}*/}
-                      {/*selectedItemIndex={contractTypes.indexOf(contractType)} />*/}
-                  {/*</span>*/}
-                {/*</p>*/}
+                <p>
+                  <label><FormattedMessage id='Contract' />:</label>
+                  <span>
+                    <SelectList options={contractTypes}
+                      getCaptionFunc={this.getContractCaption}
+                      // onChange={this.setContractType}
+                      // selectedItemIndex={contractTypes.indexOf(contractType)}
+                    />
+                  </span>
+                </p>
                 <p>
                   <label><FormattedMessage id='Daily Price' />:</label>
                   <span>

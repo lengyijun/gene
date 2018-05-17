@@ -12,7 +12,7 @@ import getLocale from '../shared/getLocale';
 import AppRouter from './router';
 import configStore from './store';
 import translations from './translations';
-import { loadRepairOrders } from './actions/repairShopActions';
+import { loadRepairOrders ,setShopType} from './actions/repairShopActions';
 
 const store = configStore();
 store.dispatch(loadRepairOrders());

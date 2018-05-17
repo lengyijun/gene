@@ -11,6 +11,7 @@ import Loading from '../../shared/Loading';
 import * as repairShopActions from '../actions/repairShopActions';
 import RepairOrderComponent from './RepairOrderComponent';
 import {uploadGene} from '../api'
+import SelectList from '../../shared/SelectList';
 
 class RepairOrdersPage extends React.Component {
 
@@ -27,6 +28,7 @@ class RepairOrdersPage extends React.Component {
     super(props);
 
     this.toRepairOrderComponent = this.toRepairOrderComponent.bind(this);
+    this.getContractCaption = elem => elem.description;
     this.order = this.order.bind(this);
     this.callback=this.callback.bind(this)
     this.state = {redirectToNext: false };
@@ -60,7 +62,8 @@ class RepairOrdersPage extends React.Component {
   }
 
   render() {
-    const { repairOrders, loading, intl } = this.props;
+    const { repairOrders, loading, intl,products} = this.props;
+    const contractTypes=[{description:"Heart Disease"},{description:"Diabete"} ,{ description: "Hypertension"} ]
 
     let {redirectToNext } = this.state;
     if (redirectToNext) {
@@ -83,6 +86,17 @@ class RepairOrdersPage extends React.Component {
         <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh' }}
           data-widget='masonry' data-items='.ibm-col-5-1'>
           {orders}
+
+          <p>
+          <label><FormattedMessage id='Choose' />:</label>
+          <span>
+          <SelectList options={contractTypes}
+          getCaptionFunc={this.getContractCaption}
+          // selectedItemIndex={contractTypes.indexOf(contractType)}
+          />
+          </span>
+          </p>
+
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
               <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order}>Choose file to upload
@@ -99,7 +113,7 @@ class RepairOrdersPage extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     repairOrders: state.repairShop.repairOrders,
-    loading: Array.isArray(state.repairShop.repairOrders)
+    loading: Array.isArray(state.repairShop.repairOrders),
   };
 }
 

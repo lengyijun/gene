@@ -1,5 +1,6 @@
 'use strict';
 
 export const repairShop = {
-  repairOrders: null
+  repairOrders: null,
+  products:null
 };

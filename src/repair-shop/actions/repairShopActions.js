@@ -41,3 +41,11 @@ function completeRepairOrderSuccess(uuid) {
     uuid
   };
 }
+
+
+export function setShopType( products) {
+  return {
+    type:RepairShopActionType.CREATE_DISEASE_TYPES,
+    products
+  };
+}
