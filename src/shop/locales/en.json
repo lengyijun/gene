@@ -4,7 +4,7 @@
   "Ski Shop": "Heart Disease",
   "Buy a Bike": "Diabete",
   "Buy a Smart Phone": "Heart Disease",
-  "Buy a Pair of Skis": "HyperTension",
+  "Buy a Pair of Skis": "Lung Cancer",
   "Choose a Product": "Choose a Database",
   "Product Brand": "Data Provider",
   "Product Model": "Usage Count",
@@ -35,7 +35,7 @@
   "Insurance": "Insurance",
   "Processing Transaction...": "Processing Transaction...",
   "Transaction completed.": "Transaction completed.",
-  "Username": "Username",
+  "Username": "Result",
   "Password": "Password",
   "Summary": "Summary",
   "Upload":"Upload"

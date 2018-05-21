@@ -1,10 +1,10 @@
 {
-	"Blockchain for Insurance": "基于区块链的隐私保护系统",
+	"Blockchain for Insurance": "基于区块链的隐私保护交集计算系统",
 	"Home": "主页",
 	"Shop": "基因比对",
 	"Bikes": "糖尿病",
 	"Smart Phones": "心脏病",
-	"Skis": "高血压",
+	"Skis": "肺癌",
 	"Repair Service": "致病基因上传",
 	"Introduction": "简介",
 	"Go To The Shop Peer": "开始基因比对",
@@ -12,8 +12,8 @@
 	"Go To The Repair Shop Peer": "上传致病基因",
 	"Bikes Description": "检测糖尿病",
 	"Smart Phones Description": "检测心脏病",
-	"Skis Description": "检测高血压",
+	"Skis Description": "检测肺癌",
 	"Go To The Bike Shop": "糖尿病基因比对",
 	"Go To The Smart Phone Shop": "心脏病基因比对",
-	"Go To The Ski Shop": "高血压基因比对"
+	"Go To The Ski Shop": "肺癌基因比对"
 }

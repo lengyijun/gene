@@ -81,7 +81,7 @@ class ProductCarousel extends React.Component {
     return (
       <div key={index} className={`${isActive ? ' is-active' : ''}`}>
         <p><img src={product.imgSrc} /></p>
-        <p dangerouslySetInnerHTML={{ __html: product.description }} />
+        {/*<p dangerouslySetInnerHTML={{ __html: product.description }} />*/}
       </div>
     );
   }

@@ -63,7 +63,7 @@ class RepairOrdersPage extends React.Component {
 
   render() {
     const { repairOrders, loading, intl,products} = this.props;
-    const contractTypes=[{description:"Heart Disease"},{description:"Diabete"} ,{ description: "Hypertension"} ]
+    const contractTypes=[{description:"Heart Disease"},{description:"Diabete"} ,{ description: "Lung Cancer"} ]
 
     let {redirectToNext } = this.state;
     if (redirectToNext) {

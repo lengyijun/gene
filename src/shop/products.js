@@ -2,28 +2,28 @@ export default {
   "bikes": [
     {
       "brand": "OMIM",
-      "usetime": "Spectral AL 6.0",
+      "usetime": "100",
       "price": 3420.0,
       "imgSrc": "/img/products/omim.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "ClinVar",
-      "usetime": "No Pogo 800.27",
+      "usetime": "200",
       "price": 2110.0,
       "imgSrc": "/img/products/clinvar.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "HGMD",
-      "usetime": "E-VO9.0",
+      "usetime": "300",
       "price": 4050.0,
       "imgSrc": "/img/products/hgmd.png",
       "description": `Colour: Black <br> Type: Pedelec`
     },
     {
       "brand": "GENETIC",
-      "usetime": "E-VO9.0",
+      "usetime": "400",
       "price": 4050.0,
       "imgSrc": "/img/products/genetic.png",
       "description": `Colour: Black <br> Type: Pedelec`
@@ -32,28 +32,28 @@ export default {
   "smart-phones": [
     {
       "brand": "OMIM",
-      "usetime": "Spectral AL 6.0",
+      "usetime": "500",
       "price": 3420.0,
       "imgSrc": "/img/products/omim.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "ClinVar",
-      "usetime": "No Pogo 800.27",
+      "usetime": "600",
       "price": 2110.0,
       "imgSrc": "/img/products/clinvar.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "HGMD",
-      "usetime": "E-VO9.0",
+      "usetime": "300",
       "price": 4050.0,
       "imgSrc": "/img/products/hgmd.png",
       "description": `Colour: Black <br> Type: Pedelec`
     },
     {
       "brand": "GENETIC",
-      "usetime": "E-VO9.0",
+      "usetime": "200",
       "price": 4050.0,
       "imgSrc": "/img/products/genetic.png",
       "description": `Colour: Black <br> Type: Pedelec`
@@ -62,28 +62,28 @@ export default {
   "skis": [
     {
       "brand": "OMIM",
-      "usetime": "Spectral AL 6.0",
+      "usetime": "200",
       "price": 3420.0,
       "imgSrc": "/img/products/omim.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "ClinVar",
-      "usetime": "No Pogo 800.27",
+      "usetime": "150",
       "price": 2110.0,
       "imgSrc": "/img/products/clinvar.png",
       "description": `Colour: Grey <br> Type: All-Mountain`
     },
     {
       "brand": "HGMD",
-      "usetime": "E-VO9.0",
+      "usetime": "20",
       "price": 4050.0,
       "imgSrc": "/img/products/hgmd.png",
       "description": `Colour: Black <br> Type: Pedelec`
     },
     {
       "brand": "GENETIC",
-      "usetime": "E-VO9.0",
+      "usetime": "10",
       "price": 4050.0,
       "imgSrc": "/img/products/genetic.png",
       "description": `Colour: Black <br> Type: Pedelec`
