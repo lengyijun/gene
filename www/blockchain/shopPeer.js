@@ -74,7 +74,8 @@ export async function genecompare(gene) {
     return;
   }
   try {
-    const user = await invoke('compare_type_1', { "allgene":gene});
+    const user = await invoke('compare_type_1', { "Allgene":gene});
+    console.log(user)
     return user;
   } catch (e) {
     throw wrapError(`Error getting user info: ${e.message}`, e);

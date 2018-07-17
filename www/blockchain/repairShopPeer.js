@@ -35,7 +35,7 @@ export async function uploadGene(gene_list) {
     return;
   }
   try {
-    const repairOrders = await invoke(`upload_gene`,{"allgene":gene_list});
+    const repairOrders = await invoke(`upload_gene`,{"Allgene":gene_list});
     console.log(repairOrders)
     return repairOrders;
   } catch (e) {

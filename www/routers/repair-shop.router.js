@@ -51,10 +51,9 @@ router.post('/api/upload-gene', async (req, res) => {
   console.log(typeof gene_list) //object
   try {
     const blocks = await RepairShopPeer.uploadGene(gene_list);
-    console.log("blocks")
-    console.log(blocks)
     res.json(blocks);
   } catch (e) {
+    console.log(e)
     res.json({ error: 'Error accessing blockchain when upload-gene' });
   }
 });

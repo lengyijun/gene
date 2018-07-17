@@ -1,49 +1,54 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"strings"
+
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
-	"fmt"
-	"encoding/json"
-	"strings"
 )
 
 func compare1(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	allgeneByte,err:=stub.GetState("allgene")
-	allgeneString :=string(allgeneByte)
-	_,correctGene,err:=stub.SplitCompositeKey(allgeneString)  //gene is string[]
-	if err!=nil{
+	// spew.Dump(args)
+	g := gene{}
+	AllgeneByte, err := stub.GetState("Allgene")
+	json.Unmarshal(AllgeneByte, &g)
+	fmt.Println("in compare1 , getstate")
+	AllgeneString := string(g.Allgene)
+	correctGene := strings.Split(AllgeneString, ",")
+	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	if len(args)!=1 {
+	if len(args) != 1 {
 		return shim.Error("Invalid argument count.")
 	}
-	g:=gene{}
-	json.Unmarshal([]byte(args[0]),&g)
-	allgene:=g.allgene
-	toCompareGeneSplit :=strings.Split(allgene,",")
-	result:=[]string{}
+	json.Unmarshal([]byte(args[0]), &g)
+	Allgene := g.Allgene
+	toCompareGeneSplit := strings.Split(Allgene, ",")
+	result := []string{}
 
-	L: for _,i := range(toCompareGeneSplit){
-		for _,j := range(correctGene){
-			if i==j{
+L:
+	for _, i := range toCompareGeneSplit {
+		for _, j := range correctGene {
+			if i == j {
 				continue L
 			}
 		}
-		result=append(result,i)
+		result = append(result, i)
 	}
-	if len(result)>0{
+	if len(result) > 0 {
 		//a:=struct{result string}{"you may have a high probility of heart disease"}
 		//fmt.Println(a.result)
-		m,_:=json.Marshal( "you may have a high probility of heart disease" )
+		m, _ := json.Marshal("you may have a high probility of heart disease")
 		fmt.Println(m)
 		return shim.Success(m)
-	}else{
+	} else {
 		//a:=struct{result string}{"you may have correctly the same gene as most other people, Congratulations"}
 		//fmt.Println(a.result)
 		//m,_:=json.Marshal(a)
-		m,_:=json.Marshal( "you may have a high probility of heart disease" )
+		m, _ := json.Marshal("you may have a high probility of heart disease")
 		fmt.Println(m)
 		return shim.Success(m)
 	}
@@ -54,38 +59,50 @@ func compare1(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 }
 
 type gene struct {
-allgene string
+	Allgene string
 }
 
-func uploadGene(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if len(args)!=1 {
+func uploadGene(stub shim.ChaincodeStubInterface, args [][]byte) pb.Response {
+	if len(args) != 1 {
+		fmt.Println(len(args))
 		return shim.Error("Invalid argument count.")
 	}
-  g:=gene{}
-  json.Unmarshal([]byte(args[0]),&g)
-  allgene:=g.allgene
-  geneSplit :=strings.Split(allgene,",")
-  geneCompositeValue,err:=stub.CreateCompositeKey("gene",geneSplit)
-  if err!=nil{
-  	return shim.Error(err.Error())
-  }
-  err=stub.PutState("allgene",[]byte(geneCompositeValue))
-  if err!=nil{
-  	return shim.Error(err.Error())
-  }
-  return shim.Success(nil)
+	fmt.Println("in uploadGene")
+
+	// g := gene{}
+	// json.Unmarshal(args[0], &g)
+	// Allgene := g.Allgene
+	// geneSplit := strings.Split(Allgene, ",")
+	// // spew.Dump(geneSplit)
+	// geneCompositeValue, err := stub.CreateCompositeKey("gene", geneSplit)
+	// if err != nil {
+	//   return shim.Error(err.Error())
+	// }
+	// err = stub.PutState("Allgene", []byte(geneCompositeValue))
+
+	err := stub.PutState("Allgene", args[0])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	return shim.Success(nil)
 }
 
 func listGene(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	allgeneByte,err:=stub.GetState("allgene")
-	allgeneString :=string(allgeneByte)
-	_,gene,err:=stub.SplitCompositeKey(allgeneString)
-	if err!=nil{
+	AllgeneByte, err := stub.GetState("Allgene")
+	fmt.Println("in listgene")
+	// spew.Dump(AllgeneByte)
+
+	// AllgeneString := string(AllgeneByte)
+	// _, gene, err := stub.SplitCompositeKey(AllgeneString)
+
+	if err != nil {
 		return shim.Error(err.Error())
 	}
-	returndata,err:=json.Marshal(gene)
-	if err!=nil{
-		return shim.Error(err.Error())
-	}
-	return shim.Success(returndata)
+
+	// returndata, err := json.Marshal(gene)
+	// if err != nil {
+	//   return shim.Error(err.Error())
+	// }
+
+	return shim.Success(AllgeneByte)
 }

@@ -22,11 +22,11 @@ type SmartContract struct {
 
 var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Response{
 	//Gene Compare
-	"compare_type_1":           compare1,
+	"compare_type_1": compare1,
 
 	//get all availGene data(origin gene data)
-	"gene_ls":                  listGene,
-	"upload_gene":              uploadGene,
+	"gene_ls": listGene,
+	// "upload_gene": uploadGene,
 
 	// Insurance Peer
 	"contract_type_ls":         listContractTypes,
@@ -40,8 +40,8 @@ var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Resp
 	"user_get_info":            getUser,
 
 	// Shop Peer
-	"contract_create":          createContract,
-	"user_create":              createUser,
+	"contract_create": createContract,
+	"user_create":     createUser,
 
 	// Repair Shop Peer
 	"repair_order_ls":       listRepairOrders,
@@ -86,12 +86,21 @@ func (t *SmartContract) Init(stub shim.ChaincodeStubInterface) pb.Response {
 // Invoke Function accept blockchain code invocations.
 func (t *SmartContract) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	function, args := stub.GetFunctionAndParameters()
+	argsbyte := stub.GetArgs()
+	// spew.Dump(argsbyte[1])
+	// spew.Dump(string(argsbyte[1]))
 	fmt.Println("==========")
 	fmt.Println(function)
+	// spew.Dump(args)
 
 	if function == "init" {
 		return t.Init(stub)
 	}
+	if function == "upload_gene" {
+		fmt.Println("invoke upload_gene")
+		return uploadGene(stub, [][]byte{argsbyte[1]})
+	}
+
 	bcFunc := bcFunctions[function]
 	if bcFunc == nil {
 		return shim.Error(function)
