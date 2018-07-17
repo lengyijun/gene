@@ -77,13 +77,13 @@ class RepairOrdersPage extends React.Component {
       cards === null) ? cards :
       (
         <div className='ibm-col-5-5 ibm-col-medium-6-6'>
-          <FormattedMessage id='No outstanding repair orders.' />
+          {/*<FormattedMessage id='No outstanding repair orders.' />*/}
         </div>
       );
     return (
       <Loading hidden={loading}
         text={intl.formatMessage({ id: 'Loading Repair Orders...' })}>
-        <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh' }}
+        <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh',float:"left",width:"120px" }}
           data-widget='masonry' data-items='.ibm-col-5-1'>
           {orders}
 
@@ -97,13 +97,16 @@ class RepairOrdersPage extends React.Component {
           </span>
           </p>
 
-          <div className='ibm-columns'>
+          <div className='ibm-columns' >
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order}>Choose file to upload
+              <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>Choose file to upload
               <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
               </label>
             </div>
           </div>
+        </div>
+        <div style={{float:"right"}} margin="10px">
+          <img src="/img/right/center.jpg" width="600px" />
         </div>
       </Loading>
     );

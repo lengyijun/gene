@@ -80,6 +80,7 @@ class ChooseProductPage extends React.Component {
 
     return (
       <div>
+        <div style={{float:"left",width:"300px"}}>
         <div>
           <div className='ibm-columns'>
             <div className='ibm-col-1-1'>
@@ -142,6 +143,11 @@ class ChooseProductPage extends React.Component {
               <FormattedMessage id='Next' />
             </button>
           </div>
+        </div>
+      </div>
+
+        <div style={{float:"right"}} margin="10px">
+          <img src="/img/right/disease.jpg" width="600px" />
         </div>
       </div>
     );

@@ -63,8 +63,8 @@ class PaymentPage extends React.Component {
     var fileReader = new FileReader()
     fileReader.onload = function(){
       var textFromFileLoaded=fileReader.result
-      console.log(textFromFileLoaded)
       var ll=textFromFileLoaded.split("\n\n\n")
+      console.log(ll)
       this.callback(ll)
     }.bind(this);
 
@@ -128,7 +128,7 @@ class PaymentPage extends React.Component {
       <Loading hidden={!this.state.loading} text={intl.formatMessage({
         id: 'Processing Transaction...'
       })}>
-        <div>
+        <div style={{float:"left" , width:"300px"}}>
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
               <h3 className='ibm-h3'>
@@ -211,6 +211,9 @@ class PaymentPage extends React.Component {
                 {/*onClick={this.order}><FormattedMessage id='Order' /></button>*/}
             {/*</div>*/}
           </div>
+        </div>
+        <div style={{float:"right"}}>
+          <img src={"/img/right/sports.png"} style={{width:"500px"}}/>
         </div>
       </Loading>
     );

@@ -155,7 +155,7 @@ class ChooseInsurancePage extends React.Component {
     return (
       <Loading hidden={contractsLoaded}
         text={intl.formatMessage({ id: 'Loading Contracts...' })}>
-        <div>
+        <div style={{float:"left",width:"300px"}}>
           <div className='ibm-columns'>
             <div className='ibm-col-1-1'>
               {/*<h3 className='ibm-h3'>{messageAtTop}</h3>*/}
@@ -228,6 +228,9 @@ class ChooseInsurancePage extends React.Component {
               </button>
             </div>
           </div>
+        </div>
+        <div style={{float:"right"}} margin="10px">
+          <img src="/img/right/gene.jpg" width="600px" />
         </div>
       </Loading>
     );

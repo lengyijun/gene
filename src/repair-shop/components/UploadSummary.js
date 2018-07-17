@@ -29,12 +29,15 @@ class SummaryPage extends React.Component {
             </h3>
           </div>
         </div>
-        <div className='ibm-columns'>
+        <div className='ibm-columns' style={{float:"left"}}>
           <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
             <div>
               <FormattedMessage id='Upload Success' />
             </div>
           </div>
+        </div>
+        <div style={{float:"right"}} margin="10px">
+          <img src="/img/right/center.jpg" width="600px" />
         </div>
       </div>
     );
