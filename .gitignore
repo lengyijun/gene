@@ -22,3 +22,13 @@ chaincode/src/bcins/.idea
 /static/js/block-explorer.bundle.js
 /static/js/common.bundle.js
 
+
+police-peer/
+
+repairshop-peer/
+
+shop-peer/
+
+chaincode/src/bcins/bcins
+
+insurance-peer/
