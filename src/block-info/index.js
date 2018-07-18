@@ -6,18 +6,18 @@ import { Provider as StoreProvider } from 'react-redux';
 import { IntlProvider, addLocaleData, defineMessages } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import deLocaleData from 'react-intl/locale-data/de';
-import zhLocaleData from 'react-intl/locale-data/zh';
+import zhLocaleData from 'react-intl/locale-data/zh'
 
 import getLocale from '../shared/getLocale';
 import AppRouter from './router';
 import configStore from './store';
 import translations from './translations';
-import { loadClaims } from './actions/claimProcessingActions';
-import { loadContractTypes } from './actions/contractTemplateActions';
+// import { loadRepairOrders ,setShopType} from './actions/repairShopActions';
+import {loadBlocks} from './actions/claimProcessingActions';
 
 const store = configStore();
-store.dispatch(loadClaims());
-store.dispatch(loadContractTypes());
+store.dispatch(loadBlocks());
+
 const locale = getLocale();
 addLocaleData([...deLocaleData, ...enLocaleData,...zhLocaleData]);
 

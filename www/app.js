@@ -12,11 +12,14 @@ import repairShopRouter, { wsConfig as repairShopWsConfig }
   from './routers/repair-shop.router';
 import insuranceRouter, { wsConfig as insuranceWsConfig }
   from './routers/insurance.router';
+import blockinfoRouter, { wsConfig as blockWsConfig }
+  from './routers/blockinfo.router'
 
 const INSURANCE_ROOT_URL = '/insurance';
 const POLICE_ROOT_URL = '/police';
 const REPAIR_SHOP_ROOT_URL = '/repair-shop';
 const SHOP_ROOT_URL = '/shop';
+const BLOCK_ROOT_URL='/block-info'
 
 const app = express();
 const httpServer = new Server(app);
@@ -27,6 +30,7 @@ shopWsConfig(io.of(SHOP_ROOT_URL));
 policeWsConfig(io.of(POLICE_ROOT_URL));
 repairShopWsConfig(io.of(REPAIR_SHOP_ROOT_URL));
 insuranceWsConfig(io.of(INSURANCE_ROOT_URL));
+blockWsConfig(io.of(BLOCK_ROOT_URL))
 
 configureExpress(app);
 
@@ -39,5 +43,6 @@ app.use(SHOP_ROOT_URL, shopRouter);
 app.use(POLICE_ROOT_URL, policeRouter);
 app.use(REPAIR_SHOP_ROOT_URL, repairShopRouter);
 app.use(INSURANCE_ROOT_URL, insuranceRouter);
+app.use(BLOCK_ROOT_URL,blockinfoRouter)
 
 export default httpServer;

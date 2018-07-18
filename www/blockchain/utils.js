@@ -513,6 +513,7 @@ function unmarshalBlock(block) {
   return {
     id: block.header.number.toString(),
     fingerprint: block.header.data_hash.slice(0, 20),
+    prevfingerprint: block.header.previous_hash.slice(0, 20),
     transactions
   };
 }
