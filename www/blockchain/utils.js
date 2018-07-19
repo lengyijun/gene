@@ -368,6 +368,19 @@ export class OrganizationClient extends EventEmitter {
     return unmarshalResult(await this._channel.queryByChaincode(request));
   }
 
+  async getBlockInfoFromBlockId(id) {
+    const queryBlock = this._channel.queryBlock.bind(this._channel);
+    const blockPromises = {};
+    blockPromises[Symbol.iterator] = function* () {
+      // for (let i = 1; i <= id; i++) {
+        yield queryBlock(parseInt(id));
+      // }
+    };
+    const blocks = await Promise.all([...blockPromises]);
+    console.log(blocks)
+    return blocks
+  }
+
   async getBlocks(noOfLastBlocks) {
     if (typeof noOfLastBlocks !== 'number' &&
       typeof noOfLastBlocks !== 'string') {
@@ -399,6 +412,15 @@ export class OrganizationClient extends EventEmitter {
     const blocks = await Promise.all([...blockPromises]);
     return blocks.map(unmarshalBlock);
   }
+
+  // async getBlockInfoFromBlockId(id) {
+  //   console.log("id: "+id)
+  //   const {
+  //     blockinfo
+  //   } = await this._channel.queryBlock(Number(id));
+  //   console.log(blockinfo)
+  //   return blockinfo
+  // }
 }
 
 /**

@@ -10,8 +10,10 @@ import NotFoundPage from '../shared/NotFoundPage';
 import ContractManagementApp from './components/contract-management/App';
 import ContractTemplatesPage
   from './components/contract-management/ContractTemplatesPage';
-import NewContractTemplatePage
-  from './components/contract-management/NewContractTemplatePage';
+// import NewContractTemplatePage
+//   from './components/contract-management/NewContractTemplatePage';
+import BlockDetailPage
+  from './components/contract-management/BlockDetail'
 
 export default function router() {
   return (
@@ -26,8 +28,10 @@ export default function router() {
               <Switch>
                 <Route exact path='/contract-management'
                        component={ContractTemplatesPage} />
-                <Route path='/contract-management/new-contract-template'
-                       component={NewContractTemplatePage} />
+                {/*<Route path='/contract-management/new-contract-template'*/}
+                       {/*component={NewContractTemplatePage} />*/}
+                <Route path='/blockinfo/:id'
+                       component={BlockDetailPage} />
                 <Route component={NotFoundPage} />
               </Switch>
             </ContractManagementApp>

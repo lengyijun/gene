@@ -8,10 +8,12 @@ import Transaction from './Transaction';
 
 const Block = ({ data }) => {
   return (
-    <div className='block'>
+    <div className='block' >
       <div className='block-data'>
         <p>
-          <b><FormattedMessage id='Block No.' />:</b> {data.id}
+          <a href={ '//localhost:3000/block-info/blockinfo/'+data.id } >
+              <b><FormattedMessage id='Block No.' />:</b> {data.id}
+          </a>
         </p>
         <p>
           <b><FormattedMessage id='Hash' />:</b>&nbsp;
@@ -21,9 +23,9 @@ const Block = ({ data }) => {
           <b><FormattedMessage id='Transactions' />:</b>&nbsp;
           {data.transactions.length}
         </p>
-        <div className='transactions'>
-          {data.transactions.map((t, i) => <Transaction key={i} data={t} />)}
-        </div>
+        {/*<div className='transactions'>*/}
+          {/*{data.transactions.map((t, i) => <Transaction key={i} data={t} />)}*/}
+        {/*</div>*/}
       </div>
     </div>
   );

@@ -14,12 +14,14 @@ const ContractTemplatesPage = ({ loading,blocks, intl, }) => {
   console.log(blocks)
   const contractTemplateRows = Array.isArray(blocks) ? blocks
     .map((block) => (
-      <tr key={block.fingerprint} >
-        <td>{block.id}</td>
-        <td>{block.fingerprint}</td>
-        <td>{block.prevfingerprint}</td>
-        <td>{block.transactions.length}</td>
-      </tr>
+          <tr key={block.fingerprint} >
+           <a href={ 'blockinfo/'+block.id } >
+                <td>{block.id}</td>
+            </a>
+            <td>{block.fingerprint}</td>
+            <td>{block.prevfingerprint}</td>
+            <td>{block.transactions.length}</td>
+          </tr>
     )) : null;
   function activateIcon(contractType) {
     // const activate = () => {

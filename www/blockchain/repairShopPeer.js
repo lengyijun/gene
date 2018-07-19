@@ -16,6 +16,19 @@ export async function getRepairOrders() {
   }
 }
 
+export async function getBlockById(id){
+  if (!isReady()) {
+    return;
+  }
+  try{
+   const blockinfo=await getblockbyid(id)
+    return blockinfo
+  }catch (e){
+    throw wrapError(`Error getting Block By Id: ${e.message}`, e);
+  }
+
+}
+
 export async function completeRepairOrder(uuid) {
   if (!isReady()) {
     return;
@@ -61,4 +74,8 @@ function invoke(fcn, ...args) {
 function query(fcn, ...args) {
   return client.query(
     config.chaincodeId, config.chaincodeVersion, fcn, ...args);
+}
+
+function getblockbyid(id){
+  return client.getBlockInfoFromBlockId(id)
 }

@@ -3,29 +3,16 @@ import * as RepairShopPeer from '../blockchain/repairShopPeer';
 
 const router = express.Router();
 
-router.post('/api/repair-orders', async (req, res) => {
+router.post('/api/getblock-by-id', async (req, res) => {
   try {
-    let repairOrders = await RepairShopPeer.getRepairOrders();
+    const {id } =req.body
+    let repairOrders = await RepairShopPeer.getBlockById(id);
+    // console.log("blockinforouter")
+    // console.log(repairOrders)
     res.json(repairOrders);
   } catch (e) {
     console.log(e);
     res.json({ error: "Error accessing blockchain."});
-  }
-});
-
-router.post('/api/complete-repair-order', async (req, res) => {
-  const { uuid } = req.body;
-  if (typeof uuid !== 'string') {
-    res.json({ error: "Invalid request." });
-    return;
-  }
-
-  try {
-    await RepairShopPeer.completeRepairOrder(uuid);
-    res.json({ success: true });
-  } catch (e) {
-    console.log(e);
-    res.json({ error: "Error accessing blockchain." });
   }
 });
 

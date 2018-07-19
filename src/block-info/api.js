@@ -39,3 +39,18 @@ function getBlocks(url, noOfLastBlocks) {
     return blocks;
   });
 }
+
+export function getBlockById(id) {
+  console.log("getblockbyid")
+  return fetch('/block-info/api/getblock-by-id', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify({ id })
+  }).then(async res => {
+    // console.log(res)
+    // console.log(res.json())
+    return res.json();
+  });
+}
