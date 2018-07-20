@@ -96,8 +96,8 @@ class SummaryPage extends React.Component {
           </div>
         </div>
 
-        <div style={{float:"right",width:"500px"}}>
-          <img src={"/img/right/center.jpg"} style={{width: "500px"}} />
+        <div style={{float:"right",width:"700px"}}>
+          <img src={"/img/right/center.jpg"} style={{width: "700px"}} />
         </div>
       </div>
     );

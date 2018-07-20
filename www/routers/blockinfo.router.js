@@ -30,7 +30,7 @@ router.post('/api/blocks', async (req, res) => {
 });
 
 router.get('*', (req, res) => {
-  res.render('block-info', { repairShopActive: true });
+  res.render('block-info', { BlockInfoActive: true });
 });
 
 function wsConfig(io) {

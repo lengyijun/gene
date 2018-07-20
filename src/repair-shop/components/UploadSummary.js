@@ -37,7 +37,7 @@ class SummaryPage extends React.Component {
           </div>
         </div>
         <div style={{float:"right"}} margin="10px">
-          <img src="/img/right/center.jpg" width="600px" />
+          <img src="/img/right/medical.jpg" width="600px" />
         </div>
       </div>
     );
