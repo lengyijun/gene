@@ -15,18 +15,38 @@ const prefixClaim = "claim"
 const prefixUser = "user"
 const prefixRepairOrder = "repair_order"
 
+const prefixDone = "done"
+const prefixUndone = "undone"
+
+const prefixUploadDone = "done"
+const prefixUploadUndone = "undone"
+
 var logger = shim.NewLogger("main")
 
 type SmartContract struct {
 }
 
+type PSIStruct struct {
+  UserGene          []string
+  OfficialGene      []string
+  Result            []string
+}
+
 var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Response{
 	//Gene Compare
-	"compare_type_1": compare1,
+	//"compare_type_1":           compare1,
+  "compare_type_1":           calculation_user_gene_upload,  //tested
+  "compare_claim_ls":         listCompareClaims,             //tested
 
-	//get all availGene data(origin gene data)
-	"gene_ls": listGene,
-	// "upload_gene": uploadGene,
+	//Disease Center
+	"gene_ls":                                listGene,         //get all availGene data(origin gene data),not used
+	"diseasecenter_upload_gene":              calculation_official_gene_upload,
+	"diseasecenter_compare_claim_gene_ls":    listUnpropossedGene,
+	// "upload_gene": uploadGene,  //in the Invoke function,maybe not need any more
+
+	//Calculation
+	"calculation_complete":     completeCalculation,
+	"calculation_ls":           listUndoneCalculation,      //undone
 
 	// Insurance Peer
 	"contract_type_ls":         listContractTypes,

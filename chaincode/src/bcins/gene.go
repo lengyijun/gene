@@ -3,59 +3,29 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-func compare1(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	// spew.Dump(args)
-	g := gene{}
-	AllgeneByte, err := stub.GetState("Allgene")
-	json.Unmarshal(AllgeneByte, &g)
-	fmt.Println("in compare1 , getstate")
-	AllgeneString := string(g.Allgene)
-	correctGene := strings.Split(AllgeneString, ",")
-	if err != nil {
-		return shim.Error(err.Error())
-	}
+//args[0]: UUID
+//args[1:]: all gene to compare
+//only create a undone struct
+func calculation_user_gene_upload (stub shim.ChaincodeStubInterface, args []string) pb.Response {
+  UUID := args[0]
+  key,err :=stub.CreateCompositeKey(prefixUndone,[]string{prefixUploadUndone,UUID})
+  value := PSIStruct{}
+  value.UserGene=args[1:]
+  value_byte,err :=json.Marshal(value)
+  if err!=nil{
+    return shim.Error(err.Error())
+  }
 
-	if len(args) != 1 {
-		return shim.Error("Invalid argument count.")
-	}
-	json.Unmarshal([]byte(args[0]), &g)
-	Allgene := g.Allgene
-	toCompareGeneSplit := strings.Split(Allgene, ",")
-	result := []string{}
-
-L:
-	for _, i := range toCompareGeneSplit {
-		for _, j := range correctGene {
-			if i == j {
-				continue L
-			}
-		}
-		result = append(result, i)
-	}
-	if len(result) > 0 {
-		//a:=struct{result string}{"you may have a high probility of heart disease"}
-		//fmt.Println(a.result)
-		m, _ := json.Marshal("you may have a high probility of heart disease")
-		fmt.Println(m)
-		return shim.Success(m)
-	} else {
-		//a:=struct{result string}{"you may have correctly the same gene as most other people, Congratulations"}
-		//fmt.Println(a.result)
-		//m,_:=json.Marshal(a)
-		m, _ := json.Marshal("you may have a high probility of heart disease")
-		fmt.Println(m)
-		return shim.Success(m)
-	}
-	//mm,err:=json.Marshal(result)
-	//if err!=nil{
-	//	return shim.Error(err.Error())
-	//}
+  err = stub.PutState(key,value_byte)
+  if err!=nil{
+    return shim.Error(err.Error())
+  }
+  return shim.Success(value_byte)
 }
 
 type gene struct {
@@ -69,17 +39,6 @@ func uploadGene(stub shim.ChaincodeStubInterface, args [][]byte) pb.Response {
 	}
 	fmt.Println("in uploadGene")
 
-	// g := gene{}
-	// json.Unmarshal(args[0], &g)
-	// Allgene := g.Allgene
-	// geneSplit := strings.Split(Allgene, ",")
-	// // spew.Dump(geneSplit)
-	// geneCompositeValue, err := stub.CreateCompositeKey("gene", geneSplit)
-	// if err != nil {
-	//   return shim.Error(err.Error())
-	// }
-	// err = stub.PutState("Allgene", []byte(geneCompositeValue))
-
 	err := stub.PutState("Allgene", args[0])
 	if err != nil {
 		return shim.Error(err.Error())
@@ -90,19 +49,74 @@ func uploadGene(stub shim.ChaincodeStubInterface, args [][]byte) pb.Response {
 func listGene(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	AllgeneByte, err := stub.GetState("Allgene")
 	fmt.Println("in listgene")
-	// spew.Dump(AllgeneByte)
-
-	// AllgeneString := string(AllgeneByte)
-	// _, gene, err := stub.SplitCompositeKey(AllgeneString)
 
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	// returndata, err := json.Marshal(gene)
-	// if err != nil {
-	//   return shim.Error(err.Error())
-	// }
-
 	return shim.Success(AllgeneByte)
+}
+
+//no args need
+func listCompareClaims(stub shim.ChaincodeStubInterface,args []string) pb.Response{
+  if len(args) !=0{
+    return shim.Error("incorrect number of parameter,expect 0")
+  }
+  undoneIterator,err :=stub.GetStateByPartialCompositeKey(prefixUndone,[]string{})
+  defer  undoneIterator.Close()
+  if err!=nil{
+    return shim.Error("Get Undone Iterator Failed")
+  }
+
+  doneIterator ,err := stub.GetStateByPartialCompositeKey(prefixDone,[]string{})
+  defer doneIterator.Close()
+  if err!=nil{
+    return shim.Error("Get Done Iterator Failed")
+  }
+
+  result := []interface{}{}
+
+  for undoneIterator.HasNext(){
+    kvResult, err := undoneIterator.Next()
+    if err != nil {
+      return shim.Error(err.Error())
+    }
+    undone := struct {
+      UserGene          []string
+      OfficialGene      []string
+      Result            []string
+      Done              bool
+    }{}
+    err =json.Unmarshal(kvResult.Value,&undone)
+    undone.Done=false
+    if err!=nil{
+      return shim.Error("cannot unmarshal")
+    }
+    result = append(result,undone)
+  }
+
+  for doneIterator.HasNext() {
+    kvResult, err := doneIterator.Next()
+    if err!=nil{
+      return shim.Error("cannot get next iterator")
+    }
+    doneStruct := struct {
+      UserGene          []string
+      OfficialGene      []string
+      Result            []string
+      Done              bool
+    }{}
+    err = json.Unmarshal(kvResult.Value,&doneStruct)
+    doneStruct.Done=true
+    if err != nil{
+      return shim.Error("cannot unmarshal done ")
+    }
+
+    result = append(result,doneStruct)
+  }
+  returnAsByte,err := json.Marshal(result)
+  if err !=nil{
+    return shim.Error("cannot marshal in returnAsByte")
+  }
+  return shim.Success(returnAsByte)
 }
