@@ -68,11 +68,11 @@ const ContractTemplatesPage = ({ loading,blocks, intl, }) => {
     <Loading hidden={!loading}
       text={intl.formatMessage({ id: 'Loading contract types...' })}>
       <div className='ibm-columns' style={{ minHeight: '30vh' }}>
-        {/*<div className='ibm-col-1-1'>*/}
-          {/*<h3 className='ibm-h3'>*/}
-            {/*<FormattedMessage id='Contract Templates' />*/}
-          {/*</h3>*/}
-        {/*</div>*/}
+        <div className='ibm-col-1-1'>
+          <h3 className='ibm-h3'>
+            <FormattedMessage id='Latest Block' />
+          </h3>
+        </div>
         {/*<div style={{ marginTop: '10px', marginBottom: '20px' }}*/}
           {/*className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>*/}
           {/*<Link type='button' className='ibm-btn-sec ibm-btn-blue-50'*/}
@@ -84,10 +84,10 @@ const ContractTemplatesPage = ({ loading,blocks, intl, }) => {
           <table className='ibm-data-table ibm-altcols'>
             <thead>
               <tr>
-                <th><FormattedMessage id='Id' /></th>
+                <th><FormattedMessage id='Height' /></th>
                 <th><FormattedMessage id='Data Hash' /></th>
                 <th><FormattedMessage id='Previous Hash' /></th>
-                <th><FormattedMessage id='Number of Transactions' /></th>
+                <th><FormattedMessage id='Transactions' /></th>
               </tr>
             </thead>
             <tbody>

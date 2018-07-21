@@ -49,15 +49,20 @@ class  ContractTemplatesPage extends React.Component{
                text={intl.formatMessage({ id: 'Loading contract types...' })}>
         <div className='ibm-columns' style={{ minHeight: '30vh' }}>
           <div className='ibm-col-1-1'>
-            <h3 className='ibm-h3'>
+            <h2 className='ibm-h2'>
+                <FormattedMessage id='Block Inspect' />
+            </h2>
+          </div>
+          <div className='ibm-col-1-1'>
+            <h4 className='ibm-h4'>
               number: {this.state.number}
-            </h3>
-            <h3 className='ibm-h3'>
+            </h4>
+            <h4 className='ibm-h4'>
               data_hash: {this.state.data_hash}
-            </h3>
-            <h3 className='ibm-h3'>
+            </h4>
+            <h4 className='ibm-h4'>
               previous_hash:{this.state.previous_hash}
-            </h3>
+            </h4>
           </div>
           {/*<div style={{ marginTop: '10px', marginBottom: '20px' }}*/}
                {/*className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>*/}
@@ -66,6 +71,11 @@ class  ContractTemplatesPage extends React.Component{
               {/*<FormattedMessage id='Create Contract Template' />*/}
             {/*</Link>*/}
           {/*</div>*/}
+          <div className='ibm-col-1-1'>
+            <h2 className='ibm-h3'>
+              <FormattedMessage id='Transactions' />
+            </h2>
+          </div>
           <div className='ibm-col-1-1'>
             <table className='ibm-data-table ibm-altcols'>
               <thead>
