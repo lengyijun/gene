@@ -46,7 +46,9 @@ export async function completeRepairOrder(uuid,ll) {
     return;
   }
   try {
-    const Result = await invoke( "diseasecenter_upload_gene" , uuid ,ll);
+    ll.unshift(uuid)
+    ll.unshift( "diseasecenter_upload_gene" )
+    const Result = await invoke.apply(this, ll);
     if (Result) {
       throw new Error(Result);
     }
