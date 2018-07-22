@@ -13,25 +13,13 @@ export function getRepairOrders() {
   });
 }
 
-export function completeRepairOrder(uuid) {
+export function completeRepairOrder(uuid,ll) {
   return fetch('/repair-shop/api/complete-repair-order', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({ uuid })
-  }).then(async res => {
-    return await res.json();
-  });
-}
-
-export function uploadGene(gene_list){
-  return fetch('/repair-shop/api/upload-gene', {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify({gene_list })
+    body: JSON.stringify({ uuid,ll })
   }).then(async res => {
     return await res.json();
   });

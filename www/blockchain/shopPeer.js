@@ -74,7 +74,8 @@ export async function genecompare(gene) {
     return;
   }
   try {
-    const user = await invoke('compare_type_1', { "Allgene":gene});
+    const UUID = Math.random().toString(36).substring(7);
+    const user = await invoke('compare_type_1',  UUID ,gene);
     console.log(user)
     return user;
   } catch (e) {

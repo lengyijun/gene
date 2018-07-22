@@ -7,9 +7,9 @@ class ClaimComponent extends React.Component {
   static get propTypes() {
     return {
       claim: PropTypes.object.isRequired,
-      onRepair: PropTypes.func.isRequired,
-      onReimburse: PropTypes.func.isRequired,
-      onReject: PropTypes.func.isRequired
+      // onRepair: PropTypes.func.isRequired,
+      // onReimburse: PropTypes.func.isRequired,
+      // onReject: PropTypes.func.isRequired
     };
   }
 
@@ -83,38 +83,39 @@ class ClaimComponent extends React.Component {
       );
     };
 
+    console.log(claim)
     return (
       <div className='ibm-col-2-1 ibm-col-medium-2-1 ibm-col-small-1-1'>
         <div className='ibm-card ibm-border-gray-50'>
           <div className='ibm-card__content'>
-            <h4 className='ibm-bold ibm-h4'>{claim.description}</h4>
+            <h4 className='ibm-bold ibm-h4'>{claim.Result}</h4>
             <div style={{ wordWrap: 'break-word' }} className='ibm-column-form'>
               <p>
                 <label><FormattedMessage id='Description' />: </label>
-                <span>{claim.description}</span>
+                <span>{claim.Done.toString()}</span>
               </p>
               <p>
                 <label><FormattedMessage id='Creation Date' />: </label>
-                <span><FormattedDate value={claim.date} /></span>
+                <span>{claim.OfficialGene} </span>
               </p>
-              <p>
-                <label><FormattedMessage id='Theft Involved' />: </label>
-                <span className='ibm-input-group'>
-                  <input type='checkbox' className='ibm-styled-checkbox'
-                    ref='theftField' checked={claim.isTheft}
-                    readOnly disabled />
-                  <label className='ibm-field-label' htmlFor='theftField' />
-                </span>
-              </p>
-              <p>
-                <label><FormattedMessage id='Reimbursable' />: </label>
-                <span>
-                  <input type='text'
-                    value={reimbursable} onChange={this.setReimbursable} />
-                </span>
-              </p>
+              {/*<p>*/}
+                {/*<label><FormattedMessage id='Theft Involved' />: </label>*/}
+                {/*<span className='ibm-input-group'>*/}
+                  {/*<input type='checkbox' className='ibm-styled-checkbox'*/}
+                    {/*ref='theftField' checked={claim.UserGene}*/}
+                    {/*readOnly disabled />*/}
+                  {/*<label className='ibm-field-label' htmlFor='theftField' />*/}
+                {/*</span>*/}
+              {/*</p>*/}
+              {/*<p>*/}
+                {/*<label><FormattedMessage id='Reimbursable' />: </label>*/}
+                {/*<span>*/}
+                  {/*<input type='text'*/}
+                    {/*value={reimbursable} onChange={this.setReimbursable} />*/}
+                {/*</span>*/}
+              {/*</p>*/}
             </div>
-            {claimButtons(claim)}
+            {/*{claimButtons(claim)}*/}
           </div>
         </div>
       </div>

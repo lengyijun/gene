@@ -25,9 +25,19 @@ func listUnpropossedGene (stub shim.ChaincodeStubInterface,args []string) pb.Res
       OfficialGene      []string
       Result            []string
       Done              bool
+      UUID              string
     }{}
     err = json.Unmarshal(kvResult.Value,&undone)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
+    _,compositekey,err:= stub.SplitCompositeKey(kvResult.Key)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
+
     undone.Done=false
+    undone.UUID= compositekey[1]
     result=append(result,undone)
   }
   returnAsByte,err :=json.Marshal(result)

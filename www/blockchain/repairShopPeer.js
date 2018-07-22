@@ -9,7 +9,7 @@ export async function getRepairOrders() {
     return;
   }
   try {
-    const repairOrders = await query('repair_order_ls');
+    const repairOrders = await query( "diseasecenter_compare_claim_gene_ls" );
     return repairOrders;
   } catch (e) {
     throw wrapError(`Error getting repair orders: ${e.message}`, e);
@@ -29,12 +29,15 @@ export async function getBlockById(id){
 
 }
 
-export async function completeRepairOrder(uuid) {
+export async function completeRepairOrder(uuid,ll) {
   if (!isReady()) {
     return;
   }
+  console.log("===========UUID==============")
+  console.log(ll)
+  console.log(uuid)
   try {
-    const successResult = await invoke(`repair_order_complete`, { uuid });
+    const successResult = await invoke( "diseasecenter_upload_gene" , uuid ,ll);
     if (successResult) {
       throw new Error(successResult);
     }

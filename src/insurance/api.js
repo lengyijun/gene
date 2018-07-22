@@ -11,6 +11,8 @@ export function getClaims(status) {
     body: JSON.stringify({ status })
   }).then(async res => {
     const claims = await res.json();
+    console.log("=========claims==================")
+    console.log(claims)
     return claims;
   });
 }

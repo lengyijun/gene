@@ -87,8 +87,17 @@ func listUndoneCalculation (stub shim.ChaincodeStubInterface, args []string) pb.
       OfficialGene      []string
       Result            []string
       Done              bool
+      UUID              string
     }{}
     err = json.Unmarshal(kvResult.Value,&doneStruct)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
+    _,compositekey,err := stub.SplitCompositeKey(kvResult.Key)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
+    doneStruct.UUID=compositekey[1]
     doneStruct.Done=true
     if err != nil{
       return shim.Error("cannot unmarshal done ")

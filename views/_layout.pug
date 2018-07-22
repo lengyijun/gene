@@ -51,8 +51,8 @@ html(lang='en')
               //li(role='presentation', class=(BlockInfoActive ? 'ibm-highlight' : ''))
               li(role='presentation' )
                 a(role='menuitem',) #{ __('Login') }
-              //li.ibm-haschildlist(role='presentation', class=(insuranceActive ? 'ibm-highlight' : ''))
-              //  span(role='menuitem') #{ __('Insurance') }
+              li.ibm-haschildlist(role='presentation', class=(insuranceActive ? 'ibm-highlight' : ''))
+                a(role='menuitem',href='/insurance') #{ __('Insurance') }
               //  ul(role='menu')
               //    li(role='presentation', class=(selfServiceActive ? 'ibm-highlight' : ''))
               //      a(role='menuitem', href='/insurance/self-service') #{ __('Claim Self-Service') }

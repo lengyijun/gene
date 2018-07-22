@@ -32,3 +32,13 @@ shop-peer/
 chaincode/src/bcins/bcins
 
 insurance-peer/
+
+certs _peerOrg1/
+
+certs _peerOrg2/
+
+certs _peerOrg3/
+
+certs _peerOrg4/
+
+channel\.tx

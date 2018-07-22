@@ -79,7 +79,7 @@ export async function getClaims(status) {
     if (typeof status !== 'string') {
       status = undefined;
     }
-    const claims = await query('claim_ls', { status });
+    const claims = await query('compare_claim_ls' );  //no args need
     return claims;
   } catch (e) {
     let errMessage;

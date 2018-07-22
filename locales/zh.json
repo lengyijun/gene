@@ -16,6 +16,15 @@
 	"Go To The Bike Shop": "糖尿病基因分析",
 	"Go To The Smart Phone Shop": "心脏病基因分析",
 	"Go To The Ski Shop": "肺癌基因分析",
-  "Login": "登录",
-  "WatchBlock":"区块查看"
+	"Login": "登录",
+	"WatchBlock": "区块查看",
+	"Insurance": "Insurance",
+	"Claim Self-Service": "Claim Self-Service",
+	"Claim Self-Service Description": "Claim Self-Service Description",
+	"Claim Processing": "Claim Processing",
+	"Claim Processing Description": "Claim Processing Description",
+	"Process New Claims": "Process New Claims",
+	"Contract Management": "Contract Management",
+	"Contract Management Description": "Contract Management Description",
+	"Manage Available Contract Templates": "Manage Available Contract Templates"
 }

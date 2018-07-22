@@ -86,9 +86,15 @@ func listCompareClaims(stub shim.ChaincodeStubInterface,args []string) pb.Respon
       OfficialGene      []string
       Result            []string
       Done              bool
+      UUID              string
     }{}
     err =json.Unmarshal(kvResult.Value,&undone)
+    _,compositekey,err := stub.SplitCompositeKey(kvResult.Key)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
     undone.Done=false
+    undone.UUID= compositekey[1]
     if err!=nil{
       return shim.Error("cannot unmarshal")
     }
@@ -105,8 +111,14 @@ func listCompareClaims(stub shim.ChaincodeStubInterface,args []string) pb.Respon
       OfficialGene      []string
       Result            []string
       Done              bool
+      UUID              string
     }{}
     err = json.Unmarshal(kvResult.Value,&doneStruct)
+    _,compositekey,err := stub.SplitCompositeKey(kvResult.Key)
+    if err!=nil{
+      return shim.Error(err.Error())
+    }
+    doneStruct.UUID= compositekey[1]
     doneStruct.Done=true
     if err != nil{
       return shim.Error("cannot unmarshal done ")

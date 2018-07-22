@@ -8,8 +8,8 @@ export function loadClaims() {
     let claims;
     try {
       claims = await Api.getClaims('N'); // Load only (N)ew (unprocessed) claims
-      const confirmedTheftClaims = await Api.getClaims('P');
-      claims = claims.concat(confirmedTheftClaims);
+      // const confirmedTheftClaims = await Api.getClaims('P');
+      // claims = claims.concat(confirmedTheftClaims);
     } catch (e) {
       console.log(e);
     }

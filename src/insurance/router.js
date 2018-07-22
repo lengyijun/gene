@@ -25,36 +25,36 @@ export default function router() {
         <Switch>
 
           {/* Claim Self-Service */}
-          <Route path='/self-service'>
-            <SelfServiceApp>
-              <Switch>
-                <Route exact path='/self-service' component={LoginPage} />
-                <Route path='/self-service/contracts'
-                  component={ContractsPage} />
-                <Route path='/self-service/contract/:contractUuid/claims'
-                  component={ContractClaimsPage} />
-                <Route path='/self-service/claim/:contractUuid'
-                  component={ClaimPage} />
-                <Route component={NotFoundPage} />
-              </Switch>
-            </SelfServiceApp>
-          </Route>
+          {/*<Route path='/self-service'>*/}
+            {/*<SelfServiceApp>*/}
+              {/*<Switch>*/}
+                {/*<Route exact path='/self-service' component={LoginPage} />*/}
+                {/*<Route path='/self-service/contracts'*/}
+                  {/*component={ContractsPage} />*/}
+                {/*<Route path='/self-service/contract/:contractUuid/claims'*/}
+                  {/*component={ContractClaimsPage} />*/}
+                {/*<Route path='/self-service/claim/:contractUuid'*/}
+                  {/*component={ClaimPage} />*/}
+                {/*<Route component={NotFoundPage} />*/}
+              {/*</Switch>*/}
+            {/*</SelfServiceApp>*/}
+          {/*</Route>*/}
 
-          {/* Claim Processing */}
+          {/* only need this*/}
           <Route exact path='/claim-processing' component={ClaimsPage} />
 
           {/* Contract Management */}
-          <Route path='/contract-management'>
-            <ContractManagementApp>
-              <Switch>
-                <Route exact path='/contract-management'
-                  component={ContractTemplatesPage} />
-                <Route path='/contract-management/new-contract-template'
-                  component={NewContractTemplatePage} />
-                <Route component={NotFoundPage} />
-              </Switch>
-            </ContractManagementApp>
-          </Route>
+          {/*<Route path='/contract-management'>*/}
+            {/*<ContractManagementApp>*/}
+              {/*<Switch>*/}
+                {/*<Route exact path='/contract-management'*/}
+                  {/*component={ContractTemplatesPage} />*/}
+                {/*<Route path='/contract-management/new-contract-template'*/}
+                  {/*component={NewContractTemplatePage} />*/}
+                {/*<Route component={NotFoundPage} />*/}
+              {/*</Switch>*/}
+            {/*</ContractManagementApp>*/}
+          {/*</Route>*/}
           <Route component={NotFoundPage} />
         </Switch>
       </App>

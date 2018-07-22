@@ -14,14 +14,14 @@ router.post('/api/repair-orders', async (req, res) => {
 });
 
 router.post('/api/complete-repair-order', async (req, res) => {
-  const { uuid } = req.body;
-  if (typeof uuid !== 'string') {
-    res.json({ error: "Invalid request." });
-    return;
-  }
+  const { uuid,ll } = req.body;
+  // if (typeof uuid !== 'string') {
+  //   res.json({ error: "Invalid request." });
+  //   return;
+  // }
 
   try {
-    await RepairShopPeer.completeRepairOrder(uuid);
+    await RepairShopPeer.completeRepairOrder(uuid,ll);
     res.json({ success: true });
   } catch (e) {
     console.log(e);

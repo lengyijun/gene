@@ -17,13 +17,27 @@ class RepairOrderComponent extends React.Component {
     super(props);
 
     this.markComplete = this.markComplete.bind(this);
+    this.order=this.order.bind(this);
   }
 
-  markComplete() {
+  markComplete(ll) {
     const { repairOrder, onMarkedComplete } = this.props;
     if (typeof onMarkedComplete === 'function') {
-      setTimeout(() => { onMarkedComplete(repairOrder.uuid); });
+      setTimeout(() => { onMarkedComplete(this.props.repairOrder.UUID ,ll); });
     }
+  }
+
+  async order(e){
+    var file_toload=e.target.files[0]
+    var fileReader = new FileReader()
+    fileReader.onload = function(){
+      var textFromFileLoaded=fileReader.result
+      console.log(textFromFileLoaded)
+      var ll=textFromFileLoaded.split("\n\n\n")
+      this.markComplete(ll)
+    }.bind(this);
+
+    fileReader.readAsText(file_toload, "UTF-8");
   }
 
   render() {
@@ -39,18 +53,25 @@ class RepairOrderComponent extends React.Component {
             <div style={{ wordWrap: 'break-word' }}>
               <p>
                 <FormattedMessage id='Brand' />:
-                  {repairOrder.item.brand} <br />
+                  {repairOrder.Done} <br />
                 <FormattedMessage id='Model' />:
-                  {repairOrder.item.Use} <br />
+                  {repairOrder.OfficialGene} <br />
                 <FormattedMessage id='Description' />:
-                  {repairOrder.item.description} <br />
+                  {repairOrder.UserGene} <br />
+                <FormattedMessage id='Description' />:
+                {repairOrder.Result} <br />
               </p>
               <p>
-                <button type='button'
-                  className='ibm-btn-sec ibm-btn-small ibm-btn-blue-50'
-                  onClick={this.markComplete}>
-                  <FormattedMessage id='Mark Completed' />
-                </button>
+                <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
+                  <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>Choose file to upload
+                    <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
+                  </label>
+                </div>
+                {/*<button type='button'*/}
+                  {/*className='ibm-btn-sec ibm-btn-small ibm-btn-blue-50'*/}
+                  {/*onClick={this.markComplete}>*/}
+                  {/*<FormattedMessage id='Mark Completed' />*/}
+                {/*</button>*/}
               </p>
             </div>
             <br />

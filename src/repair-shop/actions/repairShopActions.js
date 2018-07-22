@@ -24,10 +24,10 @@ function loadRepairOrdersSuccess(repairOrders) {
   };
 }
 
-export function completeRepairOrder(uuid) {
+export function completeRepairOrder(uuid,ll) {
   return async dispatch => {
     try {
-      await Api.completeRepairOrder(uuid);
+      await Api.completeRepairOrder(uuid,ll);
       dispatch(completeRepairOrderSuccess(uuid));
     } catch (e) {
       console.log(e);
@@ -39,13 +39,5 @@ function completeRepairOrderSuccess(uuid) {
   return {
     type: RepairShopActionType.COMPLETE_REPAIR_ORDER_SUCCESS,
     uuid
-  };
-}
-
-
-export function setShopType( products) {
-  return {
-    type:RepairShopActionType.CREATE_DISEASE_TYPES,
-    products
   };
 }
