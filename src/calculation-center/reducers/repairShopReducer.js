@@ -11,7 +11,7 @@ export default function repairShopReducer(state = initialState.repairShop, actio
       return Object.assign({}, state,
         {
           repairOrders: [
-            ...(state.repairOrders.filter(ro => ro.uuid !== action.uuid))
+            ...(state.repairOrders.filter(ro => ro.UUID !== action.uuid))
           ]
         });
     default:

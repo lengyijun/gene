@@ -61,6 +61,7 @@ export async function completeCalculationClaim (uuid) {
   }
   try {
     const successResult = await invoke( "calculation_complete" , uuid );
+    return successResult
   } catch (e) {
     throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
   }
