@@ -65,44 +65,26 @@ func checkInvoke(t *testing.T, stub *shim.MockStub, args [][]byte) {
 func TestExample02_Invoke(t *testing.T) {
 	scc := new(SmartContract)
 	stub := shim.NewMockStub("ex02", scc)
-checkInit(t, stub, [][]byte{[]byte("init")})
+	checkInit(t, stub, [][]byte{[]byte("init")})
 
-	a := gene{
-		Allgene: "1234,2345,3456",
-	}
-	fmt.Println("dump a")
-	spew.Dump(a)
-	abyte, _ := json.Marshal(a)
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID1"), []byte("GENE1"), []byte("GENE2")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID2"), []byte("GENE3"), []byte("GENE4")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID3"), []byte("GENE5"), []byte("GENE6")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_claim_ls")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
 
-	b := gene{}
-	json.Unmarshal(abyte, b)
-	fmt.Println("dump b")
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID3"), []byte("GENE7"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
 
-	b.Allgene = "fadsfas"
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID2"), []byte("GENE7"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID1"), []byte("GENE7"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
 
-	fmt.Println("origin version")
-	spew.Dump(abyte)
-	checkInvoke(t, stub, [][]byte{[]byte("upload_gene"), abyte})
-	checkQuery(t, stub)
-
-	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"),[]byte("MYUUID1") ,[]byte("GENE1"),[]byte("GENE2")})
-  checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"),[]byte("MYUUID2") ,[]byte("GENE3"),[]byte("GENE4")})
-  checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"),[]byte("MYUUID3") ,[]byte("GENE5"),[]byte("GENE6")})
-  checkInvoke(t, stub, [][]byte{[]byte("compare_claim_ls")})
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
-
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"),[]byte("MYUUID3") ,[]byte("GENE7"),[]byte("GENE8")})
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
-
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"),[]byte("MYUUID2") ,[]byte("GENE7"),[]byte("GENE8")})
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"),[]byte("MYUUID1") ,[]byte("GENE7"),[]byte("GENE8")})
-  checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
-
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"),[]byte("MYUUID1")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"),[]byte("MYUUID2")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"),[]byte("MYUUID3")})
-  checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"), []byte("MYUUID1")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"), []byte("MYUUID2")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_complete"), []byte("MYUUID3")})
+	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
 }

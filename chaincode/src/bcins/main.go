@@ -27,26 +27,25 @@ type SmartContract struct {
 }
 
 type PSIStruct struct {
-  UserGene          []string
-  OfficialGene      []string
-  Result            []string
+	UserGene     []string
+	OfficialGene []string
+	Result       []string
 }
 
 var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Response{
 	//Gene Compare
 	//"compare_type_1":           compare1,
-  "compare_type_1":           calculation_user_gene_upload,  //tested
-  "compare_claim_ls":         listCompareClaims,             //tested
+	"compare_type_1":   calculation_user_gene_upload, //tested
+	"compare_claim_ls": listCompareClaims,            //tested
 
 	//Disease Center
-	"gene_ls":                                listGene,         //get all availGene data(origin gene data),not used
-	"diseasecenter_upload_gene":              calculation_official_gene_upload,
-	"diseasecenter_compare_claim_gene_ls":    listUnpropossedGene,
+	"diseasecenter_upload_gene":           calculation_official_gene_upload,
+	"diseasecenter_compare_claim_gene_ls": listUnpropossedGene,
 	// "upload_gene": uploadGene,  //in the Invoke function,maybe not need any more
 
 	//Calculation
-	"calculation_complete":     completeCalculation,
-	"calculation_ls":           listUndoneCalculation,      //undone
+	"calculation_complete": completeCalculation,
+	"calculation_ls":       listUndoneCalculation, //undone
 
 	// Insurance Peer
 	"contract_type_ls":         listContractTypes,
@@ -106,19 +105,12 @@ func (t *SmartContract) Init(stub shim.ChaincodeStubInterface) pb.Response {
 // Invoke Function accept blockchain code invocations.
 func (t *SmartContract) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	function, args := stub.GetFunctionAndParameters()
-	argsbyte := stub.GetArgs()
-	// spew.Dump(argsbyte[1])
-	// spew.Dump(string(argsbyte[1]))
 	fmt.Println("==========")
 	fmt.Println(function)
 	// spew.Dump(args)
 
 	if function == "init" {
 		return t.Init(stub)
-	}
-	if function == "upload_gene" {
-		fmt.Println("invoke upload_gene")
-		return uploadGene(stub, [][]byte{argsbyte[1]})
 	}
 
 	bcFunc := bcFunctions[function]
