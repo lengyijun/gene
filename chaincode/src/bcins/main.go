@@ -30,6 +30,7 @@ type PSIStruct struct {
 	UserGene     []string
 	OfficialGene []string
 	Result       []string
+	CreateTime   string
 }
 
 var bcFunctions = map[string]func(shim.ChaincodeStubInterface, []string) pb.Response{

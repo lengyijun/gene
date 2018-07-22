@@ -5,11 +5,11 @@
 	"Bikes": "糖尿病",
 	"Smart Phones": "心脏病",
 	"Skis": "肺癌",
-	"Repair Service": "基因上传",
+	"Repair Service": "医疗中心",
 	"Introduction": "简介",
 	"Go To The Shop Peer": "开始基因分析",
 	"Repair Shop": "致病基因",
-	"Go To The Repair Shop Peer": "基因上传",
+	"Go To The Repair Shop Peer": "医疗中心",
 	"Bikes Description": "检测糖尿病",
 	"Smart Phones Description": "检测心脏病",
 	"Skis Description": "检测肺癌",
@@ -18,7 +18,7 @@
 	"Go To The Ski Shop": "肺癌基因分析",
 	"Login": "登录",
 	"WatchBlock": "区块查看",
-	"Insurance": "Insurance",
+	"Insurance": "交集计算",
 	"Claim Self-Service": "Claim Self-Service",
 	"Claim Self-Service Description": "Claim Self-Service Description",
 	"Claim Processing": "Claim Processing",
@@ -27,5 +27,5 @@
 	"Contract Management": "Contract Management",
 	"Contract Management Description": "Contract Management Description",
 	"Manage Available Contract Templates": "Manage Available Contract Templates",
-	"Calculation Center": "Calculation Center"
+	"Calculation Center": "计算节点"
 }

@@ -38,14 +38,14 @@ class RepairOrderComponent extends React.Component {
             </h4>
             <div style={{ wordWrap: 'break-word' }}>
               <p>
-                <FormattedMessage id='Brand' />:
-                  {repairOrder.Done} <br />
-                <FormattedMessage id='Model' />:
-                  {repairOrder.OfficialGene} <br />
-                <FormattedMessage id='Description' />:
-                  {repairOrder.UserGene} <br />
-                <FormattedMessage id='Description' />:
-                {repairOrder.Result} <br />
+                <FormattedMessage id='UUID' />:
+                {repairOrder.UUID} <br />
+                <FormattedMessage id='Intersection Calaculated' />:
+                false <br />
+                <FormattedMessage id='Medical Center Uploaded' />:
+                {Array.isArray(repairOrder.OfficialGene).toString()} <br />
+                <FormattedMessage id='Create Time' />:
+                {repairOrder.CreateTime} <br />
               </p>
               <p>
                 {/*<div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>*/}

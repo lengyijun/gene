@@ -91,12 +91,20 @@ class ClaimComponent extends React.Component {
             <h4 className='ibm-bold ibm-h4'>{claim.Result}</h4>
             <div style={{ wordWrap: 'break-word' }} className='ibm-column-form'>
               <p>
-                <label><FormattedMessage id='Description' />: </label>
-                <span>{claim.Done.toString()}</span>
+                <label><FormattedMessage id='UUID' />: </label>
+                <span>{claim.UUID.toString()}</span>
               </p>
               <p>
-                <label><FormattedMessage id='Creation Date' />: </label>
-                <span>{claim.OfficialGene} </span>
+                <label><FormattedMessage id='Create Time' />: </label>
+                <span>{claim.CreateTime}</span>
+              </p>
+              <p>
+                <label><FormattedMessage id='Medical Center Uploaded' />: </label>
+                <span>{Array.isArray(claim.OfficialGene).toString()}</span>
+              </p>
+              <p>
+                <label><FormattedMessage id='Intersection Calculated' />: </label>
+                <span>{Array.isArray(claim.Result).toString()}</span>
               </p>
               {/*<p>*/}
                 {/*<label><FormattedMessage id='Theft Involved' />: </label>*/}

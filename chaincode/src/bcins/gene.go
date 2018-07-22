@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"time"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
@@ -11,15 +13,27 @@ import (
 //args[1:]: all gene to compare
 //only create a undone struct
 func calculation_user_gene_upload(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	fmt.Println(len(args))
 	UUID := args[0]
 	key, err := stub.CreateCompositeKey(prefixUndone, []string{prefixUploadUndone, UUID})
 	value := PSIStruct{}
 	value.UserGene = args[1:]
-	value_byte, err := json.Marshal(value)
+
+	t, err := stub.GetTxTimestamp()
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
+	loc, err := time.LoadLocation("Asia/Chongqing")
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	value.CreateTime = time.Unix(t.Seconds, 0).In(loc).Format("2006-01-02 15:04:05")
+
+	value_byte, err := json.Marshal(value)
 	err = stub.PutState(key, value_byte)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -61,6 +75,7 @@ func listCompareClaims(stub shim.ChaincodeStubInterface, args []string) pb.Respo
 			Result       []string
 			Done         bool
 			UUID         string
+			CreateTime   string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &undone)
 		_, compositekey, err := stub.SplitCompositeKey(kvResult.Key)
@@ -86,6 +101,7 @@ func listCompareClaims(stub shim.ChaincodeStubInterface, args []string) pb.Respo
 			Result       []string
 			Done         bool
 			UUID         string
+			CreateTime   string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &doneStruct)
 		_, compositekey, err := stub.SplitCompositeKey(kvResult.Key)
