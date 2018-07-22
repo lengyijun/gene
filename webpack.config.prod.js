@@ -19,7 +19,8 @@ export default {
     'repair-shop': resolve(__dirname, 'src/repair-shop/index'),
     'insurance': resolve(__dirname, 'src/insurance/index'),
     'block-explorer': resolve(__dirname, 'src/block-explorer/index'),
-    'block-info': resolve(__dirname,'src/block-info/index')
+    'block-info': resolve(__dirname,'src/block-info/index'),
+    'calculation-center': resolve(__dirname,'src/calculation-center/index')
   },
   target: 'web',
   output: {

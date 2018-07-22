@@ -16,6 +16,18 @@ export async function getRepairOrders() {
   }
 }
 
+export async function getCalculationClaims() {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const repairOrders = await query( "calculation_ls" );
+    return repairOrders;
+  } catch (e) {
+    throw wrapError(`Error getting repair orders: ${e.message}`, e);
+  }
+}
+
 export async function getBlockById(id){
   if (!isReady()) {
     return;
@@ -33,29 +45,24 @@ export async function completeRepairOrder(uuid,ll) {
   if (!isReady()) {
     return;
   }
-  console.log("===========UUID==============")
-  console.log(ll)
-  console.log(uuid)
   try {
-    const successResult = await invoke( "diseasecenter_upload_gene" , uuid ,ll);
-    if (successResult) {
-      throw new Error(successResult);
+    const Result = await invoke( "diseasecenter_upload_gene" , uuid ,ll);
+    if (Result) {
+      throw new Error(Result);
     }
   } catch (e) {
     throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
   }
 }
 
-export async function uploadGene(gene_list) {
+export async function completeCalculationClaim (uuid) {
   if (!isReady()) {
     return;
   }
   try {
-    const repairOrders = await invoke(`upload_gene`,{"Allgene":gene_list});
-    console.log(repairOrders)
-    return repairOrders;
+    const successResult = await invoke( "calculation_complete" , uuid );
   } catch (e) {
-    throw wrapError(`Error upload gene: ${e.message}`, e);
+    throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
   }
 }
 
