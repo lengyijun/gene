@@ -59,7 +59,7 @@ router.post('/api/upload-gene', async (req, res) => {
 });
 
 router.get('*', (req, res) => {
-  res.render('repair-shop', { repairShopActive: true });
+  res.render('medical-center', { repairShopActive: true });
 });
 
 function wsConfig(io) {

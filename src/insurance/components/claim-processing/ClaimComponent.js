@@ -99,6 +99,10 @@ class ClaimComponent extends React.Component {
                 <span>{claim.CreateTime}</span>
               </p>
               <p>
+                <label><FormattedMessage id='Type' />: </label>
+                <span>{claim.Type}</span>
+              </p>
+              <p>
                 <label><FormattedMessage id='Medical Center Uploaded' />: </label>
                 <span>{Array.isArray(claim.OfficialGene).toString()}</span>
               </p>

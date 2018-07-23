@@ -17,9 +17,9 @@ import blockinfoRouter, { wsConfig as blockWsConfig }
 import calculationRouter , {wsconfig as calculationConfig}
   from './routers/calculation-center.router'
 
-const INSURANCE_ROOT_URL = '/insurance';
+const INSURANCE_ROOT_URL = '/claim';
 const POLICE_ROOT_URL = '/police';
-const REPAIR_SHOP_ROOT_URL = '/repair-shop';
+const REPAIR_SHOP_ROOT_URL = '/medical-center';
 const SHOP_ROOT_URL = '/shop';
 const BLOCK_ROOT_URL='/block-info'
 const CALCULATION_ROOT_URL = '/calculation-center'

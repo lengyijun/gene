@@ -66,13 +66,13 @@ class ClaimsPage extends React.Component {
       <Loading hidden={!loading}
         text={intl.formatMessage({ id: 'Loading Claims...' })}>
         <div>
-          <div className='ibm-columns'>
-            <div className='ibm-col-5-5 ibm-col-medium-6-6'>
-              <h3 className='ibm-h3'>
-                <FormattedMessage id='Unprocessed Claims' />
-              </h3>
-            </div>
-          </div>
+          {/*<div className='ibm-columns'>*/}
+            {/*<div className='ibm-col-5-5 ibm-col-medium-6-6'>*/}
+              {/*<h3 className='ibm-h3'>*/}
+                {/*<FormattedMessage id='Unprocessed Claims' />*/}
+              {/*</h3>*/}
+            {/*</div>*/}
+          {/*</div>*/}
           <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh' }}
             data-widget='masonry' data-items='.ibm-col-2-1'>
             {claimsDisplay}

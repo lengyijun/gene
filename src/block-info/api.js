@@ -11,12 +11,12 @@ export function getBlocksFromSelfService(noOfLastBlocks) {
 }
 
 export function getBlocksFromRepairShop(noOfLastBlocks) {
-  return getBlocks('/repair-shop/api/blocks', noOfLastBlocks);
+  return getBlocks('/medical-center/api/blocks', noOfLastBlocks);
 }
 
 //useful
 export function getBlocksFromContractManagement(noOfLastBlocks) {
-  return getBlocks('/insurance/api/blocks', noOfLastBlocks);
+  return getBlocks('/claim/api/blocks', noOfLastBlocks);
 }
 
 export function getBlocksInfoFromShop(noOfLastBlocks) {
@@ -41,7 +41,6 @@ function getBlocks(url, noOfLastBlocks) {
 }
 
 export function getBlockById(id) {
-  console.log("getblockbyid")
   return fetch('/block-info/api/getblock-by-id', {
     method: 'POST',
     headers: new Headers({

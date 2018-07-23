@@ -3,7 +3,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function getClaims(status) {
-  return fetch('/insurance/api/claims', {
+  return fetch('/claim/api/claims', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export function getClaims(status) {
 }
 
 export function processClaim(contractUuid, uuid, status, reimbursable) {
-  return fetch('/insurance/api/process-claim', {
+  return fetch('/claim/api/process-claim', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export function processClaim(contractUuid, uuid, status, reimbursable) {
 }
 
 export function getContractTypes() {
-  return fetch('/insurance/api/contract-types', {
+  return fetch('/claim/api/contract-types', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export function getContractTypes() {
 }
 
 export function createContractType(contractType) {
-  return fetch('/insurance/api/create-contract-type', {
+  return fetch('/claim/api/create-contract-type', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ export function createContractType(contractType) {
 }
 
 export function setContractTypeActive(uuid, active) {
-  return fetch('/insurance/api/set-contract-type-active', {
+  return fetch('/claim/api/set-contract-type-active', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export function setContractTypeActive(uuid, active) {
 }
 
 export function authenticateUser(user) {
-  return fetch('/insurance/api/authenticate-user', {
+  return fetch('/claim/api/authenticate-user', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ export function authenticateUser(user) {
 }
 
 export function getContracts(user) {
-  return fetch('/insurance/api/contracts', {
+  return fetch('/claim/api/contracts', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ export function getContracts(user) {
 }
 
 export function fileClaim(user, contractUuid, claim) {
-  return fetch('/insurance/api/file-claim', {
+  return fetch('/claim/api/file-claim', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'

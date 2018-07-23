@@ -11,7 +11,7 @@ const App = ({ children }) => {
       <div className='ibm-columns'>
         <div className='ibm-col-1-1'>
           <h2 className='ibm-h2'>
-            <FormattedMessage id='Insurance' />
+            <FormattedMessage id='Claims' />
           </h2>
         </div>
       </div>

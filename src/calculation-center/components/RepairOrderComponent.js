@@ -40,6 +40,8 @@ class RepairOrderComponent extends React.Component {
               <p>
                 <FormattedMessage id='UUID' />:
                 {repairOrder.UUID} <br />
+                <FormattedMessage id='Type' />:
+                {repairOrder.Type} <br />
                 <FormattedMessage id='Intersection Calaculated' />:
                 false <br />
                 <FormattedMessage id='Medical Center Uploaded' />:

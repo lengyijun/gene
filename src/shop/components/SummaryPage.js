@@ -25,73 +25,20 @@ class SummaryPage extends React.Component {
     return (
       <div>
         <div style={{float:"left" }}>
-        <div className='ibm-columns' style={{width:"300px"}}>
-          <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
-            <h3 className='ibm-h3'>
-              <FormattedMessage id='Summary' />
-            </h3>
-              <table cols='2' style={{ width: '100%' }}>
-                <tbody>
-                  <tr>
-                    <td style={{ padding: '.3em' }} colSpan='2'
-                      className='ibm-background-blue-20'>
-                      <h4 className='ibm-h4'>
-                        <FormattedMessage id='All Gene Uploaded' />
-                      </h4>
-                    </td>
-                    <td className='ibm-background-blue-10 ibm-right'>
-                      <FormattedMessage id='1000' />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='ibm-background-gray-20' colSpan='2'
-                        style={{ padding: '.3em' }}>
-                      <h3 className='ibm-h3'>
-                        <FormattedMessage id='All Modified Gene Detected' />
-                      </h3>
-                    </td>
-                    <td className='ibm-background-gray-10 ibm-right'>
-                        <FormattedMessage id='10 all detected' />
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className='ibm-background-gray-20' colSpan='2'
-                        style={{ padding: '.3em' }}>
-                      <h3 className='ibm-h3'>
-                        <FormattedMessage id='Different Gene' />
-                      </h3>
-                    </td>
-                    <td className='ibm-background-gray-10 ibm-right'>
-                      <FormattedMessage id='1 different gene found' />
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className='ibm-background-gray-20' colSpan='2'
-                        style={{ padding: '.3em' }}>
-                      <h3 className='ibm-h3'>
-                        <FormattedMessage id='Result' />
-                      </h3>
-                    </td>
-                    <td className='ibm-background-gray-10 ibm-right'>
-                      <FormattedMessage id='You may have 3 time higher risk vulnerable to Lung Cancer' />
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className='ibm-background-gray-20' colSpan='2'
-                        style={{ padding: '.3em' }}>
-                      <h3 className='ibm-h3'>
-                        <FormattedMessage id='Suggestion' />
-                      </h3>
-                    </td>
-                    <td className='ibm-background-gray-10 ibm-right'>
-                      <FormattedMessage id='You need to stop smoke' />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div>
+            <div className='ibm-columns'>
+              <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
+                <h3 className='ibm-h3'>
+                  <FormattedMessage id='Summary' />
+                </h3>
+              </div>
+            </div>
+            <div className='ibm-columns'>
+              <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>
+                <div>
+                  <FormattedMessage id='Claim Created Success' />
+                </div>
+              </div>
             </div>
           </div>
         </div>

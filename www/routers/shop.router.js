@@ -108,12 +108,12 @@ router.post('/api/enter-contract', async (req, res) => {
 });
 
 router.post('/api/comparegene', async (req, res) => {
-  let {gene} = req.body;
+  let {shoptype,gene} = req.body;
   // if (typeof user === 'object' &&
   //   typeof contractTypeUuid === 'string' &&
   //   typeof additionalInfo === 'object') {
     try {
-      let loginInfo = await ShopPeer.genecompare(gene );
+      let loginInfo = await ShopPeer.genecompare(shoptype,gene );
       console.log(loginInfo)
       res.json({ success: 'Contract signed.', loginInfo });
     } catch (e) {

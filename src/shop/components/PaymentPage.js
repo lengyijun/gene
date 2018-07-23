@@ -48,7 +48,7 @@ class PaymentPage extends React.Component {
   }
 
   async callback(ll){
-    const uploadresult=await compareGene(ll)
+    const uploadresult=await compareGene(this.props.shopType,ll)
     console.log(uploadresult)
     const { userMgmtActions } = this.props;
     userMgmtActions.setUser({
@@ -99,6 +99,7 @@ class PaymentPage extends React.Component {
   }
 
   render() {
+    console.log(this.props.shopType)
     let paymentStatus;
 
     const { intl, productInfo, contractInfo } = this.props;

@@ -10,7 +10,7 @@ import NotFoundPage from '../shared/NotFoundPage';
 
 export default function router() {
   return (
-    <Router basename='repair-shop'>
+    <Router basename='medical-center'>
       <App>
         <Switch>
           <Route exact path='/' component={RepairOrdersPage} />

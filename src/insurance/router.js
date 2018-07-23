@@ -20,7 +20,7 @@ import NewContractTemplatePage
 
 export default function router() {
   return (
-    <Router basename='/insurance'>
+    <Router basename='/claim'>
       <App>
         <Switch>
 

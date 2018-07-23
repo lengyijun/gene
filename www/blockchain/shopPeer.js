@@ -69,12 +69,21 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function genecompare(gene) {
+export async function genecompare(shoptype,gene) {
   if (!isReady()) {
     return;
   }
   try {
     const UUID = Math.random().toString(36).substring(7);
+    if( shoptype=="bikes") {
+      gene.unshift("diabete")
+    }
+    if ( shoptype == "smart-phones") {
+      gene.unshift("heart disease")
+    }
+    if ( shoptype == "skis"){
+      gene.unshift("lung cancer")
+    }
     gene.unshift(UUID)
     gene.unshift('compare_type_1')
     const user = await invoke.apply(this,gene);
