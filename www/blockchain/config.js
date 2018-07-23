@@ -25,7 +25,7 @@ const config = {
     ca: {
       hostname: 'insurance-ca',
       url: 'https://insurance-ca:7054',
-      mspId: 'InsuranceOrgMSP'
+      mspId: 'CalculationOrgMSP'
     },
     admin: {
       key: readCryptoFile('Admin@insurance-org-key.pem'),
@@ -76,7 +76,7 @@ const config = {
     ca: {
       hostname: 'repairshop-ca',
       url: 'https://repairshop-ca:7054',
-      mspId: 'RepairShopOrgMSP'
+      mspId: 'MedicalCenterOrgMSP'
     },
     admin: {
       key: readCryptoFile('Admin@repairshop-org-key.pem'),
