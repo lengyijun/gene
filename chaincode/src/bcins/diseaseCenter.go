@@ -29,6 +29,7 @@ func listUnpropossedGene(stub shim.ChaincodeStubInterface, args []string) pb.Res
 			Done         bool
 			UUID         string
 			CreateTime   string
+			Type         string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &undone)
 		if err != nil {

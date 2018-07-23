@@ -15,9 +15,11 @@ import (
 func calculation_user_gene_upload(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println(len(args))
 	UUID := args[0]
+	Type := args[1]
 	key, err := stub.CreateCompositeKey(prefixUndone, []string{prefixUploadUndone, UUID})
 	value := PSIStruct{}
-	value.UserGene = args[1:]
+	value.UserGene = args[2:]
+	value.Type = Type
 
 	t, err := stub.GetTxTimestamp()
 	if err != nil {
@@ -76,6 +78,7 @@ func listCompareClaims(stub shim.ChaincodeStubInterface, args []string) pb.Respo
 			Done         bool
 			UUID         string
 			CreateTime   string
+			Type         string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &undone)
 		_, compositekey, err := stub.SplitCompositeKey(kvResult.Key)
@@ -102,6 +105,7 @@ func listCompareClaims(stub shim.ChaincodeStubInterface, args []string) pb.Respo
 			Done         bool
 			UUID         string
 			CreateTime   string
+			Type         string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &doneStruct)
 		_, compositekey, err := stub.SplitCompositeKey(kvResult.Key)

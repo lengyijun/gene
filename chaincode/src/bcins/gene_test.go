@@ -67,9 +67,9 @@ func TestExample02_Invoke(t *testing.T) {
 	stub := shim.NewMockStub("ex02", scc)
 	checkInit(t, stub, [][]byte{[]byte("init")})
 
-	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID1"), []byte("GENE1"), []byte("GENE2")})
-	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID2"), []byte("GENE3"), []byte("GENE4")})
-	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID3"), []byte("GENE5"), []byte("GENE6")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID1"), []byte("TYPE1"), []byte("GENE1"), []byte("GENE2")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID2"), []byte("TYPE2"), []byte("GENE3"), []byte("GENE4")})
+	checkInvoke(t, stub, [][]byte{[]byte("compare_type_1"), []byte("MYUUID3"), []byte("TYPE3"), []byte("GENE5"), []byte("GENE6")})
 	checkInvoke(t, stub, [][]byte{[]byte("compare_claim_ls")})
 	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
 

@@ -90,6 +90,7 @@ func listUndoneCalculation(stub shim.ChaincodeStubInterface, args []string) pb.R
 			Done         bool
 			UUID         string
 			CreateTime   string
+			Type         string
 		}{}
 		err = json.Unmarshal(kvResult.Value, &doneStruct)
 		if err != nil {
