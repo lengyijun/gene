@@ -138,20 +138,32 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function getUserInfo(username) {
+export function getBlocks(noOfLastBlocks) {
+  return client.getBlocks(noOfLastBlocks);
+}
+
+export async function getCalculationClaims() {
   if (!isReady()) {
     return;
   }
   try {
-    const user = await query('user_get_info', { username });
-    return user;
+    const repairOrders = await query( "calculation_ls" );
+    return repairOrders;
   } catch (e) {
-    throw wrapError(`Error getting user info: ${e.message}`, e);
+    throw wrapError(`Error getting repair orders: ${e.message}`, e);
   }
 }
 
-export function getBlocks(noOfLastBlocks) {
-  return client.getBlocks(noOfLastBlocks);
+export async function completeCalculationClaim (uuid) {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const successResult = await invoke( "calculation_complete" , uuid );
+    return successResult
+  } catch (e) {
+    throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
+  }
 }
 
 export const on = client.on.bind(client);

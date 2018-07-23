@@ -16,18 +16,6 @@ export async function getRepairOrders() {
   }
 }
 
-export async function getCalculationClaims() {
-  if (!isReady()) {
-    return;
-  }
-  try {
-    const repairOrders = await query( "calculation_ls" );
-    return repairOrders;
-  } catch (e) {
-    throw wrapError(`Error getting repair orders: ${e.message}`, e);
-  }
-}
-
 export async function getBlockById(id){
   if (!isReady()) {
     return;
@@ -52,18 +40,6 @@ export async function completeRepairOrder(uuid,ll) {
     if (Result) {
       throw new Error(Result);
     }
-  } catch (e) {
-    throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
-  }
-}
-
-export async function completeCalculationClaim (uuid) {
-  if (!isReady()) {
-    return;
-  }
-  try {
-    const successResult = await invoke( "calculation_complete" , uuid );
-    return successResult
   } catch (e) {
     throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
   }
