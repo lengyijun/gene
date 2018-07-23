@@ -17,9 +17,9 @@ const config = {
   },
   insuranceOrg: {
     peer: {
-      hostname: 'insurance-peer',
-      url: 'grpcs://insurance-peer:7051',
-      eventHubUrl: 'grpcs://insurance-peer:7053',
+      hostname: 'calculation-peer',
+      url: 'grpcs://Calculation-peer:7051',
+      eventHubUrl: 'grpcs://calculation-peer:7053',
       pem: readCryptoFile('insuranceOrg.pem')
     },
     ca: {
