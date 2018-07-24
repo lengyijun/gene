@@ -68,10 +68,10 @@ const config = {
   },
   repairShopOrg: {
     peer: {
-      hostname: 'repairshop-peer',
-      url: 'grpcs://repairshop-peer:7051',
+      hostname: 'medicalcenter-peer',
+      url: 'grpcs://medicalcenter-peer:7051',
       pem: readCryptoFile('repairShopOrg.pem'),
-      eventHubUrl: 'grpcs://repairshop-peer:7053',
+      eventHubUrl: 'grpcs://medicalcenter-peer:7053',
     },
     ca: {
       hostname: 'repairshop-ca',
