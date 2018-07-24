@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"testing"
 
@@ -32,23 +31,6 @@ func checkState(t *testing.T, stub *shim.MockStub, name string, value string) {
 	if string(bytes) != value {
 		fmt.Println("State value", name, "was not", value, "as expected")
 		t.FailNow()
-	}
-}
-
-func checkQuery(t *testing.T, stub *shim.MockStub) {
-	res := stub.MockInvoke("1", [][]byte{[]byte("gene_ls")})
-	if res.Status != shim.OK {
-		fmt.Println("Query", "failed", string(res.Message))
-		t.FailNow()
-	}
-	if res.Payload == nil {
-		fmt.Println("Query", "failed to get value")
-		t.FailNow()
-	} else {
-		a := gene{}
-		json.Unmarshal(res.Payload, a)
-		fmt.Println("query result in test")
-		spew.Dump(a)
 	}
 }
 

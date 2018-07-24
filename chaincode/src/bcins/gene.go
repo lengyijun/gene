@@ -43,10 +43,6 @@ func calculation_user_gene_upload(stub shim.ChaincodeStubInterface, args []strin
 	return shim.Success(value_byte)
 }
 
-type gene struct {
-	Allgene string
-}
-
 //no args need
 func listCompareClaims(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	if len(args) != 0 {
