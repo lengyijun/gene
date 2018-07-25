@@ -48,9 +48,6 @@ L:
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	if err != nil {
-		return shim.Error("cannot create composite key done")
-	}
 	mypsiAsByte, err := json.Marshal(mypsi)
 	if err != nil {
 		return shim.Error(err.Error())

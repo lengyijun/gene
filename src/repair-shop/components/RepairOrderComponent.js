@@ -66,7 +66,7 @@ class RepairOrderComponent extends React.Component {
               <p>
                 <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
                   <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>
-                    <FormattedMessage id='upload' />:
+                    <FormattedMessage id='Upload' />:
                     <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
                   </label>
                 </div>
