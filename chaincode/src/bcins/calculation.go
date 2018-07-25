@@ -15,7 +15,7 @@ func completeCalculation(stub shim.ChaincodeStubInterface, args []string) pb.Res
 	UUID := args[0]
 	key, err := stub.CreateCompositeKey(prefixUndone, []string{prefixUploadDone, UUID})
 	if err != nil {
-		return shim.Error("cannot create composite key done")
+		return shim.Error(err.Error())
 	}
 
 	value, err := stub.GetState(key)
@@ -32,8 +32,8 @@ func completeCalculation(stub shim.ChaincodeStubInterface, args []string) pb.Res
 	result := []string{}
 
 L:
-	for _, i := range mypsi.OfficialGene {
-		for _, j := range mypsi.UserGene {
+	for _, i := range mypsi.UserGene {
+		for _, j := range mypsi.OfficialGene {
 			if i == j {
 				continue L
 			}
@@ -58,10 +58,10 @@ L:
 	stub.PutState(key, mypsiAsByte)
 
 	if len(result) > 0 {
-		m, _ := json.Marshal("you may have a high probility of heart disease")
+		m, _ := json.Marshal(result)
 		return shim.Success(m)
 	} else {
-		m, _ := json.Marshal("you may have a high probility of heart disease")
+		m, _ := json.Marshal("all the same")
 		return shim.Success(m)
 	}
 

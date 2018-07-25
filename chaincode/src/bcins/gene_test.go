@@ -55,12 +55,12 @@ func TestExample02_Invoke(t *testing.T) {
 	checkInvoke(t, stub, [][]byte{[]byte("compare_claim_ls")})
 	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
 
-	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID3"), []byte("GENE7"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID1"), []byte("GENE1"), []byte("GENE2")})
 	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
 	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
 
-	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID2"), []byte("GENE7"), []byte("GENE8")})
-	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID1"), []byte("GENE7"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID2"), []byte("GENE3"), []byte("GENE8")})
+	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_upload_gene"), []byte("MYUUID3"), []byte("GENE7"), []byte("GENE8")})
 	checkInvoke(t, stub, [][]byte{[]byte("diseasecenter_compare_claim_gene_ls")})
 	checkInvoke(t, stub, [][]byte{[]byte("calculation_ls")})
 
