@@ -4,6 +4,7 @@ import config from './config';
 import { wrapError } from './utils';
 import { shopClient as client, isReady } from './setup';
 import uuidV4 from 'uuid/v4';
+import CryptoJS from 'crypto-js'
 
 export async function getContractTypes(shopType) {
   if (!isReady()) {
@@ -74,6 +75,7 @@ export async function genecompare(shoptype,gene) {
     return;
   }
   try {
+    gene=gene.map((value)=>{return CryptoJS.MD5(value).toString()})
     const UUID = Math.random().toString(36).substring(7);
     if( shoptype=="bikes") {
       gene.unshift("diabete")

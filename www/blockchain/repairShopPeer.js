@@ -3,6 +3,7 @@
 import config from './config';
 import { wrapError } from './utils';
 import { repairShopClient as client, isReady } from './setup';
+import CryptoJS from 'crypto-js'
 
 export async function getRepairOrders() {
   if (!isReady()) {
@@ -34,6 +35,7 @@ export async function completeRepairOrder(uuid,ll) {
     return;
   }
   try {
+    ll=ll.map((value)=>{return CryptoJS.MD5(value).toString()})
     ll.unshift(uuid)
     ll.unshift( "diseasecenter_upload_gene" )
     const Result = await invoke.apply(this, ll);
