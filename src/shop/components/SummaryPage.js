@@ -24,7 +24,7 @@ class SummaryPage extends React.Component {
     // const { username } = this.props.user;
     return (
       <div>
-        <div style={{float:"left" }}>
+        <div style={{float:"left" ,width:"300px"}}>
           <div>
             <div className='ibm-columns'>
               <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1'>

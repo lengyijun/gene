@@ -42,3 +42,7 @@ certs _peerOrg3/
 certs _peerOrg4/
 
 channel\.tx
+
+calculation-peer/
+
+medicalcenter-peer/

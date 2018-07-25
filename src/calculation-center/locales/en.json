@@ -1,8 +1,8 @@
 {
-  "Repair Service": "Repair Shop",
+  "Repair Service": "Calculation Peer",
   "Loading Repair Orders...": "Loading Repair Orders...",
   "No outstanding repair orders.": "No outstanding repair orders.",
-  "Repair Order": "Repair Order",
+  "Repair Order": "Calculation Order",
   "Brand": "Brand",
   "Model": "Model",
   "Description": "Description",

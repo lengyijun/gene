@@ -214,7 +214,7 @@ class PaymentPage extends React.Component {
           </div>
         </div>
         <div style={{float:"right"}}>
-          <img src={"/img/right/safe.jpg"} style={{width:"500px"}}/>
+          <img src={"/img/right/safe.jpg"} style={{width:"650px"}}/>
         </div>
       </Loading>
     );

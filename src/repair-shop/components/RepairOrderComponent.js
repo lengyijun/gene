@@ -56,7 +56,7 @@ class RepairOrderComponent extends React.Component {
                   {repairOrder.UUID} <br />
                 <FormattedMessage id='Type' />:
                 {repairOrder.Type} <br />
-                <FormattedMessage id='Intersection Calaculated' />:
+                <FormattedMessage id='Intersection Calculated' />:
                   false <br />
                 <FormattedMessage id='Medical Center Uploaded' />:
                 {Array.isArray(repairOrder.OfficialGene).toString()} <br />
@@ -65,7 +65,8 @@ class RepairOrderComponent extends React.Component {
               </p>
               <p>
                 <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-                  <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>Choose file to upload
+                  <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>
+                    <FormattedMessage id='upload' />:
                     <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
                   </label>
                 </div>

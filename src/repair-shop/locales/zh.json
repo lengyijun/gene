@@ -1,0 +1,16 @@
+{
+  "Repair Service": "医疗中心",
+  "Loading Repair Orders...": "Loading Repair Orders...",
+  "No outstanding repair orders.": "No outstanding repair orders.",
+  "Repair Order": "致病基因请求",
+  "Brand": "Brand",
+  "Model": "Model",
+  "Description": "Description",
+  "Type":"疾病类型",
+  "Intersection Calculated":"交集计算",
+  "Medical Center Uploaded":"医疗机构上传基因",
+  "Create Time":"创建时间",
+  "Mark Completed":"交集计算",
+  "No outstanding repair orders.":"没有待处理的交易",
+  "upload":"上传"
+}

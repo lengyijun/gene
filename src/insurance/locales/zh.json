@@ -60,5 +60,11 @@
   "Expecting confirmation from police": "Expecting confirmation from police",
   "You haven't filed any claims yet.": "You haven't filed any claims yet.",
   "Theft confirmed by police": "Theft confirmed by police",
-  "File Reference": "File Reference"
+  "File Reference": "File Reference",
+  "Medical Center Uploaded":"医疗机构上传基因",
+  "Create Time":"创建时间",
+  "Mark Completed":"交集计算",
+  "No outstanding repair orders.":"没有待处理的交易",
+  "Intersection Calculated": "交集计算完成",
+  "Claims":"我的交易"
 }

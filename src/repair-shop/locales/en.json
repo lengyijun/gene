@@ -1,8 +1,8 @@
 {
-  "Repair Service": "Repair Shop",
+  "Repair Service": "Medical Center",
   "Loading Repair Orders...": "Loading Repair Orders...",
   "No outstanding repair orders.": "No outstanding repair orders.",
-  "Repair Order": "Repair Order",
+  "Repair Order": "Medical Order",
   "Brand": "Brand",
   "Model": "Model",
   "Description": "Description",

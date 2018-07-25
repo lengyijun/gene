@@ -147,7 +147,7 @@ class ChooseProductPage extends React.Component {
       </div>
 
         <div style={{float:"right"}} margin="10px">
-          <img src="/img/right/safety.jpg" width="700px" />
+          <img src="/img/right/insurance.jpg" width="670px" />
         </div>
       </div>
     );
