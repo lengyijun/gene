@@ -10,7 +10,7 @@
 ![page](img/page.jpg)
 
 ## 系统架构
-![goujia](img/goujia.png)
+![structure](img/structure.jpg)
 ### 区块链网络结构
 ![jiedian](img/jiedian2.jpg)
 ### 智能合约实现
