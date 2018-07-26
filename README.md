@@ -22,9 +22,6 @@
 ### 上传致病基因数据
 ![upload](img/upload.jpg)
 
-### 致病基因交集计算
-![cal](img/cal.jpg)
-
 ### 隐私保护机制协议
 ![algorithm](img/algorithm.jpg)
 
