@@ -2,6 +2,7 @@
 
 ## 系统功能
 ## 系统架构
+![goujia](https://github.com/lengyijun/gene/blob/gene/img/calipher.png)
 ## 区块链网络结构
 ## 智能合约实现
 ## 性能测试
