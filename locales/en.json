@@ -6,7 +6,7 @@
 	"Shop Description": "This is the online shop.",
 	"Claim Self-Service": "Claim Self-Service",
 	"Claim Self-Service Description": "Claim Self-Service Description.",
-	"Repair Service": "Virulence Gene Uploader",
+	"Repair Service": "Medical Center",
 	"Repair Service Description": "Repair Shop Description.",
 	"Introduction": "Introduction Page",
 	"Bikes": "Diabete",
@@ -38,9 +38,10 @@
 	"Repair Shop": "Calculation Center",
 	"Go To The Shop Peer": "Go To Genetic Test",
 	"Go To The Police Peer": "Go To The Police Peer",
-	"Go To The Repair Shop Peer": "Go To The Virulence Gene Uploader",
+	"Go To The Repair Shop Peer": "Go To The Medical Center",
 	"Login": "Login",
 	"WatchBlock": "WatchBlock",
 	"Calculation Center": "Calculation Center",
-	"Insurance": "Insurance"
+	"Insurance": "Insurance",
+	"Go To The Calculation Peer": "Go To The Calculation Peer"
 }
