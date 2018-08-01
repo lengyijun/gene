@@ -26,3 +26,6 @@
 ![algorithm](img/algorithm.jpg)
 
 ![fig](img/fig.jpg)
+
+### TODO
+- 智能合约检查发起方的ORG
