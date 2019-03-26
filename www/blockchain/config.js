@@ -86,22 +86,22 @@ const config = {
 };
 
 if (process.env.LOCALCONFIG) {
-  config.orderer0.url = 'grpcs://localhost:7050';
+  config.orderer0.url = 'grpcs://129.28.54.225:7050';
 
-  config.insuranceOrg.peer.url = 'grpcs://localhost:7051';
-  config.shopOrg.peer.url = 'grpcs://localhost:8051';
-  config.repairShopOrg.peer.url = 'grpcs://localhost:9051';
-  config.policeOrg.peer.url = 'grpcs://localhost:10051';
+  config.insuranceOrg.peer.url = 'grpcs://129.28.54.225:7051';
+  config.shopOrg.peer.url = 'grpcs://129.28.54.225:8051';
+  config.repairShopOrg.peer.url = 'grpcs://129.28.54.225:9051';
+  config.policeOrg.peer.url = 'grpcs://129.28.54.225:10051';
 
-  config.insuranceOrg.peer.eventHubUrl = 'grpcs://localhost:7053';
-  config.shopOrg.peer.eventHubUrl = 'grpcs://localhost:8053';
-  config.repairShopOrg.peer.eventHubUrl = 'grpcs://localhost:9053';
-  config.policeOrg.peer.eventHubUrl = 'grpcs://localhost:10053';
+  config.insuranceOrg.peer.eventHubUrl = 'grpcs://129.28.54.225:7053';
+  config.shopOrg.peer.eventHubUrl = 'grpcs://129.28.54.225:8053';
+  config.repairShopOrg.peer.eventHubUrl = 'grpcs://129.28.54.225:9053';
+  config.policeOrg.peer.eventHubUrl = 'grpcs://129.28.54.225:10053';
 
-  config.insuranceOrg.ca.url = 'https://localhost:7054';
-  config.shopOrg.ca.url = 'https://localhost:8054';
-  config.repairShopOrg.ca.url = 'https://localhost:9054';
-  config.policeOrg.ca.url = 'https://localhost:10054';
+  config.insuranceOrg.ca.url = 'https://129.28.54.225:7054';
+  config.shopOrg.ca.url = 'https://129.28.54.225:8054';
+  config.repairShopOrg.ca.url = 'https://129.28.54.225:9054';
+  config.policeOrg.ca.url = 'https://129.28.54.225:10054';
 }
 
 export default config;
