@@ -21,7 +21,7 @@ class PaymentPage extends React.Component {
       shopType: PropTypes.string.isRequired,
       productInfo: PropTypes.object.isRequired,
       contractInfo: PropTypes.object.isRequired,
-      payed: PropTypes.bool.isRequired,
+      // payed: PropTypes.bool.isRequired,
       user: PropTypes.object,
       paymentActions: PropTypes.object.isRequired,
       userMgmtActions: PropTypes.object.isRequired
@@ -99,7 +99,6 @@ class PaymentPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.shopType)
     let paymentStatus;
 
     const { intl, productInfo, contractInfo } = this.props;
@@ -226,7 +225,7 @@ function mapStateToProps(state, ownProps) {
     shopType: state.shop.type,
     productInfo: state.shop.productInfo,
     contractInfo: state.insurance.contractInfo,
-    payed: state.payment.payed,
+    // payed: state.payment.payed,
     user: state.userMgmt.user
   };
 }

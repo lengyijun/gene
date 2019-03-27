@@ -3,7 +3,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function getClaims(status) {
-  return fetch('/claim/api/claims', {
+  return fetch('/shop/api/response-file', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'

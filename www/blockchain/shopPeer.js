@@ -70,25 +70,14 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function genecompare(shoptype,gene) {
+export async function uploadFile(filename,description) {
   if (!isReady()) {
     return;
   }
   try {
-    gene=gene.map((value)=>{return CryptoJS.MD5(value).toString()})
     const UUID = Math.random().toString(36).substring(7);
-    if( shoptype=="bikes") {
-      gene.unshift("diabete")
-    }
-    if ( shoptype == "smart-phones") {
-      gene.unshift("heart disease")
-    }
-    if ( shoptype == "skis"){
-      gene.unshift("lung cancer")
-    }
-    gene.unshift(UUID)
-    gene.unshift('compare_type_1')
-    const user = await invoke.apply(this,gene);
+    var parameter=['uploadFile',UUID,filename,description]
+    const user = await invoke.apply(this,parameter);
     console.log(user)
     return user;
   } catch (e) {
@@ -105,6 +94,68 @@ export const once = client.once.bind(client);
 export const addListener = client.addListener.bind(client);
 export const prependListener = client.prependListener.bind(client);
 export const removeListener = client.removeListener.bind(client);
+
+
+export async function getMyRequest() {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const repairOrders = await query( "listRequest" );
+    console.log(repairOrders)
+    return repairOrders;
+  } catch (e) {
+    throw wrapError(`Error getting repair orders: ${e.message}`, e);
+  }
+}
+
+export async function getAllFiles() {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const repairOrders = await query( "listFile" );
+    return repairOrders;
+  } catch (e) {
+    throw wrapError(`Error getting all files: ${e.message}`, e);
+  }
+}
+
+export async function requestFile(fileId,owner) {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    const ReqId = Math.random().toString(36).substring(7)
+    var args=['requestFile',ReqId,fileId,owner,"publicKey"]
+    const Result = await invoke.apply(this, args);
+    console.log(Result)
+    return Result
+  } catch (e) {
+    throw wrapError(`Error marking repair order as complete: ${e.message}`, e);
+  }
+}
+
+export async function getClaims(status) {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    // if (typeof status !== 'string') {
+    //   status = undefined;
+    // }
+    const claims = await query('listResponse' );  //no args need
+    return claims;
+  } catch (e) {
+    let errMessage;
+    if (status) {
+      errMessage = `Error getting response with status ${status}: ${e.message}`;
+    } else {
+      errMessage = `Error getting all response: ${e.message}`;
+    }
+    throw wrapError(errMessage, e);
+  }
+}
 
 function invoke(fcn, ...args) {
   return client.invoke(

@@ -12,10 +12,10 @@ import getLocale from '../shared/getLocale';
 import AppRouter from './router';
 import configStore from './store';
 import translations from './translations';
-import { loadRepairOrders } from './actions/repairShopActions';
+import { loadAllFiles} from './actions/repairShopActions';
 
 const store = configStore();
-store.dispatch(loadRepairOrders());
+store.dispatch(loadAllFiles());
 
 const locale = getLocale();
 addLocaleData([...deLocaleData, ...enLocaleData,...zhLocaleData]);

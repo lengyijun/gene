@@ -3,9 +3,9 @@ import * as InsurancePeer from '../blockchain/insurancePeer';
 
 const router = express.Router();
 
-router.post('/api/repair-orders', async (req, res) => {
+router.post('/api/my-request', async (req, res) => {
   try {
-    let repairOrders = await InsurancePeer.getCalculationClaims();
+    let repairOrders = await InsurancePeer.getMyRequest();
     res.json(repairOrders);
   } catch (e) {
     console.log(e);

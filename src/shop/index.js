@@ -20,7 +20,7 @@ const shopType = window.location.pathname.split('/').filter(e => !!e)[1];
 const store = configStore();
 if (typeof shopType == 'string' && shopType.length > 0) {
   store.dispatch(setShopType(shopType, products[shopType]));
-  store.dispatch(loadContractsTypes(shopType));
+  // store.dispatch(loadContractsTypes(shopType));
 }
 
 const locale = getLocale();

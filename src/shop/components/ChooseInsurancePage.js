@@ -8,16 +8,15 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter, Redirect } from 'react-router-dom';
 
 import Loading from '../../shared/Loading';
-import SelectList from '../../shared/SelectList';
-import DateInput from '../../shared/DateInput';
 import * as insuranceActions from '../actions/insuranceActions';
+import { uploadFile } from '../api';
 
 class ChooseInsurancePage extends React.Component {
 
   static get propTypes() {
     return {
       intl: intlShape.isRequired,
-      shopType: PropTypes.string.isRequired,
+      // shopType: PropTypes.string.isRequired,
       productInfo: PropTypes.object.isRequired,
       contractsLoaded: PropTypes.bool.isRequired,
       contractTypes: PropTypes.array.isRequired,
@@ -34,16 +33,16 @@ class ChooseInsurancePage extends React.Component {
       contractType: {},
       dailyPrice: '',
       contractInfo: props.contractInfo || {
-        firstName: '',
-        lastName: '',
-        email: '',
+        filename: '',
+        ownername: '',
+        description: '',
         startDate: 0,
         endDate: 0
       }
     };
 
     this.nextStep = this.nextStep.bind(this);
-    this.setContractType = this.setContractType.bind(this);
+    // this.setContractType = this.setContractType.bind(this);
     this.setContractInfo = this.setContractInfo.bind(this);
     this.getContractCaption = elem => elem.description;
     this.setStartDate = date => this.setContractInfo(
@@ -53,49 +52,51 @@ class ChooseInsurancePage extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.contractsLoaded && !this.state.contractType.uuid) {
+    if (!this.state.contractType.uuid) {
+      // if (this.props.contractsLoaded && !this.state.contractType.uuid) {
       const contractType = this.props.contractInfo ?
         this.props.contractTypes.find(
           ct => ct.id === this.props.contractInfo.uuid) :
         // Fallback to the first one, if none is defined.
         this.props.contractTypes[0];
 
-      this.setContractType(contractType);
+      // this.setContractType(contractType);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.contractsLoaded && !this.state.contractType.uuid) {
+    if ( !this.state.contractType.uuid) {
+      // if (nextProps.contractsLoaded && !this.state.contractType.uuid) {
       const contractType = nextProps.contractInfo ?
         nextProps.contractTypes.find(
           ct => ct.id === nextProps.contractInfo.uuid) :
         // Fallback to the first contract type
         nextProps.contractTypes[0];
 
-      this.setContractType(contractType);
+      // this.setContractType(contractType);
     }
   }
 
-  setContractType(contractType) {
-    this.setState(Object.assign({}, this.state,
-      {
-        contractType,
-        dailyPrice: contractType.formulaPerDay(this.props.productInfo.price)
-      }));
-  }
+  // setContractType(contractType) {
+  //   this.setState(Object.assign({}, this.state,
+  //     {
+  //       contractType,
+  //       dailyPrice: contractType.formulaPerDay(this.props.productInfo.price)
+  //     }));
+  // }
 
   setContractInfo(event) {
     let obj;
     if (event.target) {
       switch (event.target) {
         case this.refs.firstNameField:
-          obj = { firstName: event.target.value };
+          obj = {filename: event.target.value };
           break;
         case this.refs.lastNameField:
-          obj = { lastName: event.target.value };
+          obj = {ownername: event.target.value };
           break;
         case this.refs.emailField:
-          obj = { email: event.target.value };
+          obj = {description: event.target.value };
           break;
         default:
           return;
@@ -119,28 +120,33 @@ class ChooseInsurancePage extends React.Component {
       { contractInfo: Object.assign({}, this.state.contractInfo, obj) }));
   }
 
-  nextStep() {
+  async nextStep() {
+    console.log(this.state.contractInfo )
     // Persist data
     this.props.insuranceActions.submitContract(
       Object.assign({}, this.state.contractInfo, this.state.contractType));
+    const uploadresult=await uploadFile(this.state.contractInfo.filename,
+                                         // this.state.contractInfo.ownername,
+                                          this.state.contractInfo.description)
+    console.log(uploadresult )
     // Navigate to the next page
-    this.setState({ redirectToNext: true });
+    // this.setState({ redirectToNext: true });
   }
 
   render() {
     let messageAtTop;
-    switch (this.props.shopType) {
-      case 'bikes':
-        messageAtTop = <FormattedMessage id='Buy Insurance for the Bike' />;
-        break;
-      case 'smart-phones':
-        messageAtTop = <FormattedMessage
-          id='Buy Insurance for the Smart Phone' />;
-        break;
-      case 'skis':
-        messageAtTop = <FormattedMessage id='Buy Insurance the Pair of Skis' />;
-        break;
-    }
+    // switch (this.props.shopType) {
+    //   case 'bikes':
+    //     messageAtTop = <FormattedMessage id='Buy Insurance for the Bike' />;
+    //     break;
+    //   case 'smart-phones':
+    //     messageAtTop = <FormattedMessage
+    //       id='Buy Insurance for the Smart Phone' />;
+    //     break;
+    //   case 'skis':
+    //     messageAtTop = <FormattedMessage id='Buy Insurance the Pair of Skis' />;
+    //     break;
+    // }
 
     const contractTypes=[{description:"Heart Disease"},{description:"Diabete"} ,{ description: "Lung Cancer"} ]
     let { contractType, contractInfo, dailyPrice, redirectToNext } = this.state;
@@ -153,7 +159,7 @@ class ChooseInsurancePage extends React.Component {
     }
 
     return (
-      <Loading hidden={contractsLoaded}
+      <Loading hidden={true}
         text={intl.formatMessage({ id: 'Loading Contracts...' })}>
         <div style={{float:"left",width:"300px"}}>
           <div className='ibm-columns'>
@@ -175,18 +181,20 @@ class ChooseInsurancePage extends React.Component {
                     {/*/>*/}
                   {/*</span>*/}
                 {/*</p>*/}
-                <p>
-                  <label><FormattedMessage id='Daily Price' />:</label>
-                  <span>
-                    <input type='text' readOnly value={
-                      intl.formatNumber(dailyPrice,
-                        {
-                          style: 'currency',
-                          currency: intl.formatMessage({ id: 'currency code' }),
-                          minimumFractionDigits: 2
-                        })} />
-                  </span>
-                </p>
+                {/*<p>*/}
+                  {/*<label><FormattedMessage id='Daily Price' />:</label>*/}
+                  {/*<span>*/}
+                    {/*<input ref='firstNameField' value={contractInfo.firstName}*/}
+                           {/*type='text' onChange={this.setContractInfo} />*/}
+                    {/*<input type='text' readOnly value={*/}
+                      {/*intl.formatNumber(dailyPrice,*/}
+                        {/*{*/}
+                          {/*style: 'currency',*/}
+                          {/*currency: intl.formatMessage({ id: 'currency code' }),*/}
+                          {/*minimumFractionDigits: 2*/}
+                        {/*})} />*/}
+                  {/*</span>*/}
+                {/*</p>*/}
                 {/*<p>*/}
                   {/*<label><FormattedMessage id='Contract Terms' />:</label>*/}
                   {/*<span>*/}
@@ -197,7 +205,7 @@ class ChooseInsurancePage extends React.Component {
                   <label><FormattedMessage id='First Name' />:
                   <span className='ibm-required'>*</span></label>
                   <span>
-                    <input ref='firstNameField' value={contractInfo.firstName}
+                    <input ref='firstNameField' value={contractInfo.filename}
                       type='text' onChange={this.setContractInfo} />
                   </span>
                 </p>
@@ -205,7 +213,7 @@ class ChooseInsurancePage extends React.Component {
                   <label><FormattedMessage id='Last Name' />:
                   <span className='ibm-required'>*</span></label>
                   <span>
-                    <input ref='lastNameField' value={contractInfo.lastName}
+                    <input ref='lastNameField' value={contractInfo.ownername}
                       type='text' onChange={this.setContractInfo} />
                   </span>
                 </p>
@@ -213,7 +221,7 @@ class ChooseInsurancePage extends React.Component {
                   <label><FormattedMessage id='E-mail Address' />:
                   <span className='ibm-required'>*</span></label>
                   <span>
-                    <input ref='emailField' value={contractInfo.email}
+                    <input ref='emailField' value={contractInfo.description}
                       type='text' onChange={this.setContractInfo} />
                   </span>
                 </p>

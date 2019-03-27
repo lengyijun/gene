@@ -95,13 +95,16 @@ function splitFormulaPart(part, splitQualifier) {
   }
 }
 
-export function compareGene(shoptype,gene) {
-  return fetch('/shop/api/comparegene', {
+export function uploadFile(filename,description) {
+  console.log(filename)
+  // console.log(ownername)
+  console.log(description)
+  return fetch('/shop/api/uploadFile', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({shoptype,gene})
+    body: JSON.stringify({filename,description})
   }).then(async res => {
     const response = await res.json();
     if (response.success) {

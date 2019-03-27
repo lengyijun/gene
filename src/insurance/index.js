@@ -13,11 +13,11 @@ import AppRouter from './router';
 import configStore from './store';
 import translations from './translations';
 import { loadClaims } from './actions/claimProcessingActions';
-import { loadContractTypes } from './actions/contractTemplateActions';
+// import { loadContractTypes } from './actions/contractTemplateActions';
 
 const store = configStore();
 store.dispatch(loadClaims());
-store.dispatch(loadContractTypes());
+// store.dispatch(loadContractTypes());
 const locale = getLocale();
 addLocaleData([...deLocaleData, ...enLocaleData,...zhLocaleData]);
 

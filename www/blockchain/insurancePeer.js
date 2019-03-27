@@ -142,12 +142,13 @@ export function getBlocks(noOfLastBlocks) {
   return client.getBlocks(noOfLastBlocks);
 }
 
-export async function getCalculationClaims() {
+export async function getMyRequest() {
   if (!isReady()) {
     return;
   }
   try {
-    const repairOrders = await query( "calculation_ls" );
+    const repairOrders = await query( "listRequest" );
+    console.log(repairOrders)
     return repairOrders;
   } catch (e) {
     throw wrapError(`Error getting repair orders: ${e.message}`, e);

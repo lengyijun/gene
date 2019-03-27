@@ -6,5 +6,11 @@
   "Brand": "Brand",
   "Model": "Model",
   "Description": "Description",
-  "Mark Completed": "Mark Completed"
+  "Mark Completed": "Mark Completed",
+  "FileId":"FileId",
+  "Requester":"Requester",
+  "Owner":"Owner",
+  "RequesterPublicKey":"RequesterPublickey",
+  "Create Time":"Create Time",
+  "Done":"Done"
 }

@@ -12,5 +12,8 @@
   "Create Time":"创建时间",
   "Mark Completed":"交集计算",
   "No outstanding repair orders.":"没有待处理的交易",
-  "Upload":"上传"
+  "Request":"请求",
+  "FileName":"文件名",
+  "Owner":"所有者",
+  "Description":"描述"
 }

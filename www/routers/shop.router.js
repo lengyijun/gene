@@ -107,13 +107,13 @@ router.post('/api/enter-contract', async (req, res) => {
   }
 });
 
-router.post('/api/comparegene', async (req, res) => {
-  let {shoptype,gene} = req.body;
+router.post('/api/uploadFile', async (req, res) => {
+  let {filename,description} = req.body;
   // if (typeof user === 'object' &&
   //   typeof contractTypeUuid === 'string' &&
   //   typeof additionalInfo === 'object') {
     try {
-      let loginInfo = await ShopPeer.genecompare(shoptype,gene );
+      let loginInfo = await ShopPeer.uploadFile(filename,description);
       console.log(loginInfo)
       res.json({ success: 'Contract signed.', loginInfo });
     } catch (e) {
@@ -135,6 +135,56 @@ router.post('/api/blocks', async (req, res) => {
   try {
     const blocks = await ShopPeer.getBlocks(noOfLastBlocks);
     res.json(blocks);
+  } catch (e) {
+    res.json({ error: 'Error accessing blockchain.' });
+  }
+});
+
+
+router.post('/api/my-request', async (req, res) => {
+  try {
+    let repairOrders = await ShopPeer.getMyRequest();
+    res.json(repairOrders);
+  } catch (e) {
+    console.log(e);
+    res.json({ error: "Error accessing blockchain."});
+  }
+});
+
+router.post('/api/request-file', async (req, res) => {
+  const {fileId,owner } = req.body;
+  // if (typeof uuid !== 'string') {
+  //   res.json({ error: "Invalid request." });
+  //   return;
+  // }
+
+  try {
+    await ShopPeer.requestFile(fileId,owner);
+    res.json({ success: true });
+  } catch (e) {
+    console.log(e);
+    res.json({ error: "Error request file." });
+  }
+});
+
+router.post('/api/all-files', async (req, res) => {
+  try {
+    let repairOrders = await ShopPeer.getAllFiles();
+    res.json(repairOrders);
+  } catch (e) {
+    console.log(e);
+    res.json({ error: "Error accessing blockchain."});
+  }
+});
+
+router.post('/api/response-file', async (req, res) => {
+  let { status } = req.body;
+  if (typeof status === 'string' && status[0]) {
+    status = status[0].toUpperCase();
+  }
+  try {
+    let claims = await ShopPeer.getClaims(status);
+    res.json(claims);
   } catch (e) {
     res.json({ error: 'Error accessing blockchain.' });
   }

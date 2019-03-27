@@ -2,8 +2,8 @@
 
 import fetch from 'isomorphic-fetch';
 
-export function getRepairOrders() {
-  return fetch('/medical-center/api/repair-orders', {
+export function getAllFiles() {
+  return fetch('/shop/api/all-files', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -13,13 +13,13 @@ export function getRepairOrders() {
   });
 }
 
-export function completeRepairOrder(uuid,ll) {
-  return fetch('/medical-center/api/complete-repair-order', {
+export function requestFile(fileId,owner) {
+  return fetch('/shop/api/request-file', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({ uuid,ll })
+    body: JSON.stringify({fileId,owner})
   }).then(async res => {
     return await res.json();
   });

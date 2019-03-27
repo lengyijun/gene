@@ -39,15 +39,19 @@ class RepairOrderComponent extends React.Component {
             <div style={{ wordWrap: 'break-word' }}>
               <p>
                 <FormattedMessage id='UUID' />:
-                {repairOrder.UUID} <br />
-                <FormattedMessage id='Type' />:
-                {repairOrder.Type} <br />
-                <FormattedMessage id='Intersection Calaculated' />:
-                false <br />
-                <FormattedMessage id='Medical Center Uploaded' />:
-                {Array.isArray(repairOrder.OfficialGene).toString()} <br />
+                {repairOrder.ReqId} <br />
+                <FormattedMessage id='FileId' />:
+                {repairOrder.FileId} <br />
+                <FormattedMessage id='Requester' />:
+                {repairOrder.Requester} <br />
+                <FormattedMessage id='Owner' />:
+                {repairOrder.Owner} <br />
+                <FormattedMessage id='RequesterPublickKey' />:
+                {repairOrder.RequesterPublicKey} <br />
                 <FormattedMessage id='Create Time' />:
                 {repairOrder.CreateTime} <br />
+                <FormattedMessage id='Done' />:
+                {repairOrder.Done} <br />
               </p>
               <p>
                 {/*<div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>*/}

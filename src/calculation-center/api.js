@@ -2,8 +2,8 @@
 
 import fetch from 'isomorphic-fetch';
 
-export function getRepairOrders() {
-  return fetch('/calculation-center/api/repair-orders', {
+export function getMyRequest() {
+  return fetch('/shop/api/my-request', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'

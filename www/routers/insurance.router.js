@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 // Claim Processing
 
-router.post('/api/claims', async (req, res) => {
+router.post('/api/response-file', async (req, res) => {
   let { status } = req.body;
   if (typeof status === 'string' && status[0]) {
     status = status[0].toUpperCase();

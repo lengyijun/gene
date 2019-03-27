@@ -3,11 +3,11 @@
 import * as RepairShopActionType from './repairShopActionTypes';
 import * as Api from '../api';
 
-export function loadRepairOrders() {
+export function loadAllFiles() {
   return async dispatch => {
     let repairOrders;
     try {
-      repairOrders = await Api.getRepairOrders();
+      repairOrders = await Api.getAllFiles();
     } catch (e) {
       console.log(e);
     }

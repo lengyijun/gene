@@ -17,7 +17,7 @@ function router({ shopType }) {
     <Router basename={`/shop/${shopType}`}>
       <App>
         <Switch>
-          <Route exact path='/' component={ChooseProductPage} />
+          <Route exact path='/' component={ChooseInsurancePage} />
           <Route path='/insurance' component={ChooseInsurancePage} />
           <Route path='/payment' component={PaymentPage} />
           <Route path='/summary' component={SummaryPage} />

@@ -3,6 +3,7 @@
 import React, { Props } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import {requestFile} from '../api'
 
 class RepairOrderComponent extends React.Component {
 
@@ -28,16 +29,11 @@ class RepairOrderComponent extends React.Component {
   }
 
   async order(e){
-    var file_toload=e.target.files[0]
-    var fileReader = new FileReader()
-    fileReader.onload = function(){
-      var textFromFileLoaded=fileReader.result
-      console.log(textFromFileLoaded)
-      var ll=textFromFileLoaded.split("\n\n\n")
-      this.markComplete(ll)
-    }.bind(this);
+    console.log(this.props.repairOrder)
+    var res=await  requestFile(this.props.repairOrder.Id,
+                                this.props.repairOrder.Owner
+                              )
 
-    fileReader.readAsText(file_toload, "UTF-8");
   }
 
   render() {
@@ -53,21 +49,27 @@ class RepairOrderComponent extends React.Component {
             <div style={{ wordWrap: 'break-word' }}>
               <p>
                 <FormattedMessage id='UUID' />:
-                  {repairOrder.UUID} <br />
-                <FormattedMessage id='Type' />:
-                {repairOrder.Type} <br />
-                <FormattedMessage id='Intersection Calculated' />:
-                  false <br />
-                <FormattedMessage id='Medical Center Uploaded' />:
-                {Array.isArray(repairOrder.OfficialGene).toString()} <br />
+                  {repairOrder.Id} <br />
+                <FormattedMessage id='FileName' />:
+                {repairOrder.Name} <br />
+                <FormattedMessage id='Owner' />:
+                {repairOrder.Owner} <br />
+                <FormattedMessage id='Description' />:
+                {repairOrder.Description} <br />
+                {/*<FormattedMessage id='Intersection Calculated' />:*/}
+                  {/*false <br />*/}
+                {/*<FormattedMessage id='Medical Center Uploaded' />:*/}
+                {/*{Array.isArray(repairOrder.OfficialGene).toString()} <br />*/}
                 <FormattedMessage id='Create Time' />:
                 {repairOrder.CreateTime} <br />
+                <FormattedMessage id='Update Time' />:
+                {repairOrder.UpdateTime} <br />
               </p>
               <p>
-                <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
+                <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right' onClick={this.order}>
                   <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.order} style={{float:"left"}}>
-                    <FormattedMessage id='Upload' />:
-                    <input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>
+                    <FormattedMessage id='Request' />:
+                    {/*<input type="file" className='ibm-btn-pri ibm-btn-blue-50' style={{display:"none"}}/>*/}
                   </label>
                 </div>
                 {/*<button type='button'*/}
