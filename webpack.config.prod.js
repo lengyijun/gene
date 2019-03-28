@@ -24,7 +24,7 @@ export default {
   },
   target: 'web',
   output: {
-    path: resolve(__dirname, '../GeneWeb/static/js'), // Note: Physical files are only output by the production build task `npm run build`.
+    path: resolve(__dirname, './static/js'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: '[name].bundle.js'
   },
