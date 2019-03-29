@@ -95,16 +95,16 @@ function splitFormulaPart(part, splitQualifier) {
   }
 }
 
-export function uploadFile(filename,description) {
+export function uploadFile(filename, description, level) {
   console.log(filename)
-  // console.log(ownername)
   console.log(description)
+  console.log(level)
   return fetch('/shop/api/uploadFile', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({filename,description})
+    body: JSON.stringify({filename, description, level})
   }).then(async res => {
     const response = await res.json();
     if (response.success) {

@@ -108,12 +108,12 @@ router.post('/api/enter-contract', async (req, res) => {
 });
 
 router.post('/api/uploadFile', async (req, res) => {
-  let {filename,description} = req.body;
+    let {filename, description, level} = req.body;
   // if (typeof user === 'object' &&
   //   typeof contractTypeUuid === 'string' &&
   //   typeof additionalInfo === 'object') {
     try {
-      let loginInfo = await ShopPeer.uploadFile(filename,description);
+      let loginInfo = await ShopPeer.uploadFile(filename, description, level);
       console.log(loginInfo)
       res.json({ success: 'Contract signed.', loginInfo });
     } catch (e) {
@@ -179,11 +179,11 @@ router.post('/api/all-files', async (req, res) => {
 
 router.post('/api/response-file', async (req, res) => {
   let { status } = req.body;
-  if (typeof status === 'string' && status[0]) {
-    status = status[0].toUpperCase();
-  }
+  // if (typeof status === 'string' && status[0]) {
+  //   status = status[0].toUpperCase();
+  // }
   try {
-    let claims = await ShopPeer.getClaims(status);
+    let claims = await ShopPeer.getResponse();
     res.json(claims);
   } catch (e) {
     res.json({ error: 'Error accessing blockchain.' });

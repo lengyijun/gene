@@ -56,6 +56,8 @@ class RepairOrderComponent extends React.Component {
                 {repairOrder.Owner} <br />
                 <FormattedMessage id='Description' />:
                 {repairOrder.Description} <br />
+                <FormattedMessage id='Level'/>:
+                {repairOrder.Level} <br/>
                 {/*<FormattedMessage id='Intersection Calculated' />:*/}
                   {/*false <br />*/}
                 {/*<FormattedMessage id='Medical Center Uploaded' />:*/}

@@ -70,13 +70,13 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function uploadFile(filename,description) {
+export async function uploadFile(filename, description, level) {
   if (!isReady()) {
     return;
   }
   try {
     const UUID = Math.random().toString(36).substring(7);
-    var parameter=['uploadFile',UUID,filename,description]
+    var parameter = ['uploadFile', UUID, filename, description, level]
     const user = await invoke.apply(this,parameter);
     console.log(user)
     return user;
@@ -136,10 +136,10 @@ export async function requestFile(fileId,owner) {
   }
 }
 
-export async function getClaims(status) {
-  if (!isReady()) {
-    return;
-  }
+export async function getResponse() {
+  // if (!isReady()) {
+  //   return;
+  // }
   try {
     // if (typeof status !== 'string') {
     //   status = undefined;

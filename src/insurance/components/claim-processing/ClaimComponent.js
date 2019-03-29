@@ -83,6 +83,7 @@ class ClaimComponent extends React.Component {
       );
     };
 
+    console.log("this is my claim++++++++++++++++++++++")
     console.log(claim)
     return (
       <div className='ibm-col-2-1 ibm-col-medium-2-1 ibm-col-small-1-1'>
@@ -91,7 +92,7 @@ class ClaimComponent extends React.Component {
             <div style={{ wordWrap: 'break-word' }} className='ibm-column-form'>
               <p>
                 <label><FormattedMessage id='UUID' />: </label>
-                <span>{claim.UUID.toString()}</span>
+                <span>{claim.ReqId}</span>
               </p>
               <p>
                 <label><FormattedMessage id='Create Time' />: </label>
@@ -99,23 +100,19 @@ class ClaimComponent extends React.Component {
               </p>
               <p>
                 <label><FormattedMessage id='Type' />: </label>
-                <span>{claim.Type}</span>
+                <span>{claim.Done.toString()}</span>
               </p>
               <p>
                 <label><FormattedMessage id='Medical Center Uploaded' />: </label>
-                <span>{Array.isArray(claim.OfficialGene).toString()}</span>
+                <span>{claim.FileId}</span>
               </p>
               <p>
                 <label><FormattedMessage id='Intersection Calculated' />: </label>
-                <span>{Array.isArray(claim.Result).toString()}</span>
+                <span>{claim.Requester}</span>
               </p>
               <p>
-                <label><FormattedMessage id='Result' />: </label>
-                  {Array.isArray(claim.Result)?
-                     claim.Result.length>0 ? claim.Result.map(value =>{ return <span> {value} </span>}):
-                    <FormattedMessage id={"No Difference Found"}/>
-                     : <FormattedMessage id='Not Detected'/>
-                  }
+                <label><FormattedMessage id='Intersection Calculated'/>: </label>
+                <span>{claim.Owner}</span>
               </p>
               {/*<p>*/}
                 {/*<label><FormattedMessage id='Theft Involved' />: </label>*/}

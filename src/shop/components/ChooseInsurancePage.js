@@ -37,7 +37,8 @@ class ChooseInsurancePage extends React.Component {
         ownername: '',
         description: '',
         startDate: 0,
-        endDate: 0
+        endDate: 0,
+        level: 0
       }
     };
 
@@ -92,8 +93,8 @@ class ChooseInsurancePage extends React.Component {
         case this.refs.firstNameField:
           obj = {filename: event.target.value };
           break;
-        case this.refs.lastNameField:
-          obj = {ownername: event.target.value };
+        case this.refs.level:
+          obj = {level: event.target.value};
           break;
         case this.refs.emailField:
           obj = {description: event.target.value };
@@ -126,8 +127,8 @@ class ChooseInsurancePage extends React.Component {
     this.props.insuranceActions.submitContract(
       Object.assign({}, this.state.contractInfo, this.state.contractType));
     const uploadresult=await uploadFile(this.state.contractInfo.filename,
-                                         // this.state.contractInfo.ownername,
-                                          this.state.contractInfo.description)
+      this.state.contractInfo.description,
+      this.state.contractInfo.level)
     console.log(uploadresult )
     // Navigate to the next page
     // this.setState({ redirectToNext: true });
@@ -210,11 +211,11 @@ class ChooseInsurancePage extends React.Component {
                   </span>
                 </p>
                 <p>
-                  <label><FormattedMessage id='Last Name' />:
+                  <label><FormattedMessage id='Level'/>:
                   <span className='ibm-required'>*</span></label>
                   <span>
-                    <input ref='lastNameField' value={contractInfo.ownername}
-                      type='text' onChange={this.setContractInfo} />
+                    <input ref='level' value={contractInfo.level}
+                           type='text' onChange={this.setContractInfo}/>
                   </span>
                 </p>
                 <p>

@@ -2,13 +2,13 @@
 
 import fetch from 'isomorphic-fetch';
 
-export function getClaims(status) {
+export function getClaims() {
   return fetch('/shop/api/response-file', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({ status })
+    body: JSON.stringify({})
   }).then(async res => {
     const claims = await res.json();
     console.log("=========claims==================")
