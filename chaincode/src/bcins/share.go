@@ -122,10 +122,16 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 
 }
 
+//args[0]: ReqId
+//args[1]: FileId
+//args[2]: Owner
+//args[3]: RequesterPublicKey
+//args[4]: Token
 func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println("requestFile Invoke")
-	if len(args) != 4 {
-		return shim.Error("Incorrect number of arguments. Expecting 4")
+	if len(args) != 5 {
+		fmt.Println(args)
+		return shim.Error("In requestFile. Incorrect number of arguments: " + strconv.Itoa(len(args)) + ". Expecting 5")
 	}
 	mytime, _ := stub.GetTxTimestamp()
 	loc, _ := time.LoadLocation("Asia/Chongqing")
@@ -138,8 +144,9 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	transaction := Transaction{
 		ReqId:              args[0],
 		FileId:             args[1],
-		Owner:              args[2],
+		Owner:              args[2], //todo,owner can be get by FileId
 		RequesterPublicKey: args[3],
+		Token:              args[4],
 		Requester:          creatorOrgMsp,
 		CreateTime:         time.Unix(mytime.Seconds, 0).In(loc).Format("2006-01-02 15:04:05"),
 		Done:               false,

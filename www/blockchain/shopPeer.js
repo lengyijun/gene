@@ -127,7 +127,7 @@ export async function requestFile(fileId,owner) {
   }
   try {
     const ReqId = Math.random().toString(36).substring(7)
-    var args=['requestFile',ReqId,fileId,owner,"publicKey"]
+    var args = ['requestFile', ReqId, fileId, owner, "publicKey", "tokentokentoken"]
     const Result = await invoke.apply(this, args);
     console.log(Result)
     return Result
