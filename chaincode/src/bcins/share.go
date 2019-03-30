@@ -22,7 +22,6 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
 	"time"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
@@ -44,19 +43,19 @@ type FileDescriptor struct {
 	UpdateTime  string
 	Owner       string
 	Description string
-	Level       int
+	Level       int `0(the lowest,all available),1,2,3(the highest,only few people can accesss it)`
 }
 
 type Transaction struct {
-	ReqId                 string
-	FileId                string
-	Requester             string `who request the key of file`
-	TransactionCreateTime string
-	Owner                 string `the owner of the file`
-	RequesterPublicKey    string `the publicKey of Requester`
-	CreateTime            string
-	Done                  bool
-	Token                 string
+	CreateTime         string
+	Done               bool
+	FileId             string
+	FileName           string
+	Owner              string `the owner of the file`
+	ReqId              string
+	Requester          string `who request the key of file`
+	RequesterPublicKey string `the publicKey of Requester`
+	Token              string
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
@@ -124,14 +123,13 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 
 //args[0]: ReqId
 //args[1]: FileId
-//args[2]: Owner
-//args[3]: RequesterPublicKey
-//args[4]: Token
+//args[2]: RequesterPublicKey
+//args[3]: Token
 func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println("requestFile Invoke")
-	if len(args) != 5 {
+	if len(args) != 4 {
 		fmt.Println(args)
-		return shim.Error("In requestFile. Incorrect number of arguments: " + strconv.Itoa(len(args)) + ". Expecting 5")
+		return shim.Error("In requestFile. Incorrect number of arguments: " + strconv.Itoa(len(args)) + ". Expecting 4")
 	}
 	mytime, _ := stub.GetTxTimestamp()
 	loc, _ := time.LoadLocation("Asia/Chongqing")
@@ -141,21 +139,34 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 		return shim.Error(err.Error())
 	}
 
+	IdIndexKey, err := stub.CreateCompositeKey(prefixFileDescriptor, []string{args[1]})
+	kvResult, err := stub.GetState(IdIndexKey)
+	if err != nil {
+		return shim.Error("Failed to GetState")
+	}
+
+	fileDescriptor := FileDescriptor{}
+	err = json.Unmarshal(kvResult, &fileDescriptor)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
 	transaction := Transaction{
-		ReqId:              args[0],
-		FileId:             args[1],
-		Owner:              args[2], //todo,owner can be get by FileId
-		RequesterPublicKey: args[3],
-		Token:              args[4],
-		Requester:          creatorOrgMsp,
 		CreateTime:         time.Unix(mytime.Seconds, 0).In(loc).Format("2006-01-02 15:04:05"),
 		Done:               false,
+		FileId:             args[1],
+		FileName:           fileDescriptor.Name,
+		Owner:              fileDescriptor.Owner,
+		ReqId:              args[0],
+		Requester:          creatorOrgMsp,
+		RequesterPublicKey: args[2],
+		Token:              args[3],
 	}
 	tByte, err := json.Marshal(transaction)
 	if err != nil {
 		return shim.Error("Failed to Marshal FileDescriptor")
 	}
-	IdIndexKey, err := stub.CreateCompositeKey(prefixRequest, []string{args[2], args[0]}) //Owner first, Id second
+	IdIndexKey, err = stub.CreateCompositeKey(prefixRequest, []string{fileDescriptor.Owner, args[0]}) //Owner first, Id second
 	err = stub.PutState(IdIndexKey, []byte(tByte))
 	if err != nil {
 		return shim.Error("Fail to put state")
@@ -203,7 +214,7 @@ func (t *SimpleChaincode) listResponse(stub shim.ChaincodeStubInterface, args []
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	fmt.Println("listResponse Invoke, creator " + creator)
+	fmt.Println("listResponse Invoke, creator:" + creator)
 
 	resultsIterator, err := stub.GetStateByPartialCompositeKey(prefixRequest, []string{creator})
 	if err != nil {
@@ -231,6 +242,7 @@ func (t *SimpleChaincode) listResponse(stub shim.ChaincodeStubInterface, args []
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	fmt.Println("listResponse return " + strconv.Itoa(len(results)) + " transaction")
 	return shim.Success(resultsAsBytes)
 }
 
@@ -254,6 +266,9 @@ func (t *SimpleChaincode) uploadFile(stub shim.ChaincodeStubInterface, args []st
 	level, err := strconv.Atoi(args[3])
 	if err != nil {
 		return shim.Error("Cannot parse level " + args[3] + " to int")
+	}
+	if (level < 0) || (level > 3) {
+		return shim.Error("Error level: " + strconv.Itoa(level) + " ! The level should be in 0,1,2,3")
 	}
 
 	f := FileDescriptor{

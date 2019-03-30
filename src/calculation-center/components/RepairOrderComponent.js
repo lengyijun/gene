@@ -34,7 +34,8 @@ class RepairOrderComponent extends React.Component {
         <div className='ibm-card ibm-border-gray-50'>
           <div className='ibm-card__content'>
             <h4 className='ibm-bold ibm-h4'>
-              <FormattedMessage id='Repair Order' />
+              {repairOrder.FileName}
+              {/*<FormattedMessage id='Repair Order' />*/}
             </h4>
             <div style={{ wordWrap: 'break-word' }}>
               <p>
@@ -50,8 +51,8 @@ class RepairOrderComponent extends React.Component {
                 {repairOrder.RequesterPublicKey} <br />
                 <FormattedMessage id='Create Time' />:
                 {repairOrder.CreateTime} <br />
-                <FormattedMessage id='Done' />:
-                {repairOrder.Done} <br />
+                {/*<FormattedMessage id='Done' />:*/}
+                {/*{repairOrder.Done} <br />*/}
               </p>
               <p>
                 {/*<div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>*/}

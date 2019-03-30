@@ -122,6 +122,10 @@ class ChooseInsurancePage extends React.Component {
   }
 
   async nextStep() {
+    if (this.state.contractInfo.level < 0 || this.state.contractInfo.level > 3) {
+      window.confirm("error level! level should be in 0,1,2,3")
+      return
+    }
     console.log(this.state.contractInfo )
     // Persist data
     this.props.insuranceActions.submitContract(
@@ -130,6 +134,7 @@ class ChooseInsurancePage extends React.Component {
       this.state.contractInfo.description,
       this.state.contractInfo.level)
     console.log(uploadresult )
+    window.confirm("uploadFile success")
     // Navigate to the next page
     // this.setState({ redirectToNext: true });
   }

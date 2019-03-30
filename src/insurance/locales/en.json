@@ -60,5 +60,9 @@
   "Expecting confirmation from police": "Expecting confirmation from police",
   "You haven't filed any claims yet.": "You haven't filed any claims yet.",
   "Theft confirmed by police": "Theft confirmed by police",
-  "File Reference": "File Reference"
+  "File Reference": "File Reference",
+  "Done": "Done",
+  "Requester": "Requester",
+  "File Owner": "File Owner",
+  "FileId": "FileId"
 }

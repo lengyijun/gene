@@ -83,8 +83,6 @@ class ClaimComponent extends React.Component {
       );
     };
 
-    console.log("this is my claim++++++++++++++++++++++")
-    console.log(claim)
     return (
       <div className='ibm-col-2-1 ibm-col-medium-2-1 ibm-col-small-1-1'>
         <div className='ibm-card ibm-border-gray-50'>
@@ -99,20 +97,20 @@ class ClaimComponent extends React.Component {
                 <span>{claim.CreateTime}</span>
               </p>
               <p>
-                <label><FormattedMessage id='Type' />: </label>
-                <span>{claim.Done.toString()}</span>
-              </p>
-              <p>
-                <label><FormattedMessage id='Medical Center Uploaded' />: </label>
+                <label><FormattedMessage id='FileId'/>: </label>
                 <span>{claim.FileId}</span>
               </p>
               <p>
-                <label><FormattedMessage id='Intersection Calculated' />: </label>
+                <label><FormattedMessage id='Requester'/>: </label>
                 <span>{claim.Requester}</span>
               </p>
               <p>
-                <label><FormattedMessage id='Intersection Calculated'/>: </label>
+                <label><FormattedMessage id='File Owner'/>: </label>
                 <span>{claim.Owner}</span>
+              </p>
+              <p>
+                <label><FormattedMessage id='Done'/>: </label>
+                <span>{claim.Done.toString()}</span>
               </p>
               {/*<p>*/}
                 {/*<label><FormattedMessage id='Theft Involved' />: </label>*/}

@@ -13,13 +13,13 @@ export function getAllFiles() {
   });
 }
 
-export function requestFile(fileId,owner) {
+export function requestFile(fileId) {
   return fetch('/shop/api/request-file', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({fileId,owner})
+    body: JSON.stringify({fileId})
   }).then(async res => {
     return await res.json();
   });

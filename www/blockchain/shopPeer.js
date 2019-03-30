@@ -121,13 +121,13 @@ export async function getAllFiles() {
   }
 }
 
-export async function requestFile(fileId,owner) {
+export async function requestFile(fileId) {
   if (!isReady()) {
     return;
   }
   try {
     const ReqId = Math.random().toString(36).substring(7)
-    var args = ['requestFile', ReqId, fileId, owner, "publicKey", "tokentokentoken"]
+    var args = ["requestFile", ReqId, fileId, "publicKey", "tokentokentoken"]
     const Result = await invoke.apply(this, args);
     console.log(Result)
     return Result

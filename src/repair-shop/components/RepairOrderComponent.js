@@ -29,10 +29,16 @@ class RepairOrderComponent extends React.Component {
   }
 
   async order(e){
-    console.log(this.props.repairOrder)
-    var res=await  requestFile(this.props.repairOrder.Id,
-                                this.props.repairOrder.Owner
-                              )
+    if (this.props.repairOrder.Level > 0) {
+      window.confirm("you cannot request file, which is leveled " + this.props.repairOrder.Level)
+      return
+    } else {
+      console.log(this.props.repairOrder)
+      var res = await  requestFile(this.props.repairOrder.Id)
+      // this.props.repairOrder.Owner
+      window.confirm("request success")
+      return
+    }
 
   }
 
@@ -44,14 +50,15 @@ class RepairOrderComponent extends React.Component {
         <div className='ibm-card ibm-border-gray-50'>
           <div className='ibm-card__content'>
             <h4 className='ibm-bold ibm-h4'>
-              <FormattedMessage id='Repair Order' />
+              {repairOrder.Name}
+              {/*<FormattedMessage id='Repair Order' />*/}
             </h4>
             <div style={{ wordWrap: 'break-word' }}>
               <p>
                 <FormattedMessage id='UUID' />:
                   {repairOrder.Id} <br />
-                <FormattedMessage id='FileName' />:
-                {repairOrder.Name} <br />
+                {/*<FormattedMessage id='FileName' />:*/}
+                {/*{repairOrder.Name} <br />*/}
                 <FormattedMessage id='Owner' />:
                 {repairOrder.Owner} <br />
                 <FormattedMessage id='Description' />:

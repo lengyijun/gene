@@ -70,5 +70,9 @@
   "Type":"疾病类型",
   "No Difference Found":"没有检测到异常基因",
   "Not Detected":"尚未检测",
-  "Result":"检测结果"
+  "Result": "检测结果",
+  "Done": "Done",
+  "Requester": "索取者",
+  "File Owner": "文件作者",
+  "FileId": "文件ID"
 }

@@ -152,14 +152,14 @@ router.post('/api/my-request', async (req, res) => {
 });
 
 router.post('/api/request-file', async (req, res) => {
-  const {fileId,owner } = req.body;
+  const {fileId} = req.body;
   // if (typeof uuid !== 'string') {
   //   res.json({ error: "Invalid request." });
   //   return;
   // }
 
   try {
-    await ShopPeer.requestFile(fileId,owner);
+    await ShopPeer.requestFile(fileId);
     res.json({ success: true });
   } catch (e) {
     console.log(e);
