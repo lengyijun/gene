@@ -134,6 +134,10 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	mytime, _ := stub.GetTxTimestamp()
 	loc, _ := time.LoadLocation("Asia/Chongqing")
 
+	if !verifyToken(args[3]) {
+		return shim.Error("Fail to verify token")
+	}
+
 	creatorOrgMsp, err := GetOrg(stub)
 	if err != nil {
 		return shim.Error(err.Error())
@@ -358,4 +362,9 @@ func GetOrg(stub shim.ChaincodeStubInterface) (string, error) {
 	}
 	creatorStr = string(creatorStr[0:end])
 	return creatorStr, nil
+}
+
+//todo
+func verifyToken(token string) bool {
+	return true
 }
