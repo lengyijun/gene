@@ -60,7 +60,7 @@ class RepairOrderComponent extends React.Component {
     let button;
     if (this.state.allowDownload) {
       button = <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right' onClick={this.download}>
-        <a href={"http://localhost:4000/shop/download/" + repairOrder.Name}>
+        <a href={"/shop/download/" + repairOrder.Name}>
           <label for="file" className='ibm-btn-pri ibm-btn-green-50' onChange={this.download} style={{float: "left"}}>
             <FormattedMessage id='Download'/>:
           </label>
