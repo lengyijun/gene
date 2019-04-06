@@ -11,7 +11,7 @@ const Block = ({ data }) => {
     <div className='block' >
       <div className='block-data'>
         <p>
-          <a href={ '//129.28.54.225:3000/block-info/blockinfo/'+data.id } >
+          <a href={'//129.28.54.225:4000/block-info/blockinfo/' + data.id}>
               <b><FormattedMessage id='Block No.' />:</b> {data.id}
           </a>
         </p>
