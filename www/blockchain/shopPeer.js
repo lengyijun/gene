@@ -5,6 +5,7 @@ import { wrapError } from './utils';
 import { shopClient as client, isReady } from './setup';
 import uuidV4 from 'uuid/v4';
 import CryptoJS from 'crypto-js'
+import fetch from 'isomorphic-fetch';
 
 export async function getContractTypes(shopType) {
   if (!isReady()) {
@@ -70,16 +71,18 @@ export async function authenticateUser(username, password) {
   }
 }
 
-export async function uploadFile(filename, description, level) {
+export async function uploadFile(filename, description, level, fileId) {
   if (!isReady()) {
     return;
   }
   try {
-    const UUID = Math.random().toString(36).substring(7);
-    var parameter = ['uploadFile', UUID, filename, description, level]
+    // const fileId= Math.random().toString(36).substring(7);
+
+
+    var parameter = ['uploadFile', fileId, filename, description, level]
     const user = await invoke.apply(this,parameter);
+    console.log("----------shopPeer.js---------------")
     console.log(user)
-    return user;
   } catch (e) {
     throw wrapError(`Error getting user info: ${e.message}`, e);
   }
@@ -109,6 +112,30 @@ export async function getMyRequest() {
   }
 }
 
+export async function saveFile(fileId, symKey, fileName) {
+  return fetch("http://129.28.54.225:8000/decryptfile/?fileid=" + fileId + "&key=" + symKey, {
+    method: 'GET',
+    headers: new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }),
+  }).then(async res => {
+    var json = await res.json()
+    console.log(json)
+    var file = json.file
+    const fs = require('fs');
+    fs.writeFile("/tmp/" + fileName, file, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+
+  })
+
+
+}
+
 export async function getAllFiles() {
   if (!isReady()) {
     return;
@@ -121,13 +148,13 @@ export async function getAllFiles() {
   }
 }
 
-export async function requestFile(fileId) {
+export async function requestFile(fileId, publicKey) {
   if (!isReady()) {
     return;
   }
   try {
     const ReqId = Math.random().toString(36).substring(7)
-    var args = ["requestFile", ReqId, fileId, "publicKey", "tokentokentoken"]
+    var args = ["requestFile", ReqId, fileId, publicKey, "tokentokentoken"]
     const Result = await invoke.apply(this, args);
     console.log(Result)
     return Result

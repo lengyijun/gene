@@ -108,23 +108,24 @@ router.post('/api/enter-contract', async (req, res) => {
 });
 
 router.post('/api/uploadFile', async (req, res) => {
-    let {filename, description, level} = req.body;
+  let {filename, description, level, fileId} = req.body;
   // if (typeof user === 'object' &&
   //   typeof contractTypeUuid === 'string' &&
   //   typeof additionalInfo === 'object') {
     try {
-      let loginInfo = await ShopPeer.uploadFile(filename, description, level);
+      let loginInfo = await ShopPeer.uploadFile(filename, description, level, fileId);
+      console.log("loginInfo: ")
       console.log(loginInfo)
       res.json({ success: 'Contract signed.', loginInfo });
     } catch (e) {
       console.log(e);
+      console.log("filename: " + filename)
+      console.log("description: " + description)
+      console.log("level: " + level)
+      console.log("fileID: " + fileId)
       res.json({ error: 'Could not create new contract!' });
     }
   }
-  // else {
-  //   res.json({ error: 'Invalid request!' });
-  // }
-// }
 );
 
 router.post('/api/blocks', async (req, res) => {
@@ -152,15 +153,19 @@ router.post('/api/my-request', async (req, res) => {
 });
 
 router.post('/api/request-file', async (req, res) => {
-  const {fileId} = req.body;
+  const {fileId, publicKey} = req.body;
   // if (typeof uuid !== 'string') {
   //   res.json({ error: "Invalid request." });
   //   return;
   // }
 
   try {
-    await ShopPeer.requestFile(fileId);
-    res.json({ success: true });
+    var symmetricKey = await ShopPeer.requestFile(fileId, publicKey);
+    // symmetricKey.success=true
+    console.log(symmetricKey)
+    // console.log(symmetricKey.decryptkey)
+    res.json(symmetricKey)
+    res.success = true
   } catch (e) {
     console.log(e);
     res.json({ error: "Error request file." });
@@ -189,6 +194,23 @@ router.post('/api/response-file', async (req, res) => {
     res.json({ error: 'Error accessing blockchain.' });
   }
 });
+
+router.post('/api/save-file', async (req, res) => {
+  let {fileId, symKey, fileName} = req.body;
+  try {
+    let x = await ShopPeer.saveFile(fileId, symKey, fileName)
+
+  } catch (e) {
+    console.log(e)
+    res.json({error: 'Error accessing blockchain.'});
+  }
+})
+
+router.get('/download/:id', async (req, res) => {
+  // let {fileName} = req.body;
+  // res.download('/tmp/'+fileName);
+  res.download('/tmp/' + req.params.id);
+})
 
 router.get('*', (req, res) => {
   res.render('shop', {

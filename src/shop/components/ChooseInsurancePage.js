@@ -9,7 +9,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import Loading from '../../shared/Loading';
 import * as insuranceActions from '../actions/insuranceActions';
-import { uploadFile } from '../api';
+import {uploadFileIndex} from '../api';
 
 class ChooseInsurancePage extends React.Component {
 
@@ -121,22 +121,33 @@ class ChooseInsurancePage extends React.Component {
       { contractInfo: Object.assign({}, this.state.contractInfo, obj) }));
   }
 
-  async nextStep() {
+  async nextStep(e) {
     if (this.state.contractInfo.level < 0 || this.state.contractInfo.level > 3) {
       window.confirm("error level! level should be in 0,1,2,3")
       return
     }
-    console.log(this.state.contractInfo )
-    // Persist data
-    this.props.insuranceActions.submitContract(
-      Object.assign({}, this.state.contractInfo, this.state.contractType));
-    const uploadresult=await uploadFile(this.state.contractInfo.filename,
+
+    var file_toload = e.target.files[0]
+    var fileReader = new FileReader()
+    fileReader.onload = function () {
+      var textFromFileLoaded = fileReader.result
+      this.callback(textFromFileLoaded, file_toload.name)
+    }.bind(this);
+
+    fileReader.readAsText(file_toload, "UTF-8");
+  }
+
+  async callback(fileContent, fileName) {
+    const uploadresult = await uploadFileIndex(
+      fileName,
+      // this.state.contractInfo.filename,
       this.state.contractInfo.description,
-      this.state.contractInfo.level)
-    console.log(uploadresult )
-    window.confirm("uploadFile success")
-    // Navigate to the next page
-    // this.setState({ redirectToNext: true });
+      this.state.contractInfo.level,
+      fileContent)
+    console.log("callback result: ")
+    console.log(uploadresult)
+    window.confirm("upload File content success")
+    // const { userMgmtActions } = this.props;
   }
 
   render() {
@@ -207,14 +218,14 @@ class ChooseInsurancePage extends React.Component {
                     {/*<textarea value={contractType.conditions} readOnly />*/}
                   {/*</span>*/}
                 {/*</p>*/}
-                <p>
-                  <label><FormattedMessage id='First Name' />:
-                  <span className='ibm-required'>*</span></label>
-                  <span>
-                    <input ref='firstNameField' value={contractInfo.filename}
-                      type='text' onChange={this.setContractInfo} />
-                  </span>
-                </p>
+                {/*<p>*/}
+                {/*<label><FormattedMessage id='First Name' />:*/}
+                {/*<span className='ibm-required'>*</span></label>*/}
+                {/*<span>*/}
+                {/*<input ref='firstNameField' value={contractInfo.filename}*/}
+                {/*type='text' onChange={this.setContractInfo} />*/}
+                {/*</span>*/}
+                {/*</p>*/}
                 <p>
                   <label><FormattedMessage id='Level'/>:
                   <span className='ibm-required'>*</span></label>
@@ -236,10 +247,13 @@ class ChooseInsurancePage extends React.Component {
           </div>
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <button type='button' className='ibm-btn-pri ibm-btn-blue-50'
-                onClick={this.nextStep}>
-                <FormattedMessage id='Next' />
-              </button>
+              {/*<button type='button' className='ibm-btn-pri ibm-btn-blue-50' onClick={this.nextStep}>*/}
+              {/*<FormattedMessage id='Next' />*/}
+              {/*</button>*/}
+
+              <label for="file" className='ibm-btn-pri ibm-btn-blue-50' onChange={this.nextStep}>Choose file to upload
+                <input type="file" style={{display: "none"}}/>
+              </label>
             </div>
           </div>
         </div>

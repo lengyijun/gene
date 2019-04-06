@@ -95,22 +95,35 @@ function splitFormulaPart(part, splitQualifier) {
   }
 }
 
-export function uploadFile(filename, description, level) {
-  console.log(filename)
-  console.log(description)
-  console.log(level)
-  return fetch('/shop/api/uploadFile', {
+export function uploadFileIndex(filename, description, level, fileContent) {
+  return fetch("http://129.28.54.225:8000/upload/", {
     method: 'POST',
+    // mode: 'no-cors',
     headers: new Headers({
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({filename, description, level})
+    body: JSON.stringify({data: "data"})  //todo:fileContent
   }).then(async res => {
-    const response = await res.json();
-    if (response.success) {
-      return response.loginInfo;
-    } else {
-      throw new Error(response.error);
-    }
-  });
+    var json = await res.json()
+    var fileId = json.fileId
+    return fetch('/shop/api/uploadFile', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({filename, description, level, fileId})
+    })
+      .then(async res => await res.json())
+      .then(async res => {
+        console.log(res)
+        if (res.success) {
+          return res.loginInfo;
+        } else {
+          throw new Error(res.error);
+        }
+      })
+  })
+
 }
+
