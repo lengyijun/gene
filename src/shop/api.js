@@ -96,6 +96,9 @@ function splitFormulaPart(part, splitQualifier) {
 }
 
 export function uploadFileIndex(filename, description, level, fileContent) {
+  console.log("real filecotent")
+  console.log(fileContent)
+
   return fetch("http://129.28.54.225:8000/upload/", {
     method: 'POST',
     // mode: 'no-cors',
@@ -103,7 +106,7 @@ export function uploadFileIndex(filename, description, level, fileContent) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({data: "data"})  //todo:fileContent
+    body: JSON.stringify({data: fileContent})  //todo:fileContent
   }).then(async res => {
     var json = await res.json()
     var fileId = json.fileId
