@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -126,6 +127,8 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 //args[2]: RequesterPublicKey
 //args[3]: Token
 func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	fileId := args[1]
+
 	fmt.Println("requestFile Invoke")
 	if len(args) != 4 {
 		fmt.Println(args)
@@ -175,7 +178,27 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	if err != nil {
 		return shim.Error("Fail to put state")
 	}
-	return shim.Success(tByte)
+	keyId, err := GetKeyId(fileId)
+	if err != nil {
+		return shim.Error("Fail to GetKeyId")
+	}
+
+	pubKey, err := GetPubKey(creatorOrgMsp)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	pubKey = url.QueryEscape(pubKey)
+
+	encryptedKey, err := GetEncryptedSYM(pubKey, keyId)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	decryptedKeyAsByte, err := GetDecryptedSYM(pubKey, encryptedKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	return shim.Success(decryptedKeyAsByte)
 }
 
 func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
@@ -250,7 +273,7 @@ func (t *SimpleChaincode) listResponse(stub shim.ChaincodeStubInterface, args []
 	return shim.Success(resultsAsBytes)
 }
 
-//args[0]: Id
+//args[0]: File Id
 //args[1]: File Name
 //args[2]: Description
 //args[3]: Level
