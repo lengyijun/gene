@@ -106,7 +106,7 @@ export function uploadFileIndex(filename, description, level, fileContent) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({data: fileContent})  //todo:fileContent
+    body: JSON.stringify({data: fileContent})
   }).then(async res => {
     var json = await res.json()
     var fileId = json.fileId

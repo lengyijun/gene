@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
   require('babel-register');
 }
 
-const port = process.env.PORT || process.env.VCAP_APP_PORT || 3000;
+const port = process.env.PORT || process.env.VCAP_APP_PORT || 4000;
 
 dotenv.config({ silent: true });
 deploymentTracker.track();
