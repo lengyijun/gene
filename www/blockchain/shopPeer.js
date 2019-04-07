@@ -2,6 +2,7 @@
 
 import config from './config';
 import { wrapError } from './utils';
+//todo change when switch user
 import { shopClient as client, isReady } from './setup';
 import uuidV4 from 'uuid/v4';
 import CryptoJS from 'crypto-js'

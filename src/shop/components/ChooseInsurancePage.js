@@ -94,7 +94,12 @@ class ChooseInsurancePage extends React.Component {
           obj = {filename: event.target.value };
           break;
         case this.refs.level:
-          obj = {level: event.target.value};
+          var level = Number(event.target.value)
+          if (isNaN(level)) {
+            level = 0
+          }
+          // obj = {level: event.target.value};
+          obj = {level: level};
           break;
         case this.refs.emailField:
           obj = {description: event.target.value };
@@ -122,7 +127,10 @@ class ChooseInsurancePage extends React.Component {
   }
 
   async nextStep(e) {
-    if (this.state.contractInfo.level < 0 || this.state.contractInfo.level > 3) {
+    if (!((this.state.contractInfo.level == 0) ||
+        (this.state.contractInfo.level == 1) ||
+        (this.state.contractInfo.level == 2) ||
+        (this.state.contractInfo.level == 3))) {
       window.confirm("error level! level should be in 0,1,2,3")
       return
     }
