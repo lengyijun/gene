@@ -15,7 +15,7 @@ export function getAllFiles() {
 
 export function requestFile(fileId) {
   //todo ShopOrgMsp
-  return fetch("http://129.28.54.225:8000/rsa/?requesttype=&name=" + "ShopOrgMSP", {
+  return fetch("http://129.28.54.225:8000/rsa/?requesttype=&name=" + "MedicalCenterOrgMSP", {
     method: 'GET',
     headers: new Headers({
       'Accept': 'application/json',
