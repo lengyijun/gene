@@ -91,6 +91,106 @@ export class OrganizationClient extends EventEmitter {
     }
   }
 
+  initDownEventHubs() {
+    // Setup event hubs
+    try {
+      const defaultEventHub = this._client.newEventHub();
+      defaultEventHub.setPeerAddr(this._peerConfig.eventHubUrl, {
+        pem: this._peerConfig.pem,
+        'ssl-target-name-override': this._peerConfig.hostname
+      });
+      defaultEventHub.connect();
+      defaultEventHub.registerChaincodeEvent(
+        "bcins", "downloadFile",
+        object => {
+          console.log("object in listener.js downloadFile")
+          var msg = JSON.parse(object.payload)
+          console.log(msg)
+          var url = "http://129.28.54.225:8000/decrypt/?publickey=" + msg.RequesterPublicKey + "&encryptkey=" + msg.SYMKey
+          return fetch(url, {
+            method: 'GET',
+            headers: new Headers({
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }),
+          }).then(async res => {
+            var json = await res.json()
+            var decryptkey = json.decryptkey
+            fetch("http://129.28.54.225:8000/decryptfile/?fileid=" + msg.FileId + "&key=" + decryptkey, {
+              method: 'GET',
+              headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }),
+            }).then(async res => {
+              var json = await res.json()
+              console.log(json)
+              var file = json.file
+              const fs = require('fs');
+              fs.writeFile("/tmp/" + msg.FileName, file, function (err) {
+                if (err) {
+                  return console.log(err);
+                }
+                console.log("The file was saved!");
+              });
+            })
+          })
+        });
+      this._eventHubs.push(defaultEventHub);
+    } catch (e) {
+      console.log(`Failed to configure event hubs. Error ${e.message}`);
+      throw e;
+    }
+  }
+
+  initDealTokenEventHubs() {
+    // Setup event hubs
+    try {
+      const defaultEventHub = this._client.newEventHub();
+      defaultEventHub.setPeerAddr(this._peerConfig.eventHubUrl, {
+        pem: this._peerConfig.pem,
+        'ssl-target-name-override': this._peerConfig.hostname
+      });
+      defaultEventHub.connect();
+      defaultEventHub.registerChaincodeEvent(
+        "bcins", "dealToken",
+        object => {
+          console.log("object in listener.js dealToken")
+          var msg = JSON.parse(object.payload)
+          // console.log(msg)
+          //fileId =>KeyId
+          //KeyId  => (SYM)publicKey
+          return fetch("http://129.28.54.225:8000/fileId2KeyId/?fileId=" + msg.FileId, {
+            method: 'GET',
+            headers: new Headers({
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }),
+          }).then(async res => {
+            var json = await res.json()
+            var keyId = json.symmetricKeyId
+            var url = "http://129.28.54.225:8000/encrypt/?keyid=" + keyId + "&publickey=" + msg.RequesterPublicKey
+            console.log(url)
+            return fetch(url, {
+              method: 'GET',
+              headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }),
+            }).then(async res => {
+              var json = await res.json()
+              var encryptkey = json.encryptkey
+              this.invoke("bcins", "v2", "dealRequest", msg.ReqId, msg.Owner, encryptkey)
+            })
+          })
+        });
+      this._eventHubs.push(defaultEventHub);
+    } catch (e) {
+      console.log(`Failed to configure event hubs. Error ${e.message}`);
+      throw e;
+    }
+  }
+
   async getOrgAdmin() {
     return this._client.createUser({
       username: `Admin@${this._peerConfig.hostname}`,

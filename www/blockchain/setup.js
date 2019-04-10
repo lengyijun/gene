@@ -91,6 +91,15 @@ function getAdminOrgs() {
   repairShopClient.initEventHubs();
   calculatorClient.initEventHubs();
 
+  //todo: change to medicalcenter when switch branch
+  // insuranceClient.initDealTokenEventHubs()
+  shopClient.initDealTokenEventHubs()
+  // repairShopClient.initDealTokenEventHubs()
+  // calculatorClient.initDealTokenEventHubs()
+
+  //todo: change to medicalcenter when switch branch
+  shopClient.initDownEventHubs()
+
   // Bootstrap blockchain network
   try {
     await getAdminOrgs();

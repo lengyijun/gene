@@ -20,7 +20,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -57,6 +56,7 @@ type Transaction struct {
 	Requester          string `who request the key of file`
 	RequesterPublicKey string `the publicKey of Requester`
 	Token              string
+	SYMKey             string
 }
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
@@ -107,7 +107,7 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 		return shim.Error(err.Error())
 	}
 	transaction.Done = true
-	transaction.RequesterPublicKey = args[2] //todo: write here?
+	transaction.SYMKey = args[2]
 
 	tByte, err := json.Marshal(transaction)
 	if err != nil {
@@ -118,6 +118,7 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 	if err != nil {
 		return shim.Error("Fail to put state")
 	}
+	stub.SetEvent("downloadFile", tByte)
 	return shim.Success(tByte)
 
 }
@@ -127,7 +128,7 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 //args[2]: RequesterPublicKey
 //args[3]: Token
 func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	fileId := args[1]
+	// fileId := args[1]
 
 	fmt.Println("requestFile Invoke")
 	if len(args) != 4 {
@@ -178,28 +179,30 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	if err != nil {
 		return shim.Error("Fail to put state")
 	}
-	keyId, err := GetKeyId(fileId)
-	if err != nil {
-		return shim.Error("Fail to GetKeyId")
-	}
 
-	pubKey, err := GetPubKey(creatorOrgMsp)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	pubKey = url.QueryEscape(pubKey)
+	// keyId, err := GetKeyId(fileId)
+	// if err != nil {
+	// return shim.Error("Fail to GetKeyId")
+	// }
 
-	encryptedKey, err := GetEncryptedSYM(pubKey, keyId)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
+	// pubKey, err := GetPubKey(creatorOrgMsp)
+	// if err != nil {
+	// return shim.Error(err.Error())
+	// }
+	// pubKey = url.QueryEscape(pubKey)
 
-	decryptedKeyAsByte, err := GetDecryptedSYM(pubKey, encryptedKey)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	stub.SetEvent("yourRequest", tByte)
-	return shim.Success(decryptedKeyAsByte)
+	// encryptedKey, err := GetEncryptedSYM(pubKey, keyId)
+	// if err != nil {
+	// return shim.Error(err.Error())
+	// }
+
+	// decryptedKeyAsByte, err := GetDecryptedSYM(pubKey, encryptedKey)
+	// if err != nil {
+	// return shim.Error(err.Error())
+	// }
+
+	stub.SetEvent("dealToken", tByte)
+	return shim.Success(tByte)
 }
 
 func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {

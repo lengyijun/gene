@@ -38,10 +38,11 @@ class RepairOrderComponent extends React.Component {
       symKey: res.decryptkey,
       allowDownload: true
     })
-    await saveFile(this.props.repairOrder.Id,
-      this.state.symKey,
-      this.props.repairOrder.Name
-    )
+    // no longer download here
+    // await saveFile(this.props.repairOrder.Id,
+    //   this.state.symKey,
+    //   this.props.repairOrder.Name
+    // )
     window.confirm("request success")
     return
   }
