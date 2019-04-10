@@ -198,6 +198,7 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	stub.SetEvent("yourRequest", tByte)
 	return shim.Success(decryptedKeyAsByte)
 }
 
