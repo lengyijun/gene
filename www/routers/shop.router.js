@@ -141,7 +141,6 @@ router.post('/api/blocks', async (req, res) => {
   }
 });
 
-
 router.post('/api/my-request', async (req, res) => {
   try {
     let repairOrders = await ShopPeer.getMyRequest();
@@ -199,18 +198,30 @@ router.post('/api/response-file', async (req, res) => {
 router.post('/api/save-file', async (req, res) => {
   let {fileId, symKey, fileName} = req.body;
   try {
-    let x = await ShopPeer.saveFile(fileId, symKey, fileName)
-
+    await ShopPeer.saveFile(fileId, symKey, fileName)
   } catch (e) {
     console.log(e)
     res.json({error: 'Error accessing blockchain.'});
   }
 })
 
-router.get('/download/:id', async (req, res) => {
-  // let {fileName} = req.body;
-  // res.download('/tmp/'+fileName);
-  res.download('/tmp/' + req.params.id);
+router.get('/download/:filename/id/:id', async (req, res) => {
+  var fs = require('fs');
+  var filePath = "/tmp/" + req.params.filename
+
+  fs.exists(filePath, async function (exists) {
+    if (exists) {
+      res.download(filePath)
+    } else {
+      let transaction = await ShopPeer.retrieveKey(req.params.id)
+      var encryptedsymkey = transaction.SYMKey
+      var publickey = transaction.RequesterPublicKey
+      let symkey = await ShopPeer.decryptKey(publickey, encryptedsymkey)
+      let x = ShopPeer.saveFile(req.params.id, symkey, req.params.filename)
+      res.download(filePath)
+    }
+  });
+  // res.download('/tmp/' + req.params.id);
 })
 
 router.get('*', (req, res) => {
