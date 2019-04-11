@@ -87,6 +87,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 //args[1]: Owner Id
 //args[2]: encrypted Key
 func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	creatorOrgMsp, err := GetOrg(stub)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
 	fmt.Println("dealRequest Invoke")
 	if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 3")
@@ -106,9 +110,12 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	if creatorOrgMsp != transaction.Owner {
+		return shim.Error("only owner of file can deal request")
+	}
+
 	transaction.Done = true
 	transaction.SYMKey = args[2]
-
 	tByte, err := json.Marshal(transaction)
 	if err != nil {
 		return shim.Error("Failed to Marshal FileDescriptor")
@@ -120,7 +127,6 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 	}
 	stub.SetEvent("downloadFile", tByte)
 	return shim.Success(tByte)
-
 }
 
 //args[0]: ReqId
@@ -205,7 +211,6 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	return shim.Success(tByte)
 }
 
-//todo
 func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println("listFile Invoke")
 	resultsIterator, err := stub.GetStateByPartialCompositeKey(prefixFileDescriptor, []string{})

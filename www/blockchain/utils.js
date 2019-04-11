@@ -138,7 +138,7 @@ export class OrganizationClient extends EventEmitter {
         });
       this._eventHubs.push(defaultEventHub);
     } catch (e) {
-      console.log(`Failed to configure event hubs. Error ${e.message}`);
+      console.log(`Failed to configure download event hubs. Error ${e.message}`);
       throw e;
     }
   }
@@ -157,9 +157,12 @@ export class OrganizationClient extends EventEmitter {
         object => {
           console.log("object in listener.js dealToken")
           var msg = JSON.parse(object.payload)
+          //todo
+          if (msg.Owner != "MedicalCenterOrgMSP") {
+            return null
+          }
           // console.log(msg)
           //fileId =>KeyId
-          //KeyId  => (SYM)publicKey
           return fetch("http://129.28.54.225:8000/fileId2KeyId/?fileId=" + msg.FileId, {
             method: 'GET',
             headers: new Headers({
@@ -167,6 +170,7 @@ export class OrganizationClient extends EventEmitter {
               'Content-Type': 'application/json'
             }),
           }).then(async res => {
+            //KeyId  => (SYM)publicKey
             var json = await res.json()
             var keyId = json.symmetricKeyId
             var url = "http://129.28.54.225:8000/encrypt/?keyid=" + keyId + "&publickey=" + msg.RequesterPublicKey
@@ -186,7 +190,7 @@ export class OrganizationClient extends EventEmitter {
         });
       this._eventHubs.push(defaultEventHub);
     } catch (e) {
-      console.log(`Failed to configure event hubs. Error ${e.message}`);
+      console.log(`Failed to configure dealToken event hubs. Error ${e.message}`);
       throw e;
     }
   }
