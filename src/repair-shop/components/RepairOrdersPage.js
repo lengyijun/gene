@@ -63,7 +63,6 @@ class RepairOrdersPage extends React.Component {
           window.confirm("权限不足，你不能申请权限为" + contractType.Level + "的文件")
           return
         }
-        //todo use action?
         requestFile(contractType.Id)
         //todo how to update view
         // this.setState({

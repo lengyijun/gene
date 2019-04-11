@@ -44,6 +44,7 @@ class ClaimsPage extends React.Component {
           {/*    //   });*/}
           {/*    // }}>*/}
           <td>{contractType.ReqId}</td>
+          <td>{contractType.FileId}</td>
           <td>{contractType.FileName}</td>
           <td>{contractType.Requester}</td>
           <td>{contractType.Owner}</td>
@@ -60,6 +61,7 @@ class ClaimsPage extends React.Component {
               <thead>
               <tr>
                 <th><FormattedMessage id='ReqId'/></th>
+                <th><FormattedMessage id='FileId'/></th>
                 <th><FormattedMessage id='FileName'/></th>
                 <th><FormattedMessage id='Requester'/></th>
                 <th><FormattedMessage id='Owner'/></th>
