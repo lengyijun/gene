@@ -19,7 +19,7 @@
 	"Go To The Ski Shop": "肺癌基因分析",
 	"Login": "登录",
 	"WatchBlock": "区块查看",
-  "Insurance": "被索取历史",
+  "Insurance": "我处理的请求",
 	"Claim Self-Service": "Claim Self-Service",
 	"Claim Self-Service Description": "Claim Self-Service Description",
 	"Claim Processing": "Claim Processing",
@@ -28,5 +28,5 @@
 	"Contract Management": "Contract Management",
 	"Contract Management Description": "Contract Management Description",
 	"Manage Available Contract Templates": "Manage Available Contract Templates",
-  "Calculation Center": "我发起的请求"
+  "Calculation Center": "我的下载"
 }

@@ -74,13 +74,16 @@ func TestExample02_Invoke(t *testing.T) {
 	scc := new(SimpleChaincode)           //SimpleChaincode是待测试的chaincode中的struct名
 	stub := shim.NewMockStub("ex02", scc) //ex02是name，没有用处。
 	checkInit(t, stub, [][]byte{})
-	// checkUploadFile(t, stub, [][]byte{[]byte("085208"), []byte("考研报名表"), []byte("descripton1"), []byte("1")})
-	// checkUploadFile(t, stub, [][]byte{[]byte("085209"), []byte("复试申请表"), []byte("descripton2"), []byte("2")})
-	// checkUploadFile(t, stub, [][]byte{[]byte("085210"), []byte("调剂申请表"), []byte("descripton3"), []byte("0")})
+	checkUploadFile(t, stub, [][]byte{[]byte("085208"), []byte("考研报名表"), []byte("descripton1"), []byte("1")})
+	checkUploadFile(t, stub, [][]byte{[]byte("085209"), []byte("复试申请表"), []byte("descripton2"), []byte("2")})
+	checkUploadFile(t, stub, [][]byte{[]byte("085210"), []byte("调剂申请表"), []byte("descripton3"), []byte("0")})
 	// checkListFile(t, stub, [][]byte{})
 
-	// checkRequestFile(t, stub, [][]byte{[]byte("999085208"), []byte("085208"), []byte("alice"), []byte("steven"), []byte("mypublickey")})
-	// checkListRequest(t, stub, [][]byte{[]byte("steven")})
-	// checkDealRequest(t, stub, [][]byte{[]byte("999085208"), []byte("steven"), []byte("encryptedKey")})
+	checkRequestFile(t, stub, [][]byte{[]byte("999085208"), []byte("085208"), []byte("mypublickey"), []byte("tokentoken")})
+	checkListFile(t, stub, [][]byte{})
+
+	checkDealRequest(t, stub, [][]byte{[]byte("999085208"), []byte(""), []byte("encryptedKey")})
+	checkListFile(t, stub, [][]byte{})
+
 	// checkListRequest(t, stub, [][]byte{[]byte("steven")})
 }
