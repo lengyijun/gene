@@ -78,23 +78,64 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.dealRequest(stub, args)
 	} else if function == "listRequest" {
 		return t.listRequest(stub, args)
+	} else if function == "retrieveKey" {
+		return t.retrieveKey(stub, args)
 	}
 
 	return shim.Error("Invalid invoke function name: " + function + " Expecting \"invoke\" \"query\"")
+}
+
+//args[0] FileId
+func (t *SimpleChaincode) retrieveKey(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	fmt.Println("retrieveKey Invoke")
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+	fileId := args[0]
+
+	resultsIterator, err := stub.GetStateByPartialCompositeKey(prefixRequest, []string{})
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	creator, err := GetOrg(stub)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	for resultsIterator.HasNext() {
+		kvResult, err := resultsIterator.Next()
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		transaction := Transaction{}
+		err = json.Unmarshal(kvResult.Value, &transaction)
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		if transaction.Requester == creator && transaction.Done && transaction.FileId == fileId {
+			return shim.Success(kvResult.Value)
+		}
+	}
+	return shim.Error("cannot find transaction in retrieveKey")
 }
 
 //args[0]: Transaction Id
 //args[1]: Owner Id
 //args[2]: encrypted Key
 func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	creatorOrgMsp, err := GetOrg(stub)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
 	fmt.Println("dealRequest Invoke")
 	if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 3")
 	}
+
+	creatorOrgMsp, err := GetOrg(stub)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
 	IdIndexKey, err := stub.CreateCompositeKey(prefixRequest, []string{args[1], args[0]}) //Owner first, Id second
 	if err != nil {
 		return shim.Error("Failed to CreateCompositeKey")

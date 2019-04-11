@@ -125,13 +125,7 @@ export async function saveFile(fileId, symKey, fileName) {
     console.log(json)
     var file = json.file
     const fs = require('fs');
-    fs.writeFile("/tmp/" + fileName, file, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    });
-
+    fs.writeFileSync("/tmp/" + fileName, file);
   })
 
 
@@ -164,6 +158,20 @@ export async function requestFile(fileId, publicKey) {
   }
 }
 
+export async function retrieveKey(fileId) {
+  if (!isReady()) {
+    return;
+  }
+  try {
+    var args = ["retrieveKey", fileId]
+    const Result = await invoke.apply(this, args);
+    console.log(Result)
+    return Result
+  } catch (e) {
+    throw wrapError(`Error retrieveKey in shoppeer: ${e.message}`, e);
+  }
+}
+
 export async function getResponse() {
   // if (!isReady()) {
   //   return;
@@ -185,6 +193,21 @@ export async function getResponse() {
   }
 }
 
+export async function decryptKey(requesterpublickey, symkey) {
+  var url = "http://129.28.54.225:8000/decrypt/?publickey=" + requesterpublickey + "&encryptkey=" + symkey;
+  return fetch(url, {
+    method: 'get',
+    headers: new Headers({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    })
+  }).then(async res => {
+    var json = await res.json()
+    var decryptkey = json.decryptkey
+    return decryptkey
+  })
+
+}
 function invoke(fcn, ...args) {
   return client.invoke(
     config.chaincodeId, config.chaincodeVersion, fcn, ...args);

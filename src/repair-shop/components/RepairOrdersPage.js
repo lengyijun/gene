@@ -74,7 +74,7 @@ class RepairOrdersPage extends React.Component {
         //   contractType.uuid, false);
       };
       let downloadButton = (
-        <a href={"/shop/download/" + contractType.Name}>
+        <a href={"/shop/download/" + contractType.Name + "/id/" + contractType.Id}>
           <button type='button'
                   className='ibm-btn-sec ibm-btn-small ibm-btn-green-50'
                   style={{marginLeft: '5px', marginRight: '5px'}}
