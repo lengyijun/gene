@@ -33,7 +33,7 @@ html(lang='en')
             ul(role='menubar')
               li(role='presentation', class=(homeActive ? 'ibm-highlight' : ''))
                 a(role='menuitem', href='/') #{ __('Home') }
-              li.ibm-haschildlist(role='presentation', class=(shopActive ? 'ibm-highlight' : ''))
+              //li.ibm-haschildlist(role='presentation', class=(shopActive ? 'ibm-highlight' : ''))
                 span(role='menuitem') #{ __('Shop') }
                 ul(role='menu')
                   li(role='presentation', class=(bikesActive ? 'ibm-highlight' : ''))
@@ -44,6 +44,8 @@ html(lang='en')
                     a(role='menuitem', href='/shop/skis') #{ __('Skis') }
               //li(role='presentation', class=(policeActive ? 'ibm-highlight' : ''))
               //  a(role='menuitem', href='/police') #{ __('Police') }
+              li(role='presentation', class=(shopActive ? 'ibm-highlight' : ''))
+                a(role='menuitem', href='/shop/bikes') #{ __('Bikes') }
               li(role='presentation', class=(repairShopActive ? 'ibm-highlight' : ''))
                 a(role='menuitem', href='/medical-center') #{ __('Repair Service') }
               //li(role='presentation', class=(CalculationActive ? 'ibm-highlight' : ''))

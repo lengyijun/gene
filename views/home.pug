@@ -21,21 +21,21 @@ block content
               //    | #{ __('Go To The Contract Management') }
         .ibm-card.shop-peer
           .ibm-card__content
-            a(href='/shop')
+            a(href='/shop/bikes')
               h3.ibm-h3 #{ __('Shop') }
-            p.ibm-ind-link
-              a.ibm-forward-link(href='/shop') #{ __('Go To The Shop Peer') }
+            //p.ibm-ind-link
+              a.ibm-forward-link(href='/shop/bikes') #{ __('Go To The Shop Peer') }
         .ibm-card.police-peer
           .ibm-card__content
             a(href='/block-info/contract-management')
               h3.ibm-h3 #{ __('WatchBlock') }
         .ibm-card.repair-shop-peer
           .ibm-card__content
-            a(href='/repair-shop')
-              h3.ibm-h3 #{ __('Repair Shop') }
-            p.ibm-ind-link
+            a(href='/medical-center')
+              h3.ibm-h3 #{ __('Go To The Repair Shop Peer') }
+            //p.ibm-ind-link
               a.ibm-forward-link(href='/medical-center')
                 | #{ __('Go To The Repair Shop Peer') }
-            p.ibm-ind-link
+            //p.ibm-ind-link
               a.ibm-forward-link(href='/calculation-center')
                 | #{ __('Go To The Calculation Peer') }
