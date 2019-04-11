@@ -158,7 +158,7 @@ export class OrganizationClient extends EventEmitter {
           console.log("object in listener.js dealToken")
           var msg = JSON.parse(object.payload)
           //todo
-          if (msg.Owner != "MedicalCenterOrgMSP") {
+          if (msg.Owner != "ShopOrgMSP") {
             return null
           }
           // console.log(msg)
