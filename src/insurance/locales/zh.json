@@ -74,5 +74,10 @@
   "Done": "Done",
   "Requester": "索取者",
   "File Owner": "文件作者",
-  "FileId": "文件ID"
+  "FileId": "文件编号",
+  "FileName": "文件名",
+  "Owner": "文件作者",
+  "CreateTime": "请求时间",
+  "Done": "状态",
+  "ReqId": "交易编号"
 }

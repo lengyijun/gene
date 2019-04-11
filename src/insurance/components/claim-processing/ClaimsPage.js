@@ -32,50 +32,45 @@ class ClaimsPage extends React.Component {
   render() {
     const { loading, intl, claimProcessingActions, claims } = this.props;
 
-    const cards = Array.isArray(claims) ? claims
-      .map(claim => {
-        // const repair = () => {
-        //   claimProcessingActions.processClaim(
-        //     claim.contractUuid, claim.uuid, 'R', 0);
-        // };
-        // const reimburse = (reimbursable) => {
-        //   claimProcessingActions.processClaim(
-        //     claim.contractUuid, claim.uuid, 'F', reimbursable);
-        // };
-        // const reject = () => {
-        //   claimProcessingActions.processClaim(
-        //     claim.contractUuid, claim.uuid, 'J', 0);
-        // };
-        return (
-          <ClaimComponent claim={claim}
-            // onRepair={repair}
-            // onReimburse={reimburse}
-            // onReject={reject}
-          />
-        );
-      }) : null;
-    const claimsDisplay = ((Array.isArray(cards) && cards.length > 0) ||
-      cards === null) ? cards :
-      (
-        <div className='ibm-col-5-5 ibm-col-medium-6-6'>
-          <FormattedMessage id='No outstanding claims.' />
-        </div>
-      );
 
+    const contractTemplateRows = Array.isArray(claims) ? claims
+    // .sort((a, b) => a.description.localeCompare(b.description))
+      .map((contractType, index) => (
+        <tr>
+          {/*<tr key={index}*/}
+          {/*    // ref={row => {*/}
+          {/*    //   jQuery(row).tooltip({*/}
+          {/*    //     content: `<b>Contract Terms:</b> <br />${contractType.conditions}`*/}
+          {/*    //   });*/}
+          {/*    // }}>*/}
+          <td>{contractType.ReqId}</td>
+          <td>{contractType.FileName}</td>
+          <td>{contractType.Requester}</td>
+          <td>{contractType.Owner}</td>
+          <td>{contractType.CreateTime}</td>
+          <td>{contractType.Done ? '允许' : '拒绝'} </td>
+        </tr>
+      )) : null;
     return (
       <Loading hidden={!loading}
-        text={intl.formatMessage({ id: 'Loading Claims...' })}>
-        <div>
-          {/*<div className='ibm-columns'>*/}
-            {/*<div className='ibm-col-5-5 ibm-col-medium-6-6'>*/}
-              {/*<h3 className='ibm-h3'>*/}
-                {/*<FormattedMessage id='Unprocessed Claims' />*/}
-              {/*</h3>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-          <div className='ibm-columns ibm-cards' style={{ minHeight: '30vh' }}
-            data-widget='masonry' data-items='.ibm-col-2-1'>
-            {claimsDisplay}
+               text={intl.formatMessage({id: 'Loading Repair Orders...'})}>
+        <div className='ibm-columns' style={{minHeight: '30vh'}}>
+          <div className='ibm-col-1-1'>
+            <table className='ibm-data-table ibm-altcols'>
+              <thead>
+              <tr>
+                <th><FormattedMessage id='ReqId'/></th>
+                <th><FormattedMessage id='FileName'/></th>
+                <th><FormattedMessage id='Requester'/></th>
+                <th><FormattedMessage id='Owner'/></th>
+                <th><FormattedMessage id='CreateTime'/></th>
+                <th><FormattedMessage id='Done'/></th>
+              </tr>
+              </thead>
+              <tbody>
+              {contractTemplateRows}
+              </tbody>
+            </table>
           </div>
         </div>
       </Loading>
