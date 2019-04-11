@@ -155,12 +155,13 @@ export class OrganizationClient extends EventEmitter {
       defaultEventHub.registerChaincodeEvent(
         "bcins", "dealToken",
         object => {
-          console.log("object in listener.js dealToken")
           var msg = JSON.parse(object.payload)
           //todo
           if (msg.Owner != "MedicalCenterOrgMSP") {
+            console.log("object in listener.js dealToken from " + msg.Owner + ", we will ignore it")
             return null
           }
+          console.log("object in listener.js dealToken from " + msg.Owner + ", we are dealing it")
           // console.log(msg)
           //fileId =>KeyId
           return fetch("http://129.28.54.225:8000/fileId2KeyId/?fileId=" + msg.FileId, {
