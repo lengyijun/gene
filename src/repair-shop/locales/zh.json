@@ -14,7 +14,7 @@
   "No outstanding repair orders.":"没有待处理的交易",
   "Request":"请求",
   "FileName":"文件名",
-  "Owner":"所有者",
+  "Owner": "文件作者",
   "Description": "描述",
   "FileId": "编号",
   "Level": "等级",

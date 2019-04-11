@@ -154,7 +154,7 @@ class ChooseInsurancePage extends React.Component {
       fileContent)
     console.log("callback result: ")
     console.log(uploadresult)
-    window.confirm("上传成功")
+    window.confirm(fileName + "上传成功")
     // const { userMgmtActions } = this.props;
   }
 
