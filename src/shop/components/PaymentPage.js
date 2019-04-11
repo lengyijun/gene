@@ -201,7 +201,7 @@ class PaymentPage extends React.Component {
           </div>
           <div className='ibm-columns'>
             <div className='ibm-col-2-1 ibm-col-medium-5-3 ibm-col-small-1-1 ibm-right'>
-              <label for="file"  className='ibm-btn-pri ibm-btn-blue-50' onChange={this.handleupload}>Choose file to upload
+              <label for="file" className='ibm-btn-pri ibm-btn-blue-50' onChange={this.handleupload}>选择上传的文件
                 <input type="file" style={{display:"none"}}/>
               </label>
             </div>

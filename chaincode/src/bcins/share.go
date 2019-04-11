@@ -31,7 +31,6 @@ import (
 // SimpleChaincode example simple Chaincode implementation
 const prefixFileDescriptor = "FileDescriptor"
 const prefixRequest = "Request"
-const prefixEncryptedKey = "Key"
 
 type SimpleChaincode struct {
 }
@@ -44,6 +43,7 @@ type FileDescriptor struct {
 	Owner       string
 	Description string
 	Level       int `0(the lowest,all available),1,2,3(the highest,only few people can accesss it)`
+	Requested   bool
 }
 
 type Transaction struct {
@@ -128,7 +128,7 @@ func (t *SimpleChaincode) dealRequest(stub shim.ChaincodeStubInterface, args []s
 //args[2]: RequesterPublicKey
 //args[3]: Token
 func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	// fileId := args[1]
+	fileId := args[1]
 
 	fmt.Println("requestFile Invoke")
 	if len(args) != 4 {
@@ -147,7 +147,7 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 		return shim.Error(err.Error())
 	}
 
-	IdIndexKey, err := stub.CreateCompositeKey(prefixFileDescriptor, []string{args[1]})
+	IdIndexKey, err := stub.CreateCompositeKey(prefixFileDescriptor, []string{fileId})
 	kvResult, err := stub.GetState(IdIndexKey)
 	if err != nil {
 		return shim.Error("Failed to GetState")
@@ -162,7 +162,7 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	transaction := Transaction{
 		CreateTime:         time.Unix(mytime.Seconds, 0).In(loc).Format("2006-01-02 15:04:05"),
 		Done:               false,
-		FileId:             args[1],
+		FileId:             fileId,
 		FileName:           fileDescriptor.Name,
 		Owner:              fileDescriptor.Owner,
 		ReqId:              args[0],
@@ -205,6 +205,7 @@ func (t *SimpleChaincode) requestFile(stub shim.ChaincodeStubInterface, args []s
 	return shim.Success(tByte)
 }
 
+//todo
 func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println("listFile Invoke")
 	resultsIterator, err := stub.GetStateByPartialCompositeKey(prefixFileDescriptor, []string{})
@@ -213,7 +214,7 @@ func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []stri
 	}
 	defer resultsIterator.Close()
 
-	results := []interface{}{}
+	allFiles := []FileDescriptor{}
 	for resultsIterator.HasNext() {
 		kvResult, err := resultsIterator.Next()
 		if err != nil {
@@ -226,10 +227,47 @@ func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []stri
 			return shim.Error(err.Error())
 		}
 
-		results = append(results, fileDescriptor)
+		allFiles = append(allFiles, fileDescriptor)
 	}
 
-	resultsAsBytes, err := json.Marshal(results)
+	for i, _ := range allFiles {
+		allFiles[i].Requested = false
+	}
+
+	//Get all MyRequest
+	resultsIterator, err = stub.GetStateByPartialCompositeKey(prefixRequest, []string{})
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	creator, err := GetOrg(stub)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	for resultsIterator.HasNext() {
+		kvResult, err := resultsIterator.Next()
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		transaction := Transaction{}
+		err = json.Unmarshal(kvResult.Value, &transaction)
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		if creator == transaction.Requester && transaction.Done {
+			for i, file := range allFiles {
+				if file.Id == transaction.FileId {
+					allFiles[i].Requested = true
+					break
+				}
+			}
+		}
+	}
+
+	resultsAsBytes, err := json.Marshal(allFiles)
 	if err != nil {
 		return shim.Error(err.Error())
 	}

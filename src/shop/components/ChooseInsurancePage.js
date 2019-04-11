@@ -154,7 +154,7 @@ class ChooseInsurancePage extends React.Component {
       fileContent)
     console.log("callback result: ")
     console.log(uploadresult)
-    window.confirm("upload File content success")
+    window.confirm("上传成功")
     // const { userMgmtActions } = this.props;
   }
 
@@ -259,7 +259,7 @@ class ChooseInsurancePage extends React.Component {
               {/*<FormattedMessage id='Next' />*/}
               {/*</button>*/}
 
-              <label for="file" className='ibm-btn-pri ibm-btn-blue-50' onChange={this.nextStep}>Choose file to upload
+              <label for="file" className='ibm-btn-pri ibm-btn-blue-50' onChange={this.nextStep}>选择上传的文件
                 <input type="file" style={{display: "none"}}/>
               </label>
             </div>

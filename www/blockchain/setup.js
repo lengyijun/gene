@@ -93,12 +93,13 @@ function getAdminOrgs() {
 
   //todo: change to medicalcenter when switch branch
   // insuranceClient.initDealTokenEventHubs()
-  shopClient.initDealTokenEventHubs()
-  // repairShopClient.initDealTokenEventHubs()
+  // shopClient.initDealTokenEventHubs()
+  repairShopClient.initDealTokenEventHubs()
   // calculatorClient.initDealTokenEventHubs()
 
   //todo: change to medicalcenter when switch branch
-  shopClient.initDownEventHubs()
+  // shopClient.initDownEventHubs()
+  repairShopClient.initDownEventHubs()
 
   // Bootstrap blockchain network
   try {
