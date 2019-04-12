@@ -306,8 +306,10 @@ func (t *SimpleChaincode) listFile(stub shim.ChaincodeStubInterface, args []stri
 		if creator == transaction.Requester && transaction.Done {
 			for i, file := range allFiles {
 				if file.Id == transaction.FileId {
-					allFiles[i].Requested = true
-					break
+					allFiles[i].Requested = transaction.Done
+					if transaction.Done {
+						break
+					}
 				}
 			}
 		}
