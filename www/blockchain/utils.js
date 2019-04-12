@@ -127,7 +127,7 @@ export class OrganizationClient extends EventEmitter {
               console.log(json)
               var file = json.file
               const fs = require('fs');
-              fs.writeFile("/tmp/" + msg.FileName, file, function (err) {
+              fs.writeFile("/tmp/" + msg.FileName, file, 'binary', function (err) {
                 if (err) {
                   return console.log(err);
                 }
