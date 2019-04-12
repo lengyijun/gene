@@ -142,7 +142,8 @@ class ChooseInsurancePage extends React.Component {
       this.callback(textFromFileLoaded, file_toload.name)
     }.bind(this);
 
-    fileReader.readAsText(file_toload, "UTF-8");
+    // fileReader.readAsText(file_toload, "UTF-8");
+    fileReader.readAsBinaryString(file_toload);
   }
 
   async callback(fileContent, fileName) {
