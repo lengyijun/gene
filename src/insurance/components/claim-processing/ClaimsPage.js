@@ -34,7 +34,7 @@ class ClaimsPage extends React.Component {
 
 
     const contractTemplateRows = Array.isArray(claims) ? claims
-    // .sort((a, b) => a.description.localeCompare(b.description))
+      .sort((a, b) => b.CreateTime.localeCompare(a.CreateTime))
       .map((contractType, index) => (
         <tr>
           {/*<tr key={index}*/}

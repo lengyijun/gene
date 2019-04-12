@@ -160,9 +160,7 @@ router.post('/api/request-file', async (req, res) => {
 
   try {
     var symmetricKey = await ShopPeer.requestFile(fileId, publicKey);
-    // symmetricKey.success=true
     console.log(symmetricKey)
-    // console.log(symmetricKey.decryptkey)
     res.json(symmetricKey)
     res.success = true
   } catch (e) {

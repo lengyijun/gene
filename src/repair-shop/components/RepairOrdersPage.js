@@ -35,7 +35,7 @@ class RepairOrdersPage extends React.Component {
     const { repairOrders, loading, intl } = this.props;
     console.log(repairOrders)
     const contractTemplateRows = Array.isArray(repairOrders) ? repairOrders
-    // .sort((a, b) => a.description.localeCompare(b.description))
+      .sort((a, b) => b.CreateTime.localeCompare(a.CreateTime))
       .map((contractType, index) => (
         <tr>
           {/*<tr key={index}*/}
