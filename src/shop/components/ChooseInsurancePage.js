@@ -267,7 +267,7 @@ class ChooseInsurancePage extends React.Component {
           </div>
         </div>
         <div style={{float:"right"}} margin="10px">
-          <img src="/img/right/safety.jpg" width="600px" />
+          <img src="/img/so-good.jpg" width="700px"/>
         </div>
       </Loading>
     );
